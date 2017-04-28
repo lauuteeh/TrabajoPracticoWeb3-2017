@@ -9,7 +9,17 @@ namespace TrabajoPracticoWeb3.Controllers
     public class PeliculasController : Controller
     {
         // GET: Peliculas
-        public ActionResult Index()
+        public ActionResult Reserva()
+        {
+            return View();
+        }
+
+        public ActionResult FinalizarReserva()
+        {
+            return View();
+        }
+
+        public ActionResult ConfirmarReserva()
         {
             return View();
         }

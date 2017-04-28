@@ -132,6 +132,9 @@
     <Content Include="Views\Administracion\AltaCartelera.cshtml" />
     <Content Include="Views\Administracion\Reportes.cshtml" />
     <Content Include="Views\Administracion\ListaReportes.cshtml" />
+    <Content Include="Views\Peliculas\Reserva.cshtml" />
+    <Content Include="Views\Peliculas\FinalizarReserva.cshtml" />
+    <Content Include="Views\Peliculas\ConfirmarReserva.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -142,7 +145,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Peliculas\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
