@@ -123,6 +123,15 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Pelicula.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Administracion\Index.cshtml" />
+    <Content Include="Views\Administracion\Peliculas.cshtml" />
+    <Content Include="Views\Administracion\AltaPelicula.cshtml" />
+    <Content Include="Views\Administracion\Sedes.cshtml" />
+    <Content Include="Views\Administracion\AltaSede.cshtml" />
+    <Content Include="Views\Administracion\Carteleras.cshtml" />
+    <Content Include="Views\Administracion\AltaCartelera.cshtml" />
+    <Content Include="Views\Administracion\Reportes.cshtml" />
+    <Content Include="Views\Administracion\ListaReportes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -133,7 +142,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Administracion\" />
     <Folder Include="Views\Peliculas\" />
   </ItemGroup>
   <PropertyGroup>
