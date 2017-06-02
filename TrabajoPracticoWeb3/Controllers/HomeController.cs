@@ -14,6 +14,21 @@ namespace TrabajoPracticoWeb3.Controllers
             return View();
         }
 
+        public ActionResult Cartelera()
+        {
+            return View();
+        }
+
+        public ActionResult Proximamente()
+        {
+            return View();
+        }
+
+        public ActionResult Ubicacion()
+        {
+            return View();
+        }
+
         public ActionResult Pelicula()
         {
             return View();

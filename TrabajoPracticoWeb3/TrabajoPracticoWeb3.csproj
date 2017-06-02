@@ -138,6 +138,9 @@
     <Content Include="Views\Peliculas\FinalizarReserva.cshtml" />
     <Content Include="Views\Peliculas\ConfirmarReserva.cshtml" />
     <Content Include="Views\Shared\_LHome.cshtml" />
+    <Content Include="Views\Home\Cartelera.cshtml" />
+    <Content Include="Views\Home\Proximamente.cshtml" />
+    <Content Include="Views\Home\Ubicacion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
