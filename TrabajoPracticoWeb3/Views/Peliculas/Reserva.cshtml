@@ -1,7 +1,48 @@
 ﻿
 @{
     ViewBag.Title = "Reserva";
+    Layout = "~/Views/Shared/_LHome.cshtml";
 }
 
-<h2>Reserva</h2>
+<h2>Nombre Pelicula</h2>
+
+<div class="row row-con-margin">
+    <div class="col-md-4">
+        <div>
+            <img class="img-responsive" src="http://cinemadevoto.neexcdn.com.ar/110.png" alt="">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h4>Sinopsis</h4>
+        <p>quam iaculis est et ligula venenatis scelerisque. Nulla interdum, enim at tempor convallis, nibh tortor sagittis velit, in ultricies dolor risus id elit. Sed luctus et leo eu bibendum. Vestibulum in mi at diam auctor sollicitudin vitae non leo. Nulla consectetur cursus placerat. Morbi pellentesque tellus non vehicula venenatis. Quisque suscipit nibh gravida elementum aliquet. Nam ut eros vitae ligula sollicitudin tincidunt. Duis a aliquam ipsum, at pellentesque augue. Sed tempor, risus id ornare dictum, leo nisl vulputate ligula, sed ultricies mauris lorem ut elit. Maecenas placerat faucibus elit, vitae dictum lorem pretium ut. Integer nulla arcu, luctus eget augue in, fermentum posuere erat. Proin scelerisque odio eget tortor facilisis fermentum laoreet ac enim. Maecenas accumsan risus eget suscipit rhoncus. Aliquam rutrum mauris non scelerisque vehicula. Nulla mattis enim nec pharetra sollicitudin. </p>
+
+
+    </div>
+    <div class="col-md-4">
+
+        @using (Html.BeginForm())
+            {
+            @Html.Label("Version", new { @class = "margin-dp" })
+            @Html.DropDownList("Version", ViewData["version"] as List<SelectListItem>, "Por Favor, seleccione una Version", new { @class = "margin-dp form-control" })
+
+            @Html.Label("Sede", new { @class = "margin-dp" })
+            @Html.DropDownList("Sede", new SelectList(string.Empty, "Value", "Text"), "Por Favor, seleccione una sede", new { @class = "margin-dp form-control" })
+
+            @Html.Label("Dia", new { @class = "margin-dp" })
+            @Html.DropDownList("Dia", new SelectList(string.Empty, "Value", "Text"), "Por favor, Seleccione un dia", new { @class = "margin-dp form-control" })
+
+            @Html.Label("Horario", new { @class = "margin-dp" })
+            @Html.DropDownList("Horario", new SelectList(string.Empty, "Value", "Text"), "Por favor, Seleccione un horario", new { @class = "margin-dp form-control" })
+
+            <button type="submit" class="margin-dp btn btn-success">Continuar</button>
+
+        }
+
+    </div>
+
+
+
+</div>
+
+
 

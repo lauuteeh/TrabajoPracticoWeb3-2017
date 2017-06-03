@@ -29,11 +29,6 @@ namespace TrabajoPracticoWeb3.Controllers
             return View();
         }
 
-        public ActionResult Pelicula()
-        {
-            return View();
-        }
-
         public ActionResult Login()
         {
             return View();

@@ -97,6 +97,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\CascadaReserva.js" />
     <Content Include="Scripts\HomeJS.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -123,7 +124,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\Pelicula.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Administracion\Index.cshtml" />
     <Content Include="Views\Administracion\Peliculas.cshtml" />
