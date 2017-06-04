@@ -1,7 +1,31 @@
 ﻿
 @{
     ViewBag.Title = "Peliculas";
-}
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    @model IEnumerable<TrabajoPracticoWeb3.App_Data.Peliculas>
+ }
 
 <h2>Peliculas</h2>
-
+<a href="Administracion/AltaPelicula"></a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID de pelicula</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Duración</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var peli in Model)
+        {
+            <tr>
+                
+                <td>@peli.Nombre</td>
+                <td>@peli.Descripcion</td>
+                <td>@peli.Duracion</td>
+            </tr>
+        }
+        
+    </tbody>
+</table>

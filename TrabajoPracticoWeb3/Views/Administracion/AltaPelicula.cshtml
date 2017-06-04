@@ -1,7 +1,17 @@
 ﻿
 @{
     ViewBag.Title = "AltaPelicula";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    @model IEnumerable<TrabajoPracticoWeb3.App_Data.Peliculas>
 }
 
 <h2>AltaPelicula</h2>
 
+@using (Html.BeginForm("Administracion", "Libros", FormMethod.Post)) //etiqueta form que va al controller de libros, la función de AltaLibro y con el metodo POST
+{
+         <label>Numero Saga</label>@Html.TextBoxFor(m => m.NumeroSaga) <br />
+         <label>Nombre</label>@Html.TextBoxFor(m => m.Nombre)<br />
+         <label>Descripcion</label>@Html.TextBoxFor(m => m.Descripcion)<br />
+         <label>Fecha</label>@Html.TextBoxFor(m => m.Fecha)<br />
+         <button type="submit">Alta</button>
+ }

@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrabajoPracticoWeb3.App_Data;
 
 namespace TrabajoPracticoWeb3.Controllers
 {
     public class AdministracionController : Controller
     {
         // GET: Administracion
-        public ActionResult Index()
+        public ActionResult Inicio()
         {
             return View();
         }
 
         public ActionResult Peliculas()
         {
-            return View();
+            myContext ctx = new myContext();
+            var a = (ctx.Peliculas).ToList();//(from peliculas in ctx.Peliculas select peliculas).ToList(); 
+            return View(a);
         }
 
         //Accion para redireccionar a la vista para agragar una nueva pelicula
@@ -24,7 +27,11 @@ namespace TrabajoPracticoWeb3.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        public ActionResult AltaPelicula(Peliculas pelicula)
+        {
+            return View();
+        }
         public ActionResult Sedes()
         {
             return View();
