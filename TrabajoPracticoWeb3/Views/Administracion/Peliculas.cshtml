@@ -6,7 +6,7 @@
  }
 
 <h2>Peliculas</h2>
-<a href="Administracion/AltaPelicula"></a>
+<a href="AltaPelicula">Nueva Pelicula</a>
 <table class="table">
     <thead>
         <tr>
@@ -14,6 +14,7 @@
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Duración</th>
+            <th>Imagen</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,7 @@
                 <td>@peli.Descripcion</td>
                 <td>@peli.Descripcion</td>
                 <td>@peli.Duracion</td>
+                <td><img src="../Images/@peli.Imagen" width="50px" height="50px"/></td>
             </tr>
         }
         

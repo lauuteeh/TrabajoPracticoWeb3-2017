@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -34,14 +35,32 @@ namespace TrabajoPracticoWeb3.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AltaPelicula(Peliculas pelicula)
+        public ActionResult AltaPelicula(Peliculas pelicula, HttpPostedFileBase file)
         {
             myContext ctx = new myContext();//Instancio el contexto
             pelicula.IdGenero = Int32.Parse(Request.Form["Generos"]);
             pelicula.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
             ctx.Peliculas.Add(pelicula);//Agrego la pelicula traida por post
+
+            if (file != null && file.ContentLength > 0) // Agregar IMAGEN
+                try
+                {
+                    string path = Path.Combine(Server.MapPath("~/Images"),
+                                               Path.GetFileName(file.FileName));
+                    file.SaveAs(path);
+                    pelicula.Imagen = Path.GetFileName(file.FileName);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                }
+            else
+            {
+                ViewBag.Message = "No especificó una imagen";
+            }
+
             ctx.SaveChanges();//persisto los datos en la bdd
-            var a = (ctx.Peliculas).ToList();
+            var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
             return View("Peliculas",a);
         }
         public ActionResult Sedes()

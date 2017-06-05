@@ -9,7 +9,7 @@
 <h2>AltaPelicula</h2>
 
 
-    <form action="AltaPelicula" method="post">
+    <form action="AltaPelicula" method="post" enctype = "multipart/form-data">
         <div class="form-group">
             <label for="Nombre">Nombre:</label>
             <input type="text" class="form-control" id="Nombre" name="Nombre">
@@ -18,10 +18,7 @@
             <label for="Descripcion">Descripción:</label>
             <input type="text" class="form-control" id="Descripcion" name="Descripcion">
         </div>
-        <div class="form-group">
-            <label for="Imagen">Imagen:</label>
-            <input type="text" class="form-control" id="Imagen" name="Imagen">
-        </div>
+ 
         <div class="form-group">
             <label for="sel1">Generos:</label>
             <select class="form-control" name="Generos" id="sel1">
@@ -33,25 +30,30 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="sel2">Calificaciones:</label>
-            <select class="form-control" name="Calificaciones"id="sel2">
-                @foreach (var cal in ViewBag.Calificaciones)
-                {
-                    <option value="@cal.IdCalificacion">@cal.Nombre</option>
-                }
-
-            </select>
+            <label for="exampleInputFile">Inserte una imagen</label>
+            <input type="file" id="exampleInputFile" name="file">
+            <p class="help-block">Imagen JPF o PNG.</p>
         </div>
-        <div class="form-group">
-            <label for="Duracion">Duración:</label>
-            <input type="text" class="form-control" id="Duracion" name="Duracion">
-        </div>
-        <div class="form-group">
-            <label for="FechaCarga">Fecha:</label>
-            <input type="date" class="form-control" id="FechaCarga" name="FechaCarga">
-        </div>
+         <div class="form-group">
+                <label for="sel2">Calificaciones:</label>
+                <select class="form-control" name="Calificaciones" id="sel2">
+                    @foreach (var cal in ViewBag.Calificaciones)
+                    {
+                        <option value="@cal.IdCalificacion">@cal.Nombre</option>
+                    }
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Duracion">Duración:</label>
+                <input type="text" class="form-control" id="Duracion" name="Duracion">
+            </div>
+            <div class="form-group">
+                <label for="FechaCarga">Fecha:</label>
+                <input type="date" class="form-control" id="FechaCarga" name="FechaCarga">
+            </div>
 
 
 
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
+            <button type="submit" class="btn btn-default">Submit</button>
+</form>
