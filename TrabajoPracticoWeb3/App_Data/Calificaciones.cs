@@ -25,5 +25,10 @@ namespace TrabajoPracticoWeb3.App_Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Peliculas> Peliculas { get; set; }
+
+        public static implicit operator Calificaciones(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

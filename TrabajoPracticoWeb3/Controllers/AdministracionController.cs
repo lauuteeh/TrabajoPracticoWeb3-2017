@@ -26,12 +26,23 @@ namespace TrabajoPracticoWeb3.Controllers
         //Accion para redireccionar a la vista para agragar una nueva pelicula
         public ActionResult AltaPelicula()
         {
+            myContext ctx = new myContext();
+            var a = (ctx.Generos).ToList();
+            ViewBag.Generos = a;
+            var b = (ctx.Calificaciones).ToList();
+            ViewBag.Calificaciones = b;
             return View();
         }
         [HttpPost]
         public ActionResult AltaPelicula(Peliculas pelicula)
         {
-            return View();
+            myContext ctx = new myContext();//Instancio el contexto
+            pelicula.IdGenero = Int32.Parse(Request.Form["Generos"]);
+            pelicula.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
+            ctx.Peliculas.Add(pelicula);//Agrego la pelicula traida por post
+            ctx.SaveChanges();//persisto los datos en la bdd
+            var a = (ctx.Peliculas).ToList();
+            return View("Peliculas",a);
         }
         public ActionResult Sedes()
         {

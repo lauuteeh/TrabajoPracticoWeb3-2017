@@ -9,7 +9,7 @@
 <h2>AltaPelicula</h2>
 
 
-    <form action="Administracion/AltaPelicula" method="post">
+    <form action="AltaPelicula" method="post">
         <div class="form-group">
             <label for="Nombre">Nombre:</label>
             <input type="text" class="form-control" id="Nombre" name="Nombre">
@@ -25,14 +25,20 @@
         <div class="form-group">
             <label for="sel1">Generos:</label>
             <select class="form-control" name="Generos" id="sel1">
-               
+               @foreach (var gen in ViewBag.Generos)
+               {
+                <option value="@gen.IdGenero">@gen.Nombre</option>
+               }
 
             </select>
         </div>
         <div class="form-group">
             <label for="sel2">Calificaciones:</label>
             <select class="form-control" name="Calificaciones"id="sel2">
-                <option>1</option>
+                @foreach (var cal in ViewBag.Calificaciones)
+                {
+                    <option value="@cal.IdCalificacion">@cal.Nombre</option>
+                }
 
             </select>
         </div>
