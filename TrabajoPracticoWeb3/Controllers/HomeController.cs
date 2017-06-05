@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrabajoPracticoWeb3.App_Data;
+using TrabajoPracticoWeb3.Models;
 
 namespace TrabajoPracticoWeb3.Controllers
 {
@@ -33,5 +35,20 @@ namespace TrabajoPracticoWeb3.Controllers
         {
             return View();
         }
+
+        public ActionResult IniciarSesion(Usuarios u)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuario = UsuarioServicio.IniciarSesion(u);
+                if (usuario != null)
+                {
+                    Session["Usuario"] = usuario;
+                    return RedirectToAction("Inicio", "Administracion");
+                }
+            }
+            return View("Login");
+        }
+
     }
 }
