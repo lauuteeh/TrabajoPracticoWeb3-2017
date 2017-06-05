@@ -3,15 +3,49 @@
     ViewBag.Title = "AltaPelicula";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     @model IEnumerable<TrabajoPracticoWeb3.App_Data.Peliculas>
+
 }
 
 <h2>AltaPelicula</h2>
 
-@using (Html.BeginForm("Administracion", "Libros", FormMethod.Post)) //etiqueta form que va al controller de libros, la función de AltaLibro y con el metodo POST
-{
-         <label>Numero Saga</label>@Html.TextBoxFor(m => m.NumeroSaga) <br />
-         <label>Nombre</label>@Html.TextBoxFor(m => m.Nombre)<br />
-         <label>Descripcion</label>@Html.TextBoxFor(m => m.Descripcion)<br />
-         <label>Fecha</label>@Html.TextBoxFor(m => m.Fecha)<br />
-         <button type="submit">Alta</button>
- }
+
+    <form action="Administracion/AltaPelicula" method="post">
+        <div class="form-group">
+            <label for="Nombre">Nombre:</label>
+            <input type="text" class="form-control" id="Nombre" name="Nombre">
+        </div>
+        <div class="form-group">
+            <label for="Descripcion">Descripción:</label>
+            <input type="text" class="form-control" id="Descripcion" name="Descripcion">
+        </div>
+        <div class="form-group">
+            <label for="Imagen">Imagen:</label>
+            <input type="text" class="form-control" id="Imagen" name="Imagen">
+        </div>
+        <div class="form-group">
+            <label for="sel1">Generos:</label>
+            <select class="form-control" name="Generos" id="sel1">
+               
+
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sel2">Calificaciones:</label>
+            <select class="form-control" name="Calificaciones"id="sel2">
+                <option>1</option>
+
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Duracion">Duración:</label>
+            <input type="text" class="form-control" id="Duracion" name="Duracion">
+        </div>
+        <div class="form-group">
+            <label for="FechaCarga">Fecha:</label>
+            <input type="date" class="form-control" id="FechaCarga" name="FechaCarga">
+        </div>
+
+
+
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
