@@ -78,8 +78,6 @@ namespace TrabajoPracticoWeb3.Controllers
         public ActionResult editarPelicula(Peliculas pelicula, HttpPostedFileBase file)
         {
             myContext ctx = new myContext();//Instancio el contexto
-            pelicula.IdGenero = Int32.Parse(Request.Form["Generos"]);
-            pelicula.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
             var id = Int32.Parse(Request.Form["idPelicula"]);
             Peliculas peli = (from pel in ctx.Peliculas where pel.IdPelicula == id select pel).First();
 
@@ -95,6 +93,7 @@ namespace TrabajoPracticoWeb3.Controllers
                 {
                     ViewBag.Message = "ERROR:" + ex.Message.ToString();
                 }
+
             else
             {
                 pelicula.Imagen = Request.Form["Imagen"];
@@ -103,12 +102,23 @@ namespace TrabajoPracticoWeb3.Controllers
             peli.Descripcion = pelicula.Descripcion;
             peli.Duracion = pelicula.Duracion;
             peli.FechaCarga = pelicula.FechaCarga;
-            peli.IdGenero = pelicula.IdGenero;
-            peli.IdCalificacion = pelicula.IdCalificacion;
+            peli.IdGenero = Int32.Parse(Request.Form["Generos"]);
+            peli.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
             ctx.SaveChanges();//persisto los datos en la bdd
             var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
             return View("Peliculas", a);
            }
+
+        public ActionResult eliminarPelicula()
+        {
+            myContext ctx = new myContext();
+            var idPeli = Int32.Parse(Request.QueryString["id"]);
+            Peliculas peli = (from pe in ctx.Peliculas where pe.IdPelicula == idPeli select pe).First();
+            ctx.Peliculas.Remove(peli);
+            ctx.SaveChanges();
+            var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
+            return View("Peliculas",a);
+        }
 
         public ActionResult Sedes()
         {
