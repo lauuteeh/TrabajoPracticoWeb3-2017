@@ -110,7 +110,7 @@ namespace TrabajoPracticoWeb3.Controllers
             var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
             return View("Peliculas", a);
            }
-        //Elimina la pelicula en bdd
+        /* Las peliculas no deben eliminarse
         public ActionResult eliminarPelicula()
         {
             myContext ctx = new myContext();
@@ -120,7 +120,7 @@ namespace TrabajoPracticoWeb3.Controllers
             ctx.SaveChanges();
             var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
             return View("Peliculas",a);
-        }
+        }*/
         //Listado de Sedes
         public ActionResult Sedes()
         {
