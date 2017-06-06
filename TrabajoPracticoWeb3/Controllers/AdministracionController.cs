@@ -169,7 +169,7 @@ namespace TrabajoPracticoWeb3.Controllers
             var a = (ctx.Sedes).ToList();
             return View("Sedes", a);
         }
-        //Elimina la sede en bdd
+        /*Lase sedes no deben eliminarse
         public ActionResult EliminarSede()
         {
             myContext ctx = new myContext();
@@ -180,7 +180,7 @@ namespace TrabajoPracticoWeb3.Controllers
             var a = (ctx.Sedes).ToList();//Cargo el modelo para Peliculas
             
             return View("Sedes", a);
-        }
+        }*/
 
         public ActionResult Carteleras()
         {
