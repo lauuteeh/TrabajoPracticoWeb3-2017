@@ -136,13 +136,48 @@ namespace TrabajoPracticoWeb3.Controllers
         public ActionResult AltaSede(Sedes sede)
         {
             myContext ctx = new myContext();
-            sede.PrecioGeneral = Int32.Parse(Request.Form["precioGeneral"]);
+            sede.PrecioGeneral = Decimal.Parse(Request.Form["precioGeneral"]);
             ctx.Sedes.Add(sede);
             ctx.SaveChanges();
             var a = (ctx.Sedes).ToList();
             return View("Sedes",a);
         }
 
+        public ActionResult EditarSede()
+        {
+            myContext ctx = new myContext();
+            var id = Int32.Parse(Request.QueryString["id"]);
+            var a = (from se in ctx.Sedes where se.IdSede == id select se).ToList();
+
+            return View(a);
+        }
+        [HttpPost]
+        public ActionResult EditarSede(Sedes sede)
+        {
+            myContext ctx = new myContext();
+            var id = Int32.Parse(Request.Form["id"]);
+            var precio = Decimal.Parse(Request.Form["PrecioGeneral"]);
+            Sedes sedeOrig = (from se in ctx.Sedes where se.IdSede == id select se).First();
+
+            sedeOrig.Nombre = sede.Nombre;
+            sedeOrig.PrecioGeneral = precio;
+            sedeOrig.Direccion = sede.Direccion;
+            ctx.SaveChanges();
+            var a = (ctx.Sedes).ToList();
+            return View("Sedes", a);
+        }
+
+        public ActionResult EliminarSede()
+        {
+            myContext ctx = new myContext();
+            var id = Int32.Parse(Request.QueryString["id"]);
+            Sedes sede = (from se in ctx.Sedes where se.IdSede == id select se).First();
+            ctx.Sedes.Remove(sede);
+            ctx.SaveChanges();
+            var a = (ctx.Sedes).ToList();//Cargo el modelo para Peliculas
+            
+            return View("Sedes", a);
+        }
         public ActionResult Carteleras()
         {
             return View();

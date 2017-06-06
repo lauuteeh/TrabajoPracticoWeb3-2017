@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "editarSede";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    @model IEnumerable<TrabajoPracticoWeb3.App_Data.Sedes>
+}
+
+<h2>editarSede</h2>
+
+<h2>AltaSede</h2>
+@foreach (var sede in Model)
+{
+<form action="EditarSede" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+         <input type="hidden" class="form-control" value="@sede.IdSede" id="id" name="id">
+    </div>
+    <div class="form-group">
+        <label for="Nombre">Nombre:</label>
+        <input type="text" class="form-control" value="@sede.Nombre" id="Nombre" name="Nombre">
+    </div>
+    <div class="form-group">
+        <label for="Descripcion">Dirección:</label>
+        <input type="text" class="form-control" value="@sede.Direccion"id="Direccion" name="Direccion">
+    </div>
+
+    <div class="form-group">
+        <label for="Duracion">Precio General:</label>
+        <input type="text" class="form-control" value="@sede.PrecioGeneral" id="PrecioGeneral" name="PrecioGeneral">
+    </div>
+
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+}
