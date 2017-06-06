@@ -122,13 +122,25 @@ namespace TrabajoPracticoWeb3.Controllers
 
         public ActionResult Sedes()
         {
-            return View();
+            myContext ctx = new myContext();
+            var a = (ctx.Sedes).ToList();
+            return View(a);
         }
 
         //Accion para redireccionar a la vista para agragar una nueva sede
         public ActionResult AltaSede()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult AltaSede(Sedes sede)
+        {
+            myContext ctx = new myContext();
+            sede.PrecioGeneral = Int32.Parse(Request.Form["precioGeneral"]);
+            ctx.Sedes.Add(sede);
+            ctx.SaveChanges();
+            var a = (ctx.Sedes).ToList();
+            return View("Sedes",a);
         }
 
         public ActionResult Carteleras()

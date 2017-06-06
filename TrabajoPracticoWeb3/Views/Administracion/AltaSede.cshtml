@@ -1,7 +1,26 @@
 ﻿
 @{
     ViewBag.Title = "AltaSede";
+    @model TrabajoPracticoWeb3.App_Data.Sedes
 }
 
 <h2>AltaSede</h2>
 
+<form action="AltaSede" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="Nombre">Nombre:</label>
+        <input type="text" class="form-control" id="Nombre" name="Nombre">
+    </div>
+    <div class="form-group">
+        <label for="Descripcion">Dirección:</label>
+        <input type="text" class="form-control" id="Direccion" name="Direccion">
+    </div>
+
+    <div class="form-group">
+        <label for="Duracion">Precio General:</label>
+        <input type="text" class="form-control" id="PrecioGeneral" name="PrecioGeneral">
+    </div>
+ 
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
