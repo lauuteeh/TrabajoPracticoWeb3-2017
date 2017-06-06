@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "editarPelicula";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    @model IEnumerable<TrabajoPracticoWeb3.App_Data.Peliculas>
+ }
+
+<h2>editarPelicula</h2>
+@foreach (var pelicula in Model) {
+<form action="editarPelicula" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="idPelicula" value="@pelicula.IdPelicula" />
+    <div class="form-group">
+        <label for="Nombre">Nombre:</label>
+        <input type="text" class="form-control" id="Nombre" name="Nombre" value="@pelicula.Nombre">
+    </div>
+    <div class="form-group">
+        <label for="Descripcion">Descripción:</label>
+        <input type="text" class="form-control" id="Descripcion" name="Descripcion" value="@pelicula.Descripcion">
+    </div>
+
+    <div class="form-group">
+        <label for="sel1">Generos:</label>
+        <select class="form-control" name="Generos" id="sel1">
+            @foreach (var gen in ViewBag.Generos)
+            {
+                if (gen.IdGenero == @pelicula.IdGenero)
+                {
+                    <option selected="selected" value="@gen.IdGenero">@gen.Nombre</option>
+                }
+                <option value="@gen.IdGenero">@gen.Nombre</option>
+            }
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputFile">Inserte una imagen</label>
+        <input type="file" id="exampleInputFile" name="file">
+        <p class="help-block">@pelicula.Imagen</p>
+        <input type="hidden" value="@pelicula.Imagen" name="Imagen" />
+    </div>
+    <div class="form-group">
+        <label for="sel2">Calificaciones:</label>
+        <select class="form-control" name="Calificaciones" id="sel2">
+            @foreach (var cal in ViewBag.Calificaciones)
+            {
+                if (cal.IdCalificacion == @pelicula.IdCalificacion)
+                {
+                    <option selected="selected" value="@cal.IdCalificacion">@cal.Nombre</option>
+                }
+                <option value="@cal.IdCalificacion">@cal.Nombre</option>
+            }
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Duracion">Duración:</label>
+        <input type="text" class="form-control" id="Duracion" value="@pelicula.Duracion" name="Duracion"/>
+    </div>
+    <div class="form-group">
+        <label for="FechaCarga">Fecha:</label>
+        <input type="date" class="form-control" id="FechaCarga" name="FechaCarga" value="@pelicula.FechaCarga"/>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+}
