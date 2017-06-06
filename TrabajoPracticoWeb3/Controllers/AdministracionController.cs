@@ -16,14 +16,13 @@ namespace TrabajoPracticoWeb3.Controllers
         {
             return View();
         }
-
+        //Listado de peliculas
         public ActionResult Peliculas()
         {
             myContext ctx = new myContext();
             var a = (ctx.Peliculas).ToList();//(from peliculas in ctx.Peliculas select peliculas).ToList(); 
             return View(a);
         }
-
         //Accion para redireccionar a la vista para agragar una nueva pelicula
         public ActionResult AltaPelicula()
         {
@@ -34,6 +33,7 @@ namespace TrabajoPracticoWeb3.Controllers
             ViewBag.Calificaciones = b;
             return View();
         }
+        //Accion que persiste los datos en la bdd
         [HttpPost]
         public ActionResult AltaPelicula(Peliculas pelicula, HttpPostedFileBase file)
         {
@@ -63,6 +63,7 @@ namespace TrabajoPracticoWeb3.Controllers
             var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
             return View("Peliculas",a);
         }
+        //Redirecciona y envía model
         public ActionResult editarPelicula()
         {
             myContext ctx = new myContext();
@@ -74,6 +75,7 @@ namespace TrabajoPracticoWeb3.Controllers
             ViewBag.Calificaciones = c;
             return View(a);
         }
+        //Persiste los cambios en bdd
         [HttpPost]
         public ActionResult editarPelicula(Peliculas pelicula, HttpPostedFileBase file)
         {
@@ -108,7 +110,7 @@ namespace TrabajoPracticoWeb3.Controllers
             var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
             return View("Peliculas", a);
            }
-
+        //Elimina la pelicula en bdd
         public ActionResult eliminarPelicula()
         {
             myContext ctx = new myContext();
@@ -119,19 +121,19 @@ namespace TrabajoPracticoWeb3.Controllers
             var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
             return View("Peliculas",a);
         }
-
+        //Listado de Sedes
         public ActionResult Sedes()
         {
             myContext ctx = new myContext();
             var a = (ctx.Sedes).ToList();
             return View(a);
         }
-
         //Accion para redireccionar a la vista para agragar una nueva sede
         public ActionResult AltaSede()
         {
             return View();
         }
+        //Acción que persiste los datos en la bdd
         [HttpPost]
         public ActionResult AltaSede(Sedes sede)
         {
@@ -142,7 +144,7 @@ namespace TrabajoPracticoWeb3.Controllers
             var a = (ctx.Sedes).ToList();
             return View("Sedes",a);
         }
-
+        //Redirecciona a EditarSede y le envía el model
         public ActionResult EditarSede()
         {
             myContext ctx = new myContext();
@@ -151,6 +153,7 @@ namespace TrabajoPracticoWeb3.Controllers
 
             return View(a);
         }
+        //Persiste los cambios en la bdd
         [HttpPost]
         public ActionResult EditarSede(Sedes sede)
         {
@@ -166,7 +169,7 @@ namespace TrabajoPracticoWeb3.Controllers
             var a = (ctx.Sedes).ToList();
             return View("Sedes", a);
         }
-
+        //Elimina la sede en bdd
         public ActionResult EliminarSede()
         {
             myContext ctx = new myContext();
@@ -178,6 +181,7 @@ namespace TrabajoPracticoWeb3.Controllers
             
             return View("Sedes", a);
         }
+
         public ActionResult Carteleras()
         {
             return View();
