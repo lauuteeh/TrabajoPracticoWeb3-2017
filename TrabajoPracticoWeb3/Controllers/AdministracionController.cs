@@ -217,7 +217,11 @@ namespace TrabajoPracticoWeb3.Controllers
             cartelera.IdPelicula = Int32.Parse(Request.Form["Peliculas"]);
             cartelera.IdSede = Int32.Parse(Request.Form["Sedes"]);
             cartelera.IdVersion = Int32.Parse(Request.Form["Versiones"]);
-            cartelera.HoraInicio = Int32.Parse(Request.Form["HoraInicio"]);
+
+            var asd = Convert.ToDateTime(Request.Form["HoraInicio"]);
+            var asd2 = (asd.Hour).ToString();
+            var asd3 = (asd.Minute).ToString();
+            cartelera.HoraInicio = Int32.Parse(asd2+asd3);
 
       
             var dias = Request.Form["chk_group[]"];
