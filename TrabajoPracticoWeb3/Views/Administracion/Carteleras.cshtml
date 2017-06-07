@@ -2,7 +2,60 @@
 @{
     ViewBag.Title = "Carteleras";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    @model IEnumerable<TrabajoPracticoWeb3.App_Data.Carteleras>
 }
 
 <h2>Carteleras</h2>
 
+<button onclick="window.location.href='AltaCartelera'" class="btn btn-success">Nueva Cartelera</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sede</th>
+            <th>Pelicula</th>
+            <th>Hora Inicio</th>
+            <th>Dias que será proyectada</th>
+            <th>Período de vigencia</th>
+            <th>Número de sala</th>
+            <th>Versión</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @foreach (var cart in Model)
+            {
+                foreach (var sede in ViewBag.Sede)
+                {
+                    if (sede.IdSede == cart.IdSede)
+                    {
+                        <td>@sede.Nombre</td> 
+                    }
+                }
+                foreach(var peli in ViewBag.Peli)
+                {
+                    if(peli.IdPelicula == cart.IdPelicula)
+                    {
+                        <td>@peli.Nombre</td>
+                    }
+                }
+                <td>@cart.HoraInicio</td>
+                <td>
+                    if(cart.Lunes == 1) {Lunes }
+                    if(cart.Martes == 1) {Martes }
+                    if(cart.Miercoles == 1) {Miercoles }
+                    if(cart.Jueves == 1) {Jueves }
+                    if(cart.Viernes == 1) {Viernes }
+                    if(cart.Sabado == 1) {Sabado }
+                    if(cart.Domingo == 1) {Domingo }
+                </td>
+                <td>@cart.FechaInicio - @cart.FechaFin</td>
+                <td>@cart.NumeroSala</td>
+                foreach(var ver in ViewBag.Version) {
+                    if(ver.IdVersion == cart.IdVersion) {
+                    <td>@ver.Nombre</td>
+                    }
+                }
+            }
+        </tr>
+    </tbody>
+</table>

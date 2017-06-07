@@ -184,7 +184,17 @@ namespace TrabajoPracticoWeb3.Controllers
 
         public ActionResult Carteleras()
         {
-            return View();
+            myContext ctx = new myContext();
+            var a = (ctx.Carteleras).ToList();
+            var b = (ctx.Sedes).ToList();
+            var c = (ctx.Peliculas).ToList();
+            var d = (ctx.Versiones).ToList();
+
+            ViewBag.Sedes = b;
+            ViewBag.Peli = c;
+            ViewBag.Version = d; 
+
+            return View(a);
         }
 
         //Accion para redireccionar a la vista para agragar una nueva cartelera
