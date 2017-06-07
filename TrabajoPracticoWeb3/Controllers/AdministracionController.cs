@@ -200,7 +200,26 @@ namespace TrabajoPracticoWeb3.Controllers
         //Accion para redireccionar a la vista para agragar una nueva cartelera
         public ActionResult AltaCartelera()
         {
+            myContext ctx = new myContext();
+            var b = (ctx.Sedes).ToList();
+            var c = (ctx.Peliculas).ToList();
+            var d = (ctx.Versiones).ToList();
+
+            ViewBag.Sedes = b;
+            ViewBag.Peli = c;
+            ViewBag.Version = d;
             return View();
+        }
+        [HttpPost]
+        public ActionResult AltaCartelera(Carteleras cartelera)
+        {
+            myContext ctx = new myContext();
+
+
+
+
+            var a = (ctx.Carteleras).ToList();
+            return View(a);
         }
 
         public ActionResult Reportes()

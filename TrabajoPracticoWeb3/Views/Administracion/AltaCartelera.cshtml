@@ -1,7 +1,75 @@
 ﻿
 @{
     ViewBag.Title = "AltaCartelera";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    @model IEnumerable<TrabajoPracticoWeb3.App_Data.Carteleras>
 }
 
 <h2>AltaCartelera</h2>
 
+
+<form action="AltaCartelera" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="sel1">Sede:</label>
+        <select class="form-control" name="Generos" id="sel1">
+            @foreach (var sede in ViewBag.Sedes)
+            {
+                <option value="@sede.IdSedes">@sede.Nombre</option>
+            }
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="sel1">Pelicula:</label>
+        <select class="form-control" name="Generos" id="sel1">
+            @foreach (var peli in ViewBag.Peli)
+            {
+                <option value="@peli.IdPeliculas">@peli.Nombre</option>
+            }
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="HoraInicio">Hora de inicio:</label>
+        <input type="time" class="form-control" id="HoraInicio" name="HoraInicio">
+    </div>
+    <div class="form-group">
+        <label for="Descripcion">Días:</label>
+        <input type="checkbox" class="form-control" name="chk_group[]" value="1" />Lunes<br />
+        <input type="checkbox" class="form-control" name="chk_group[]" value="2" />Martes<br />
+        <input type="checkbox" class="form-control" name="chk_group[]" value="3" />Miercoles<br />
+        <input type="checkbox" class="form-control" name="chk_group[]" value="4" />Jueves<br />
+        <input type="checkbox" class="form-control" name="chk_group[]" value="5" />Viernes<br />
+        <input type="checkbox" class="form-control" name="chk_group[]" value="6" />Sabado<br />
+        <input type="checkbox" class="form-control" name="chk_group[]" value="7" />Domingo<br />
+    </div>
+
+
+    <div class="form-group">
+        <label for="exampleInputFile">Inserte una imagen</label>
+        <input type="file" id="exampleInputFile" name="file">
+        <p class="help-block">Imagen JPF o PNG.</p>
+    </div>
+    <div class="form-group">
+        <label for="sel2">Calificaciones:</label>
+        <select class="form-control" name="Calificaciones" id="sel2">
+            @foreach (var cal in ViewBag.Calificaciones)
+            {
+                <option value="@cal.IdCalificacion">@cal.Nombre</option>
+            }
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Duracion">Duración:</label>
+        <input type="text" class="form-control" id="Duracion" name="Duracion">
+    </div>
+    <div class="form-group">
+        <label for="FechaCarga">Fecha:</label>
+        <input type="datetime" class="form-control" id="FechaCarga" name="FechaCarga">
+    </div>
+
+
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
