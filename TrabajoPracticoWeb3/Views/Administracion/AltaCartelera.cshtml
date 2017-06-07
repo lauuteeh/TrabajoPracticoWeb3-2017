@@ -14,7 +14,7 @@
         <select class="form-control" name="Generos" id="sel1">
             @foreach (var sede in ViewBag.Sedes)
             {
-                <option value="@sede.IdSedes">@sede.Nombre</option>
+                <option value="@sede.IdSede">@sede.Nombre</option>
             }
 
         </select>
@@ -24,7 +24,7 @@
         <select class="form-control" name="Generos" id="sel1">
             @foreach (var peli in ViewBag.Peli)
             {
-                <option value="@peli.IdPeliculas">@peli.Nombre</option>
+                <option value="@peli.IdPelicula">@peli.Nombre</option>
             }
 
         </select>
@@ -45,29 +45,6 @@
     </div>
 
 
-    <div class="form-group">
-        <label for="exampleInputFile">Inserte una imagen</label>
-        <input type="file" id="exampleInputFile" name="file">
-        <p class="help-block">Imagen JPF o PNG.</p>
-    </div>
-    <div class="form-group">
-        <label for="sel2">Calificaciones:</label>
-        <select class="form-control" name="Calificaciones" id="sel2">
-            @foreach (var cal in ViewBag.Calificaciones)
-            {
-                <option value="@cal.IdCalificacion">@cal.Nombre</option>
-            }
-
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="Duracion">Duración:</label>
-        <input type="text" class="form-control" id="Duracion" name="Duracion">
-    </div>
-    <div class="form-group">
-        <label for="FechaCarga">Fecha:</label>
-        <input type="datetime" class="form-control" id="FechaCarga" name="FechaCarga">
-    </div>
 
 
 

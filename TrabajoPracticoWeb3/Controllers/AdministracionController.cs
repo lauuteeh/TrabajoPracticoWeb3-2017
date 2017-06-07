@@ -215,7 +215,19 @@ namespace TrabajoPracticoWeb3.Controllers
         {
             myContext ctx = new myContext();
 
+            var dias = Request.Form["chk_group[]"];
+            
+                foreach(var dia in dias)
+            {
+                if (dia == '1') { cartelera.Lunes = true; }
+                if (dia == '2') { cartelera.Martes = true; }
+                if (dia == '3') { cartelera.Miercoles = true; }
+                if (dia == '4') { cartelera.Jueves = true; }
+                if (dia == '5') { cartelera.Viernes = true; }
+                if (dia == '6') { cartelera.Sabado = true; }
+                if (dia == '7') { cartelera.Domingo = true; }
 
+            }
 
 
             var a = (ctx.Carteleras).ToList();
