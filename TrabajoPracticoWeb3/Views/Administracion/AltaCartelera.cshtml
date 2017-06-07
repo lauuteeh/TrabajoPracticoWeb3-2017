@@ -11,7 +11,7 @@
 <form action="AltaCartelera" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="sel1">Sede:</label>
-        <select class="form-control" name="Generos" id="sel1">
+        <select class="form-control" name="Sedes" id="sel1">
             @foreach (var sede in ViewBag.Sedes)
             {
                 <option value="@sede.IdSede">@sede.Nombre</option>
@@ -21,7 +21,7 @@
     </div>
     <div class="form-group">
         <label for="sel1">Pelicula:</label>
-        <select class="form-control" name="Generos" id="sel1">
+        <select class="form-control" name="Peliculas" id="sel1">
             @foreach (var peli in ViewBag.Peli)
             {
                 <option value="@peli.IdPelicula">@peli.Nombre</option>
@@ -42,6 +42,28 @@
         <input type="checkbox" class="form-control" name="chk_group[]" value="5" />Viernes<br />
         <input type="checkbox" class="form-control" name="chk_group[]" value="6" />Sabado<br />
         <input type="checkbox" class="form-control" name="chk_group[]" value="7" />Domingo<br />
+    </div>
+    <div class="form-group">
+        <label for="FechaInicio">Fecha de inicio:</label>
+        <input type="date" class="form-control" id="FechaInicio" name="FechaInicio">
+    </div>
+    <div class="form-group">
+        <label for="FechaFin">Fecha de fin:</label>
+        <input type="date" class="form-control" id="FechaFin" name="FechaFin">
+    </div>
+    <div class="form-group">
+        <label for="NumeroSala">Número de sala:</label>
+        <input type="text" class="form-control" id="NumeroSala" name="NumeroSala">
+    </div>
+    <div class="form-group">
+        <label for="sel1">Pelicula:</label>
+        <select class="form-control" name="Versiones" id="sel1">
+            @foreach (var ver in ViewBag.Version)
+            {
+                <option value="@ver.IdVersion">@ver.Nombre</option>
+            }
+
+        </select>
     </div>
 
 

@@ -214,6 +214,10 @@ namespace TrabajoPracticoWeb3.Controllers
         public ActionResult AltaCartelera(Carteleras cartelera)
         {
             myContext ctx = new myContext();
+            cartelera.IdPelicula = Int32.Parse(Request.Form["Peliculas"]);
+            cartelera.IdSede = Int32.Parse(Request.Form["Sedes"]);
+            cartelera.IdVersion = Int32.Parse(Request.Form["Versiones"]);
+            cartelera.HoraInicio = Int32.Parse(Request.Form["HoraInicio"]);
 
             var dias = Request.Form["chk_group[]"];
             
@@ -229,7 +233,8 @@ namespace TrabajoPracticoWeb3.Controllers
 
             }
 
-
+            ctx.Carteleras.Add(cartelera);
+            ctx.SaveChanges();
             var a = (ctx.Carteleras).ToList();
             return View(a);
         }
