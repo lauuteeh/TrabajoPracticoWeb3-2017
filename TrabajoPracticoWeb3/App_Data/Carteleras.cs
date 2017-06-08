@@ -11,15 +11,21 @@ namespace TrabajoPracticoWeb3.App_Data
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Carteleras
     {
+
         public int IdCartelera { get; set; }
         public int IdSede { get; set; }
         public int IdPelicula { get; set; }
+        [Required(ErrorMessage = "Se requiere Hora inicio")]
         public int HoraInicio { get; set; }
+        [Required(ErrorMessage = "Se requiere Fecha inicio")]
         public System.DateTime FechaInicio { get; set; }
+        [Required(ErrorMessage = "Se requiere Fecha fin")]
         public System.DateTime FechaFin { get; set; }
+        [Required(ErrorMessage = "Se requiere una sala")]
         public int NumeroSala { get; set; }
         public int IdVersion { get; set; }
         public bool Lunes { get; set; }
