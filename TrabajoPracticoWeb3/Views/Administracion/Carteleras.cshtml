@@ -24,7 +24,7 @@
         <tr>
             @foreach (var cart in Model)
             {
-                foreach (var sede in ViewBag.Sede)
+                foreach (var sede in ViewBag.Sedes)
                 {
                     if (sede.IdSede == cart.IdSede)
                     {
@@ -40,15 +40,16 @@
                 }
                 <td>@cart.HoraInicio</td>
                 <td>
-                    if(cart.Lunes == 1) {Lunes }
-                    if(cart.Martes == 1) {Martes }
-                    if(cart.Miercoles == 1) {Miercoles }
-                    if(cart.Jueves == 1) {Jueves }
-                    if(cart.Viernes == 1) {Viernes }
-                    if(cart.Sabado == 1) {Sabado }
-                    if(cart.Domingo == 1) {Domingo }
+                    @if (cart.Lunes == true)
+                    { <p>Lunes</p> }
+                    @if (cart.Martes == true) { <span>Martes</span> }
+                    @if (cart.Miercoles == true){ <span>Miercoles</span> }
+                    @if (cart.Jueves == true){ <span>Jueves</span> }
+                    @if (cart.Viernes == true){ <span>Viernes</span> }
+                    @if (cart.Sabado == true) { <span>Sabado</span> }
+                    @if (cart.Domingo == true){ <span>Domingo</span> }
                 </td>
-                <td>@cart.FechaInicio - @cart.FechaFin</td>
+                <td>@cart.FechaInicio.ToString("MM/dd/yyyy") - @cart.FechaFin.ToString("MM/dd/yyyy")</td>
                 <td>@cart.NumeroSala</td>
                 foreach(var ver in ViewBag.Version) {
                     if(ver.IdVersion == cart.IdVersion) {

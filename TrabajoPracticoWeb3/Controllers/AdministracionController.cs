@@ -217,13 +217,11 @@ namespace TrabajoPracticoWeb3.Controllers
             cartelera.IdPelicula = Int32.Parse(Request.Form["Peliculas"]);
             cartelera.IdSede = Int32.Parse(Request.Form["Sedes"]);
             cartelera.IdVersion = Int32.Parse(Request.Form["Versiones"]);
-            cartelera.FechaInicio = DateTime.Parse(Request.Form["FechaInicio"]);
-            cartelera.FechaFin = DateTime.Parse(Request.Form["FechaFin"]);
             var asd = Convert.ToDateTime(Request.Form["HoraInicio"]);
             var asd2 = (asd.Hour).ToString();
             var asd3 = (asd.Minute).ToString();
             cartelera.HoraInicio = Int32.Parse(asd2+asd3);
-
+            cartelera.FechaCarga = DateTime.Now;
       
             var dias = Request.Form["chk_group[]"];
             
@@ -241,8 +239,15 @@ namespace TrabajoPracticoWeb3.Controllers
 
             ctx.Carteleras.Add(cartelera);
             ctx.SaveChanges();
+            //Preparo lo necesario para devolver la vista Carteleras
+            var b = (ctx.Sedes).ToList();
+            var c = (ctx.Peliculas).ToList();
+            var d = (ctx.Versiones).ToList();
+            ViewBag.Sedes = b;
+            ViewBag.Peli = c;
+            ViewBag.Version = d;
             var a = (ctx.Carteleras).ToList();
-            return View(a);
+            return View("Carteleras",a);
         }
 
         public ActionResult Reportes()
