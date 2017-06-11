@@ -17,7 +17,15 @@ body {
 
 .img-portfolio {
     margin-bottom: 30px;
-    padding-left:30px;
+    padding-left: 30px;
+
+}
+
+.img-min {
+    min-width: 300px;
+    min-height: 400px;
+    max-height: 400px;
+    max-width: 300px;
 }
 
 .img-hover:hover {
