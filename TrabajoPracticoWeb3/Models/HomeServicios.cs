@@ -19,5 +19,17 @@ namespace TrabajoPracticoWeb3.Models
             return a;
 
         }
+
+        public static dynamic CarteleraProximamente()
+        {
+
+            myContext ctx = new myContext();
+            DateTime todaysDate = DateTime.Now;
+            DateTime OneMoreMonth = DateTime.Now.Date.AddMonths(1);
+            var a = (from cartelera in ctx.Carteleras where cartelera.FechaInicio > todaysDate && cartelera.FechaInicio < OneMoreMonth select cartelera).ToList(); ;
+
+            return a;
+
+        }
     }
 }
