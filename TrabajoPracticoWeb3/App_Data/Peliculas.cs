@@ -11,7 +11,8 @@ namespace TrabajoPracticoWeb3.App_Data
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Peliculas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,11 +23,17 @@ namespace TrabajoPracticoWeb3.App_Data
         }
     
         public int IdPelicula { get; set; }
+        [Required(ErrorMessage = "¡Se requiere un nombre de pelicula!")]
         public string Nombre { get; set; }
+        [Required(ErrorMessage = "¡Por favor ingresar una Descripción!")]
         public string Descripcion { get; set; }
+        [Required(ErrorMessage = "¡Por favor, cargar una imagen!")]
         public string Imagen { get; set; }
+        [Required(ErrorMessage = "¡Por favor, Seleccionar una calificacion!")]
         public int IdCalificacion { get; set; }
+        [Required(ErrorMessage = "¡Por favor, Seleccionar un genero!")]
         public int IdGenero { get; set; }
+        [Required(ErrorMessage = "¡Por favor, ingresar la duración!")]
         public int Duracion { get; set; }
         public System.DateTime FechaCarga { get; set; }
     

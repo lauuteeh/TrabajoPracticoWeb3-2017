@@ -11,7 +11,8 @@ namespace TrabajoPracticoWeb3.App_Data
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Sedes
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,8 +23,14 @@ namespace TrabajoPracticoWeb3.App_Data
         }
     
         public int IdSede { get; set; }
+        [StringLength (40, MinimumLength =2 , ErrorMessage = "El minimo es 2 caracteres")]
+        [Required(ErrorMessage = "¡Se necesita un Nombre!")]
         public string Nombre { get; set; }
+        [StringLength(40, MinimumLength = 2, ErrorMessage = "El minimo es 2 caracteres")]
+        [Required(ErrorMessage = "¡Se necesita una dirección!")]
         public string Direccion { get; set; }
+        [StringLength(40, MinimumLength = 2, ErrorMessage = "El minimo es 2 caracteres")]
+        [Required(ErrorMessage = "¡Se necesita un precio general!")]
         public decimal PrecioGeneral { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

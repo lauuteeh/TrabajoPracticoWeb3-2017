@@ -38,30 +38,39 @@ namespace TrabajoPracticoWeb3.Controllers
         public ActionResult AltaPelicula(Peliculas pelicula, HttpPostedFileBase file)
         {
             myContext ctx = new myContext();//Instancio el contexto
-            pelicula.IdGenero = Int32.Parse(Request.Form["Generos"]);
-            pelicula.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
-            ctx.Peliculas.Add(pelicula);//Agrego la pelicula traida por post
+            if (ModelState.IsValid)
+            { 
+                pelicula.IdGenero = Int32.Parse(Request.Form["Generos"]);
+                pelicula.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
+                pelicula.FechaCarga = DateTime.Now;
+                ctx.Peliculas.Add(pelicula);//Agrego la pelicula traida por post
 
-            if (file != null && file.ContentLength > 0) // Agregar IMAGEN
-                try
+                if (file != null && file.ContentLength > 0) // Agregar IMAGEN
+                    try
+                    {
+                        string path = Path.Combine(Server.MapPath("~/Images"),
+                                                   Path.GetFileName(file.FileName));
+                        file.SaveAs(path);
+                        pelicula.Imagen = Path.GetFileName(file.FileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                    }
+                else
                 {
-                    string path = Path.Combine(Server.MapPath("~/Images"),
-                                               Path.GetFileName(file.FileName));
-                    file.SaveAs(path);
-                    pelicula.Imagen = Path.GetFileName(file.FileName);
+                    ViewBag.Message = "No especificó una imagen";
                 }
-                catch (Exception ex)
-                {
-                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
-                }
-            else
-            {
-                ViewBag.Message = "No especificó una imagen";
+
+                ctx.SaveChanges();//persisto los datos en la bdd
+                var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
+                return View("Peliculas", a);
             }
-
-            ctx.SaveChanges();//persisto los datos en la bdd
-            var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
-            return View("Peliculas",a);
+            var e = (ctx.Generos).ToList();
+            ViewBag.Generos = e;
+            var f = (ctx.Calificaciones).ToList();
+            ViewBag.Calificaciones = f;
+            return View();
         }
         //Redirecciona y envía model
         public ActionResult editarPelicula()
@@ -80,36 +89,38 @@ namespace TrabajoPracticoWeb3.Controllers
         public ActionResult editarPelicula(Peliculas peli, HttpPostedFileBase file)
         {
             myContext ctx = new myContext();//Instancio el contexto
-            var id = Int32.Parse(Request.Form["id"]);
-            Peliculas peli2 = (from pel in ctx.Peliculas where pel.IdPelicula == id select pel).First();
 
-            if (file != null && file.ContentLength > 0) // Agregar IMAGEN
-                try
-                {
-                    string path = Path.Combine(Server.MapPath("~/Images"),
-                                               Path.GetFileName(file.FileName));
-                    file.SaveAs(path);
-                    peli.Imagen = Path.GetFileName(file.FileName);
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
-                }
+                var id = Int32.Parse(Request.Form["id"]);
+                Peliculas peli2 = (from pel in ctx.Peliculas where pel.IdPelicula == id select pel).First();
 
-            else
-            {
-                peli.Imagen = Request.Form["Imagen"];
+                if (file != null && file.ContentLength > 0) // Agregar IMAGEN
+                    try
+                    {
+                        string path = Path.Combine(Server.MapPath("~/Images"),
+                                                   Path.GetFileName(file.FileName));
+                        file.SaveAs(path);
+                        peli.Imagen = Path.GetFileName(file.FileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                    }
+
+                else
+                {
+                    peli.Imagen = Request.Form["Imagen"];
+                }
+                peli2.Nombre = peli.Nombre;
+                peli2.Descripcion = peli.Descripcion;
+                peli2.Duracion = peli.Duracion;
+                peli2.FechaCarga = DateTime.Now;
+                peli2.IdGenero = Int32.Parse(Request.Form["Generos"]);
+                peli2.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
+                ctx.SaveChanges();//persisto los datos en la bdd
+                var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
+                return View("Peliculas", a);
             }
-            peli2.Nombre = peli.Nombre;
-            peli2.Descripcion = peli.Descripcion;
-            peli2.Duracion = peli.Duracion;
-            peli2.FechaCarga = DateTime.Now;
-            peli2.IdGenero = Int32.Parse(Request.Form["Generos"]);
-            peli2.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
-            ctx.SaveChanges();//persisto los datos en la bdd
-            var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
-            return View("Peliculas", a);
-           }
+
         /* Las peliculas no deben eliminarse
         public ActionResult eliminarPelicula()
         {
@@ -137,21 +148,29 @@ namespace TrabajoPracticoWeb3.Controllers
         [HttpPost]
         public ActionResult AltaSede(Sedes sede)
         {
-            myContext ctx = new myContext();
-            sede.PrecioGeneral = Decimal.Parse(Request.Form["precioGeneral"]);
-            ctx.Sedes.Add(sede);
-            ctx.SaveChanges();
-            var a = (ctx.Sedes).ToList();
-            return View("Sedes",a);
+            if (ModelState.IsValid)
+            {
+                myContext ctx = new myContext();
+                sede.PrecioGeneral = Decimal.Parse(Request.Form["precioGeneral"]);
+                ctx.Sedes.Add(sede);
+                ctx.SaveChanges();
+                var a = (ctx.Sedes).ToList();
+                return View("Sedes", a);
+            }
+            return View();
         }
         //Redirecciona a EditarSede y le envía el model
         public ActionResult EditarSede()
         {
             myContext ctx = new myContext();
-            var id = Int32.Parse(Request.QueryString["id"]);
-            var a = (from se in ctx.Sedes where se.IdSede == id select se).ToList();
+            if (ModelState.IsValid)
+            {
+                var id = Int32.Parse(Request.QueryString["id"]);
+                var a = (from se in ctx.Sedes where se.IdSede == id select se).ToList();
 
-            return View(a);
+                return View(a);
+            }
+            return View();
         }
         //Persiste los cambios en la bdd
         [HttpPost]
