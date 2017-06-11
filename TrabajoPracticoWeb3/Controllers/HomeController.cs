@@ -13,12 +13,8 @@ namespace TrabajoPracticoWeb3.Controllers
     {
         // GET: Home
         public ActionResult Index()
-        {
-            myContext ctx = new myContext();
-            DateTime todaysDate = DateTime.Now;
-           
-            var a = (from cartelera in ctx.Carteleras where cartelera.FechaFin >= todaysDate && cartelera.FechaInicio < todaysDate select cartelera).ToList();
-            
+        { 
+            var a = HomeServicios.CarteleraActual();
             return View(a);
         }
 
@@ -31,7 +27,8 @@ namespace TrabajoPracticoWeb3.Controllers
 
         public ActionResult Cartelera()
         {
-            return View();
+            var a = HomeServicios.CarteleraActual();
+            return View(a);
         }
 
         public ActionResult Proximamente()
