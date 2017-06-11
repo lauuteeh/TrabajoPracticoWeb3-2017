@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrabajoPracticoWeb3.App_Data;
 
 namespace TrabajoPracticoWeb3.Controllers
 {
     public class PeliculasController : Controller
     {
         // GET: Peliculas
-        public ActionResult Reserva()
+        public ActionResult Reserva(int idPelicula)
         {
+            myContext ctx = new myContext();
+
+            var a = ctx.Peliculas.Where(x => x.IdPelicula == idPelicula);
+
             //Temporal
             List<SelectListItem> li = new List<SelectListItem>();
             li.Add(new SelectListItem { Text = "Español", Value = "1" });
             li.Add(new SelectListItem { Text = "Subtitulado", Value = "2" });
             ViewData["version"] = li;
-            return View();
+            return View(a);
         }
 
 
