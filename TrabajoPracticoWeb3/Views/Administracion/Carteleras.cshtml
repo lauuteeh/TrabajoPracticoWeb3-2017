@@ -21,42 +21,52 @@
         </tr>
     </thead>
     <tbody>
+        
+    @foreach (var cart in Model)
+    {
         <tr>
-            @foreach (var cart in Model)
+       @foreach (var sede in ViewBag.Sedes)
+        {
+            if (sede.IdSede == cart.IdSede)
             {
-                foreach (var sede in ViewBag.Sedes)
-                {
-                    if (sede.IdSede == cart.IdSede)
-                    {
-                        <td>@sede.Nombre</td> 
-                    }
-                }
-                foreach(var peli in ViewBag.Peli)
-                {
-                    if(peli.IdPelicula == cart.IdPelicula)
-                    {
-                        <td>@peli.Nombre</td>
-                    }
-                }
-                <td>@cart.HoraInicio</td>
+                <td>@sede.Nombre</td>
+            }
+        }
+        @foreach (var peli in ViewBag.Peli)
+        {
+            if (peli.IdPelicula == cart.IdPelicula)
+            {
+                <td>@peli.Nombre</td>
+            }
+        }
+        <td>@cart.HoraInicio</td>
                 <td>
                     @if (cart.Lunes == true)
                     { <p>Lunes</p> }
-                    @if (cart.Martes == true) { <span>Martes</span> }
-                    @if (cart.Miercoles == true){ <span>Miercoles</span> }
-                    @if (cart.Jueves == true){ <span>Jueves</span> }
-                    @if (cart.Viernes == true){ <span>Viernes</span> }
-                    @if (cart.Sabado == true) { <span>Sabado</span> }
-                    @if (cart.Domingo == true){ <span>Domingo</span> }
+                    @if (cart.Martes == true)
+                    { <span>Martes</span> }
+                    @if (cart.Miercoles == true)
+                    { <span>Miercoles</span> }
+                    @if (cart.Jueves == true)
+                    { <span>Jueves</span> }
+                    @if (cart.Viernes == true)
+                    { <span>Viernes</span> }
+                    @if (cart.Sabado == true)
+                    { <span>Sabado</span> }
+                    @if (cart.Domingo == true)
+                    { <span>Domingo</span> }
                 </td>
                 <td>@cart.FechaInicio.ToString("MM/dd/yyyy") - @cart.FechaFin.ToString("MM/dd/yyyy")</td>
                 <td>@cart.NumeroSala</td>
-                foreach(var ver in ViewBag.Version) {
-                    if(ver.IdVersion == cart.IdVersion) {
-                    <td>@ver.Nombre</td>
-                    }
-                }
+        @foreach (var ver in ViewBag.Version)
+        {
+            if (ver.IdVersion == cart.IdVersion)
+            {
+                <td>@ver.Nombre</td>
             }
-        </tr>
+        }
+    </tr>
+    }
+        
     </tbody>
 </table>
