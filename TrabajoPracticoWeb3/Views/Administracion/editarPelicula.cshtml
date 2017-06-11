@@ -7,63 +7,63 @@
  }
 
 <h2>editarPelicula</h2>
-@foreach (var pelicula in Model) {
-<form action="editarPelicula" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="idPelicula" value="@pelicula.IdPelicula" />
-    <div class="form-group">
-        <label for="Nombre">Nombre:</label>
-        <input type="text" class="form-control" id="Nombre" name="Nombre" value="@pelicula.Nombre">
-    </div>
-    <div class="form-group">
-        <label for="Descripcion">Descripción:</label>
-        <input type="text" class="form-control" id="Descripcion" name="Descripcion" value="@pelicula.Descripcion">
-    </div>
 
-    <div class="form-group">
-        <label for="sel1">Generos:</label>
-        <select class="form-control" name="Generos" id="sel1">
-            @foreach (var gen in ViewBag.Generos)
-            {
-                if (gen.IdGenero == @pelicula.IdGenero)
+@using (Html.BeginForm("editarPelicula", "Administracion", FormMethod.Post))
+{
+    foreach (var peli in Model)
+    {
+        <input type="hidden" value="@peli.IdPelicula" name="id"/>
+        <div class="form-group">
+            @Html.LabelFor(x => peli.Nombre)
+            @Html.TextBoxFor(x => peli.Nombre, new { @class = "form-control", Value = @peli.Nombre })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => peli.Descripcion)
+            @Html.TextBoxFor(x => peli.Descripcion, new { @class = "form-control", Value = @peli.Descripcion })
+        </div>
+        <div class="form-group">
+            <label for="sel1">Generos:</label>
+            <select class="form-control" name="Generos" id="sel1">
+                @foreach (var gen in ViewBag.Generos)
                 {
-                    <option selected="selected" value="@gen.IdGenero">@gen.Nombre</option>
+                    if (gen.IdGenero == @peli.IdGenero)
+                    {
+                        <option selected="selected" value="@gen.IdGenero">@gen.Nombre</option>
+                    }
+                    <option value="@gen.IdGenero">@gen.Nombre</option>
                 }
-                <option value="@gen.IdGenero">@gen.Nombre</option>
-            }
 
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="exampleInputFile">Inserte una imagen</label>
-        <input type="file" id="exampleInputFile" name="file">
-        <p class="help-block">@pelicula.Imagen</p>
-        <input type="hidden" value="@pelicula.Imagen" name="Imagen" />
-    </div>
-    <div class="form-group">
-        <label for="sel2">Calificaciones:</label>
-        <select class="form-control" name="Calificaciones" id="sel2">
-            @foreach (var cal in ViewBag.Calificaciones)
-            {
-                if (cal.IdCalificacion == @pelicula.IdCalificacion)
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Inserte una imagen</label>
+            <input type="file" id="exampleInputFile" name="file">
+            <p class="help-block">@peli.Imagen</p>
+            <input type="hidden" value="@peli.Imagen" name="Imagen" />
+        </div>
+        <div class="form-group">
+            <label for="sel2">Calificaciones:</label>
+            <select class="form-control" name="Calificaciones" id="sel2">
+                @foreach (var cal in ViewBag.Calificaciones)
                 {
-                    <option selected="selected" value="@cal.IdCalificacion">@cal.Nombre</option>
+                    if (cal.IdCalificacion == @peli.IdCalificacion)
+                    {
+                        <option selected="selected" value="@cal.IdCalificacion">@cal.Nombre</option>
+                    }
+                    <option value="@cal.IdCalificacion">@cal.Nombre</option>
                 }
-                <option value="@cal.IdCalificacion">@cal.Nombre</option>
-            }
 
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="Duracion">Duración:</label>
-        <input type="text" class="form-control" id="Duracion" value="@pelicula.Duracion" name="Duracion"/>
-    </div>
-    <div class="form-group">
-        <label for="FechaCarga">Fecha:</label>
-        <input type="datetime" class="form-control" id="FechaCarga" name="FechaCarga" value="@pelicula.FechaCarga"/>
-    </div>
+            </select>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => peli.Duracion)
+            @Html.TextBoxFor(x => peli.Duracion, new { @class = "form-control", Value = @peli.Duracion })
 
-
-
-    <button type="submit" class="btn btn-default">Submit</button>
-</form>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => peli.FechaCarga)
+            @Html.TextBoxFor(x => peli.FechaCarga, new { @class = "form-control", Value = @peli.FechaCarga })
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    }
 }

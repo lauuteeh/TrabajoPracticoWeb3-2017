@@ -7,21 +7,21 @@
 
 <h2>AltaSede</h2>
 
-<form action="AltaSede" method="post" enctype="multipart/form-data">
+@using (Html.BeginForm("AltaSede", "Administracion", FormMethod.Post))
+{
     <div class="form-group">
-        <label for="Nombre">Nombre:</label>
-        <input type="text" class="form-control" id="Nombre" name="Nombre">
+        @Html.LabelFor(x => x.Nombre)
+        @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control"})
     </div>
     <div class="form-group">
-        <label for="Descripcion">Dirección:</label>
-        <input type="text" class="form-control" id="Direccion" name="Direccion">
+        @Html.LabelFor(x => x.Direccion)
+        @Html.TextBoxFor(x => x.Direccion, new { @class = "form-control" })
     </div>
-
     <div class="form-group">
-        <label for="Duracion">Precio General:</label>
-        <input type="text" class="form-control" id="PrecioGeneral" name="PrecioGeneral">
+        @Html.LabelFor(x => x.PrecioGeneral)
+        @Html.TextBoxFor(x => x.PrecioGeneral, new { @class = "form-control" })
     </div>
- 
-
     <button type="submit" class="btn btn-default">Submit</button>
-</form>
+}
+
+

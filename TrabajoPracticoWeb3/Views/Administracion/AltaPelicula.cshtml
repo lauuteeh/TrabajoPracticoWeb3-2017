@@ -2,58 +2,57 @@
 @{
     ViewBag.Title = "AltaPelicula";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    @model IEnumerable<TrabajoPracticoWeb3.App_Data.Peliculas>
+    @model TrabajoPracticoWeb3.App_Data.Peliculas
 
 }
 
 <h2>AltaPelicula</h2>
 
 
-    <form action="AltaPelicula" method="post" enctype = "multipart/form-data">
-        <div class="form-group">
-            <label for="Nombre">Nombre:</label>
-            <input type="text" class="form-control" id="Nombre" name="Nombre">
-        </div>
-        <div class="form-group">
-            <label for="Descripcion">Descripción:</label>
-            <input type="text" class="form-control" id="Descripcion" name="Descripcion">
-        </div>
- 
-        <div class="form-group">
-            <label for="sel1">Generos:</label>
-            <select class="form-control" name="Generos" id="sel1">
-               @foreach (var gen in ViewBag.Generos)
-               {
+@using (Html.BeginForm("AltaPelicula", "Administracion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(x => x.Nombre)
+        @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Descripcion)
+        @Html.TextBoxFor(x => x.Descripcion, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="sel1">Generos:</label>
+        <select class="form-control" name="Generos" id="sel1">
+            @foreach (var gen in ViewBag.Generos)
+            {
                 <option value="@gen.IdGenero">@gen.Nombre</option>
-               }
+            }
 
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputFile">Inserte una imagen</label>
-            <input type="file" id="exampleInputFile" name="file">
-            <p class="help-block">Imagen JPF o PNG.</p>
-        </div>
-         <div class="form-group">
-                <label for="sel2">Calificaciones:</label>
-                <select class="form-control" name="Calificaciones" id="sel2">
-                    @foreach (var cal in ViewBag.Calificaciones)
-                    {
-                        <option value="@cal.IdCalificacion">@cal.Nombre</option>
-                    }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputFile">Inserte una imagen</label>
+        <input type="file" id="exampleInputFile" name="file">
+        <p class="help-block">Imagen JPF o PNG.</p>
+    </div>
+    <div class="form-group">
+        <label for="sel2">Calificaciones:</label>
+        <select class="form-control" name="Calificaciones" id="sel2">
+            @foreach (var cal in ViewBag.Calificaciones)
+            {
+                <option value="@cal.IdCalificacion">@cal.Nombre</option>
+            }
 
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="Duracion">Duración:</label>
-                <input type="text" class="form-control" id="Duracion" name="Duracion">
-            </div>
-            <div class="form-group">
-                <label for="FechaCarga">Fecha:</label>
-                <input type="datetime" class="form-control" id="FechaCarga" name="FechaCarga">
-            </div>
+        </select>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Duracion)
+        @Html.TextBoxFor(x => x.Duracion, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.FechaCarga)
+        @Html.TextBoxFor(x => x.FechaCarga, new { @class = "form-control" })
+    </div>
 
-
-
-            <button type="submit" class="btn btn-default">Submit</button>
-</form>
+    <button type="submit" class="btn btn-default">Submit</button>
+}
+  

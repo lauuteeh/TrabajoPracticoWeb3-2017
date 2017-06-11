@@ -8,27 +8,51 @@
 <h2>editarSede</h2>
 
 <h2>AltaSede</h2>
-@foreach (var sede in Model)
+
+
+@using (Html.BeginForm("EditarSede", "Administracion", FormMethod.Post))
+{
+    foreach (var sede in Model)
+    {
+        @Html.HiddenFor(x => sede.IdSede, new { Value= @sede.IdSede })
+    <div class="form-group">
+        @Html.LabelFor(x => sede.Nombre)
+        @Html.TextBoxFor(x => sede.Nombre, new { @class = "form-control", Value = @sede.Nombre })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => sede.Direccion)
+        @Html.TextBoxFor(x => sede.Direccion, new { @class = "form-control", Value = @sede.Direccion })
+    </div>
+    <div class="form-group">
+        <label for="Duracion">Precio General:</label>
+        <input type="text" class="form-control" value="@sede.PrecioGeneral" id="PrecioGeneral" name="PrecioGeneral">
+
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+    }
+}
+
+<!--foreach (var sede in Model)
 {
 <form action="EditarSede" method="post" enctype="multipart/form-data">
     <div class="form-group">
-         <input type="hidden" class="form-control" value="@sede.IdSede" id="id" name="id">
+         <input type="hidden" class="form-control" value="sede.IdSede" id="id" name="id">
     </div>
     <div class="form-group">
         <label for="Nombre">Nombre:</label>
-        <input type="text" class="form-control" value="@sede.Nombre" id="Nombre" name="Nombre">
+        <input type="text" class="form-control" value="sede.Nombre" id="Nombre" name="Nombre">
     </div>
     <div class="form-group">
         <label for="Descripcion">Dirección:</label>
-        <input type="text" class="form-control" value="@sede.Direccion"id="Direccion" name="Direccion">
+        <input type="text" class="form-control" value="sede.Direccion"id="Direccion" name="Direccion">
     </div>
 
     <div class="form-group">
         <label for="Duracion">Precio General:</label>
-        <input type="text" class="form-control" value="@sede.PrecioGeneral" id="PrecioGeneral" name="PrecioGeneral">
+        <input type="text" class="form-control" value="sede.PrecioGeneral" id="PrecioGeneral" name="PrecioGeneral">
     </div>
 
 
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
-}
+}-->

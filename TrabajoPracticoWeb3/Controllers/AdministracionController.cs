@@ -77,11 +77,11 @@ namespace TrabajoPracticoWeb3.Controllers
         }
         //Persiste los cambios en bdd
         [HttpPost]
-        public ActionResult editarPelicula(Peliculas pelicula, HttpPostedFileBase file)
+        public ActionResult editarPelicula(Peliculas peli, HttpPostedFileBase file)
         {
             myContext ctx = new myContext();//Instancio el contexto
-            var id = Int32.Parse(Request.Form["idPelicula"]);
-            Peliculas peli = (from pel in ctx.Peliculas where pel.IdPelicula == id select pel).First();
+            var id = Int32.Parse(Request.Form["id"]);
+            Peliculas peli2 = (from pel in ctx.Peliculas where pel.IdPelicula == id select pel).First();
 
             if (file != null && file.ContentLength > 0) // Agregar IMAGEN
                 try
@@ -89,7 +89,7 @@ namespace TrabajoPracticoWeb3.Controllers
                     string path = Path.Combine(Server.MapPath("~/Images"),
                                                Path.GetFileName(file.FileName));
                     file.SaveAs(path);
-                    pelicula.Imagen = Path.GetFileName(file.FileName);
+                    peli.Imagen = Path.GetFileName(file.FileName);
                 }
                 catch (Exception ex)
                 {
@@ -98,14 +98,14 @@ namespace TrabajoPracticoWeb3.Controllers
 
             else
             {
-                pelicula.Imagen = Request.Form["Imagen"];
+                peli.Imagen = Request.Form["Imagen"];
             }
-            peli.Nombre = pelicula.Nombre;
-            peli.Descripcion = pelicula.Descripcion;
-            peli.Duracion = pelicula.Duracion;
-            peli.FechaCarga = pelicula.FechaCarga;
-            peli.IdGenero = Int32.Parse(Request.Form["Generos"]);
-            peli.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
+            peli2.Nombre = peli.Nombre;
+            peli2.Descripcion = peli.Descripcion;
+            peli2.Duracion = peli.Duracion;
+            peli2.FechaCarga = DateTime.Now;
+            peli2.IdGenero = Int32.Parse(Request.Form["Generos"]);
+            peli2.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
             ctx.SaveChanges();//persisto los datos en la bdd
             var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
             return View("Peliculas", a);
@@ -158,9 +158,8 @@ namespace TrabajoPracticoWeb3.Controllers
         public ActionResult EditarSede(Sedes sede)
         {
             myContext ctx = new myContext();
-            var id = Int32.Parse(Request.Form["id"]);
             var precio = Decimal.Parse(Request.Form["PrecioGeneral"]);
-            Sedes sedeOrig = (from se in ctx.Sedes where se.IdSede == id select se).First();
+            Sedes sedeOrig = (from se in ctx.Sedes where se.IdSede == sede.IdSede select se).First();
 
             sedeOrig.Nombre = sede.Nombre;
             sedeOrig.PrecioGeneral = precio;
