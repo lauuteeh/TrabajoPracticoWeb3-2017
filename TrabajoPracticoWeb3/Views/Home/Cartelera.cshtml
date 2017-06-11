@@ -19,7 +19,7 @@
     {
 
         <div class="col-md-4 col-sm-6">
-            <a href="~/Peliculas/Reserva">
+            <a href="@Url.Action("Reserva", "Peliculas", new { idPelicula = cartelera.IdPelicula } )">
                 <div class="img-min">
                     <img class="img-responsive img-portfolio img-hover" src='@Url.Action("GetImage", "Home", new { image = cartelera.Peliculas.Imagen.ToString() } )' />
                 </div>
