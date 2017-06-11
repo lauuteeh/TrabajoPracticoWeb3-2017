@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,7 +14,19 @@ namespace TrabajoPracticoWeb3.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            myContext ctx = new myContext();
+            DateTime todaysDate = DateTime.Now;
+           
+            var a = (from cartelera in ctx.Carteleras where cartelera.FechaFin >= todaysDate && cartelera.FechaInicio < todaysDate select cartelera).ToList();
+            
+            return View(a);
+        }
+
+        public ActionResult GetImage(string image)
+        {
+            string path = Server.MapPath("~/Images/"+image);
+            byte[] imageByteData = System.IO.File.ReadAllBytes(path);
+            return File(imageByteData, "image/jpg");
         }
 
         public ActionResult Cartelera()
