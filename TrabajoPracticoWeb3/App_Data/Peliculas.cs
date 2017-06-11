@@ -27,7 +27,7 @@ namespace TrabajoPracticoWeb3.App_Data
         public string Nombre { get; set; }
         [Required(ErrorMessage = "¡Por favor ingresar una Descripción!")]
         public string Descripcion { get; set; }
-        [Required(ErrorMessage = "¡Por favor, cargar una imagen!")]
+
         public string Imagen { get; set; }
         [Required(ErrorMessage = "¡Por favor, Seleccionar una calificacion!")]
         public int IdCalificacion { get; set; }

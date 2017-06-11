@@ -40,8 +40,6 @@ namespace TrabajoPracticoWeb3.Controllers
             myContext ctx = new myContext();//Instancio el contexto
             if (ModelState.IsValid)
             { 
-                pelicula.IdGenero = Int32.Parse(Request.Form["Generos"]);
-                pelicula.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
                 pelicula.FechaCarga = DateTime.Now;
                 ctx.Peliculas.Add(pelicula);//Agrego la pelicula traida por post
 
