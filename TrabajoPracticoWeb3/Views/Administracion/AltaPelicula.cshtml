@@ -22,9 +22,9 @@
         @Html.ValidationMessageFor(x => x.Descripcion)
     </div>
     <div class="form-group">
-      @Html.LabelFor(x => x.IdGenero)
-      @Html.DropDownListFor(x => x.IdGenero, new SelectList(ViewBag.Generos,"IdGenero","Nombre"))
-      @Html.ValidationMessageFor(x => x.IdGenero)
+        @Html.LabelFor(x => x.IdGenero)
+        @Html.DropDownListFor(x => x.IdGenero, new SelectList(ViewBag.Generos,"IdGenero","Nombre"))
+        @Html.ValidationMessageFor(x => x.IdGenero)
     </div>
     <div class="form-group">
         <label for="exampleInputFile">Inserte una imagen</label>

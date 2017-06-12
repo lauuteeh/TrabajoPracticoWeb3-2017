@@ -2,36 +2,27 @@
 @{
     ViewBag.Title = "AltaCartelera";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    @model IEnumerable<TrabajoPracticoWeb3.App_Data.Carteleras>
+    @model TrabajoPracticoWeb3.App_Data.Carteleras
 }
 
 <h2>AltaCartelera</h2>
 
-
-<form action="AltaCartelera" method="post" enctype="multipart/form-data">
+@using (Html.BeginForm("AltaCartelera", "Administracion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
     <div class="form-group">
-        <label for="sel1">Sede:</label>
-        <select class="form-control" name="Sedes" id="sel1">
-            @foreach (var sede in ViewBag.Sedes)
-            {
-                <option value="@sede.IdSede">@sede.Nombre</option>
-            }
-
-        </select>
+        @Html.LabelFor(x => x.IdSede)
+        @Html.DropDownListFor(x => x.IdSede, new SelectList(ViewBag.Sedes, "IdSede", "Nombre"))
+        @Html.ValidationMessageFor(x => x.IdSede)
     </div>
     <div class="form-group">
-        <label for="sel1">Pelicula:</label>
-        <select class="form-control" name="Peliculas" id="sel1">
-            @foreach (var peli in ViewBag.Peli)
-            {
-                <option value="@peli.IdPelicula">@peli.Nombre</option>
-            }
-
-        </select>
+        @Html.LabelFor(x => x.IdPelicula)
+        @Html.DropDownListFor(x => x.IdPelicula, new SelectList(ViewBag.Peli, "IdPelicula", "Nombre"))
+        @Html.ValidationMessageFor(x => x.IdPelicula)
     </div>
     <div class="form-group">
-        <label for="HoraInicio">Hora de inicio:</label>
-        <input type="time" class="form-control" id="HoraInicio" name="HoraInicio">
+        @Html.LabelFor(x => x.HoraInicio)
+        @Html.TextBoxFor(x => x.HoraInicio, new { @class = "form-control"})
+        @Html.ValidationMessageFor(x => x.HoraInicio)
     </div>
     <div class="form-group">
         <label for="Descripcion">Días:</label>
@@ -44,31 +35,25 @@
         <input type="checkbox" class="form-control" name="chk_group[]" value="7" />Domingo<br />
     </div>
     <div class="form-group">
-        <label for="FechaInicio">Fecha de inicio:</label>
-        <input type="date" class="form-control" id="FechaInicio" name="FechaInicio">
+        @Html.LabelFor(x => x.FechaInicio)
+        @Html.TextBoxFor(x => x.FechaInicio, new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(x => x.FechaInicio)
     </div>
     <div class="form-group">
-        <label for="FechaFin">Fecha de fin:</label>
-        <input type="date" class="form-control" id="FechaFin" name="FechaFin">
+        @Html.LabelFor(x => x.FechaFin)
+        @Html.TextBoxFor(x => x.FechaFin, new { @class = "form-control", type="date" })
+        @Html.ValidationMessageFor(x => x.FechaFin)
     </div>
     <div class="form-group">
-        <label for="NumeroSala">Número de sala:</label>
-        <input type="text" class="form-control" id="NumeroSala" name="NumeroSala">
+        @Html.LabelFor(x => x.NumeroSala)
+        @Html.TextBoxFor(x => x.NumeroSala, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.NumeroSala)
     </div>
     <div class="form-group">
-        <label for="sel1">Pelicula:</label>
-        <select class="form-control" name="Versiones" id="sel1">
-            @foreach (var ver in ViewBag.Version)
-            {
-                <option value="@ver.IdVersion">@ver.Nombre</option>
-            }
-
-        </select>
+        @Html.LabelFor(x => x.IdVersion)
+        @Html.DropDownListFor(x => x.IdVersion, new SelectList(ViewBag.Version, "IdVersion", "Nombre"))
+        @Html.ValidationMessageFor(x => x.IdVersion)
     </div>
-
-
-
-
-
     <button type="submit" class="btn btn-default">Submit</button>
-</form>
+}
+

@@ -230,41 +230,52 @@ namespace TrabajoPracticoWeb3.Controllers
         public ActionResult AltaCartelera(Carteleras cartelera)
         {
             myContext ctx = new myContext();
-            cartelera.IdPelicula = Int32.Parse(Request.Form["Peliculas"]);
-            cartelera.IdSede = Int32.Parse(Request.Form["Sedes"]);
-            cartelera.IdVersion = Int32.Parse(Request.Form["Versiones"]);
-            var asd = Convert.ToDateTime(Request.Form["HoraInicio"]);
-            var asd2 = (asd.Hour).ToString();
-            var asd3 = (asd.Minute).ToString();
-            cartelera.HoraInicio = Int32.Parse(asd2+asd3);
-            cartelera.FechaCarga = DateTime.Now;
-      
-            var dias = Request.Form["chk_group[]"];
-            
-                foreach(var dia in dias)
+            if (ModelState.IsValid)
             {
-                if (dia == '1') { cartelera.Lunes = true; }
-                if (dia == '2') { cartelera.Martes = true; }
-                if (dia == '3') { cartelera.Miercoles = true; }
-                if (dia == '4') { cartelera.Jueves = true; }
-                if (dia == '5') { cartelera.Viernes = true; }
-                if (dia == '6') { cartelera.Sabado = true; }
-                if (dia == '7') { cartelera.Domingo = true; }
 
+               /* cartelera.IdSede = Int32.Parse(Request.Form["Sedes"]);
+                cartelera.IdVersion = Int32.Parse(Request.Form["Versiones"]);
+                var asd = Convert.ToDateTime(Request.Form["HoraInicio"]);
+                var asd2 = (asd.Hour).ToString();
+                var asd3 = (asd.Minute).ToString();
+                cartelera.HoraInicio = Int32.Parse(asd2 + asd3);*/
+                cartelera.FechaCarga = DateTime.Now;
+
+                var dias = Request.Form["chk_group[]"];
+
+                foreach (var dia in dias)
+                {
+                    if (dia == '1') { cartelera.Lunes = true; }
+                    if (dia == '2') { cartelera.Martes = true; }
+                    if (dia == '3') { cartelera.Miercoles = true; }
+                    if (dia == '4') { cartelera.Jueves = true; }
+                    if (dia == '5') { cartelera.Viernes = true; }
+                    if (dia == '6') { cartelera.Sabado = true; }
+                    if (dia == '7') { cartelera.Domingo = true; }
+
+                }
+
+                ctx.Carteleras.Add(cartelera);
+                ctx.SaveChanges();
+                //Preparo lo necesario para devolver la vista Carteleras
+                var sede = (ctx.Sedes).ToList();
+                var peli = (ctx.Peliculas).ToList();
+                var version = (ctx.Versiones).ToList();
+                ViewBag.Sedes = sede;
+                ViewBag.Peli = peli;
+                ViewBag.Version = version;
+                var a = (ctx.Carteleras).ToList();
+                return View("Carteleras", a);
             }
-
-            ctx.Carteleras.Add(cartelera);
-            ctx.SaveChanges();
-            //Preparo lo necesario para devolver la vista Carteleras
             var b = (ctx.Sedes).ToList();
             var c = (ctx.Peliculas).ToList();
             var d = (ctx.Versiones).ToList();
+
             ViewBag.Sedes = b;
             ViewBag.Peli = c;
             ViewBag.Version = d;
-            var a = (ctx.Carteleras).ToList();
-            return View("Carteleras",a);
-        }
+            return View();
+         }
 
         public ActionResult Reportes()
         {
