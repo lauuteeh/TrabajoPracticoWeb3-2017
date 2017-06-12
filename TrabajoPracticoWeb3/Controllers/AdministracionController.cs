@@ -4,16 +4,56 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using System.Web.Security;
 using TrabajoPracticoWeb3.App_Data;
-
+using TrabajoPracticoWeb3.Models;
 
 namespace TrabajoPracticoWeb3.Controllers
 {
+    [Autenticado]
     public class AdministracionController : Controller
     {
+        // Si no estamos logeado, regresamos al login
+        public class AutenticadoAttribute : ActionFilterAttribute
+        {
+            public override void OnActionExecuting(ActionExecutingContext filterContext)
+            {
+                base.OnActionExecuting(filterContext);
+
+                if (!UsuarioServicio.ExisteUsuarioEnSesion())
+                {
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+                    {
+                        controller = "Home",
+                        action = "Login"
+                    }));
+                }
+            }
+        }
+
+        // Si estamos logeado ya no podemos acceder a la página de Login
+        public class NoLoginAttribute : ActionFilterAttribute
+        {
+            public override void OnActionExecuting(ActionExecutingContext filterContext)
+            {
+                base.OnActionExecuting(filterContext);
+
+                if (UsuarioServicio.ExisteUsuarioEnSesion())
+                {
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+                    {
+                        controller = "Administracion",
+                        action = "Inicio"
+                    }));
+                }
+            }
+        }
+
         // GET: Administracion
         public ActionResult Inicio()
         {
+            ViewBag.NombreUsuario = Session["Usuario"];
             return View();
         }
         //Listado de peliculas
@@ -39,7 +79,7 @@ namespace TrabajoPracticoWeb3.Controllers
         {
             myContext ctx = new myContext();//Instancio el contexto
             if (ModelState.IsValid)
-            { 
+            {
                 pelicula.FechaCarga = DateTime.Now;
                 ctx.Peliculas.Add(pelicula);//Agrego la pelicula traida por post
 
@@ -88,36 +128,36 @@ namespace TrabajoPracticoWeb3.Controllers
         {
             myContext ctx = new myContext();//Instancio el contexto
 
-                var id = Int32.Parse(Request.Form["id"]);
-                Peliculas peli2 = (from pel in ctx.Peliculas where pel.IdPelicula == id select pel).First();
+            var id = Int32.Parse(Request.Form["id"]);
+            Peliculas peli2 = (from pel in ctx.Peliculas where pel.IdPelicula == id select pel).First();
 
-                if (file != null && file.ContentLength > 0) // Agregar IMAGEN
-                    try
-                    {
-                        string path = Path.Combine(Server.MapPath("~/Images"),
-                                                   Path.GetFileName(file.FileName));
-                        file.SaveAs(path);
-                        peli.Imagen = Path.GetFileName(file.FileName);
-                    }
-                    catch (Exception ex)
-                    {
-                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
-                    }
-
-                else
+            if (file != null && file.ContentLength > 0) // Agregar IMAGEN
+                try
                 {
-                    peli.Imagen = Request.Form["Imagen"];
+                    string path = Path.Combine(Server.MapPath("~/Images"),
+                                               Path.GetFileName(file.FileName));
+                    file.SaveAs(path);
+                    peli.Imagen = Path.GetFileName(file.FileName);
                 }
-                peli2.Nombre = peli.Nombre;
-                peli2.Descripcion = peli.Descripcion;
-                peli2.Duracion = peli.Duracion;
-                peli2.FechaCarga = DateTime.Now;
-                peli2.IdGenero = Int32.Parse(Request.Form["Generos"]);
-                peli2.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
-                ctx.SaveChanges();//persisto los datos en la bdd
-                var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
-                return View("Peliculas", a);
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                }
+
+            else
+            {
+                peli.Imagen = Request.Form["Imagen"];
             }
+            peli2.Nombre = peli.Nombre;
+            peli2.Descripcion = peli.Descripcion;
+            peli2.Duracion = peli.Duracion;
+            peli2.FechaCarga = DateTime.Now;
+            peli2.IdGenero = Int32.Parse(Request.Form["Generos"]);
+            peli2.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
+            ctx.SaveChanges();//persisto los datos en la bdd
+            var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
+            return View("Peliculas", a);
+        }
 
         /* Las peliculas no deben eliminarse
         public ActionResult eliminarPelicula()
@@ -208,7 +248,7 @@ namespace TrabajoPracticoWeb3.Controllers
 
             ViewBag.Sedes = b;
             ViewBag.Peli = c;
-            ViewBag.Version = d; 
+            ViewBag.Version = d;
 
             return View(a);
         }
@@ -233,12 +273,12 @@ namespace TrabajoPracticoWeb3.Controllers
             if (ModelState.IsValid)
             {
 
-               /* cartelera.IdSede = Int32.Parse(Request.Form["Sedes"]);
-                cartelera.IdVersion = Int32.Parse(Request.Form["Versiones"]);
-                var asd = Convert.ToDateTime(Request.Form["HoraInicio"]);
-                var asd2 = (asd.Hour).ToString();
-                var asd3 = (asd.Minute).ToString();
-                cartelera.HoraInicio = Int32.Parse(asd2 + asd3);*/
+                /* cartelera.IdSede = Int32.Parse(Request.Form["Sedes"]);
+                 cartelera.IdVersion = Int32.Parse(Request.Form["Versiones"]);
+                 var asd = Convert.ToDateTime(Request.Form["HoraInicio"]);
+                 var asd2 = (asd.Hour).ToString();
+                 var asd3 = (asd.Minute).ToString();
+                 cartelera.HoraInicio = Int32.Parse(asd2 + asd3);*/
                 cartelera.FechaCarga = DateTime.Now;
 
                 var dias = Request.Form["chk_group[]"];
@@ -275,7 +315,7 @@ namespace TrabajoPracticoWeb3.Controllers
             ViewBag.Peli = c;
             ViewBag.Version = d;
             return View();
-         }
+        }
 
         public ActionResult Reportes()
         {
@@ -286,6 +326,14 @@ namespace TrabajoPracticoWeb3.Controllers
         {
             return View();
         }
+
+        public ActionResult Logout()
+        {
+            UsuarioServicio.CerrarSesion();
+            return RedirectToAction("Login", "Home");
+        }
+
+
 
     }
 }

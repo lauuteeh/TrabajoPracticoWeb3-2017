@@ -13,14 +13,14 @@ namespace TrabajoPracticoWeb3.Controllers
     {
         // GET: Home
         public ActionResult Index()
-        { 
+        {
             var a = HomeServicios.CarteleraActual();
             return View(a);
         }
 
         public ActionResult GetImage(string image)
         {
-            string path = Server.MapPath("~/Images/"+image);
+            string path = Server.MapPath("~/Images/" + image);
             byte[] imageByteData = System.IO.File.ReadAllBytes(path);
             return File(imageByteData, "image/jpg");
         }
@@ -44,9 +44,11 @@ namespace TrabajoPracticoWeb3.Controllers
 
         public ActionResult Login()
         {
+            ViewBag.Mensaje = null;
             return View();
         }
 
+        [HttpPost]
         public ActionResult IniciarSesion(Usuarios u)
         {
             if (ModelState.IsValid)
@@ -54,8 +56,13 @@ namespace TrabajoPracticoWeb3.Controllers
                 var usuario = UsuarioServicio.IniciarSesion(u);
                 if (usuario != null)
                 {
-                    Session["Usuario"] = usuario;
+                    UsuarioServicio.AgregarUsuarioASesion(usuario.NombreUsuario);
+                    Session["Usuario"] = usuario.NombreUsuario;
                     return RedirectToAction("Inicio", "Administracion");
+                }
+                else
+                {
+                    ViewBag.Mensaje = "Usuario y/o Contraseña invalidos";
                 }
             }
             return View("Login");

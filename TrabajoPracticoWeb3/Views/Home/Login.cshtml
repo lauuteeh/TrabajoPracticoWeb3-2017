@@ -2,8 +2,9 @@
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    @model TrabajoPracticoWeb3.App_Data.Usuarios
 }
-<!-- Top content -->
+
 <div class="top-content">
     <div class="inner-bg">
         <div class="container">
@@ -24,17 +25,26 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <form role="form" action="IniciarSesion" method="post" class="login-form">
+                        @using (Html.BeginForm("IniciarSesion", "Home", FormMethod.Post, new { @class = "login-form" }))
+                        {
                             <div class="form-group">
-                                <label class="sr-only" for="NombreUsuario">Usuario</label>
-                                <input type="text" name="NombreUsuario" placeholder="Usuario..." class="form-username form-control">
+                                @Html.LabelFor(x => x.NombreUsuario, new { @class = "sr-only" })
+                                @Html.TextBoxFor(x => x.NombreUsuario, new { @class = "form-username form-control", placeholder = "Usuario..." })
+                                @Html.ValidationMessageFor(x => x.NombreUsuario)
                             </div>
                             <div class="form-group">
-                                <label class="sr-only" for="Password">Contraseña</label>
-                                <input type="password" name="Password" placeholder="Contraseña..." class="form-password form-control">
+                                @Html.LabelFor(x => x.Password, new { @class = "sr-only" })
+                                @Html.TextBoxFor(x => x.Password, new { @class = "form-password form-control", placeholder = "Contraseña..." })
+                                @Html.ValidationMessageFor(x => x.Password)
                             </div>
                             <button type="submit" class="btn">Ingrese!</button>
-                        </form>
+                        }
+                        @if (@ViewBag.Mensaje != null)
+                        {
+                            <div class="text-danger">
+                                @ViewBag.Mensaje
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
