@@ -335,6 +335,8 @@ namespace TrabajoPracticoWeb3.Controllers
 
         public ActionResult Logout()
         {
+            Session.Clear();
+            Session.Abandon();
             UsuarioServicio.CerrarSesion();
             return RedirectToAction("Login", "Home");
         }

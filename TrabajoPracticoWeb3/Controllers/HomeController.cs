@@ -55,20 +55,26 @@ namespace TrabajoPracticoWeb3.Controllers
             {
                 var usuario = UsuarioServicio.IniciarSesion(u);
                 //obtiene la url traida con la session
-                ViewData["UrlAnterior"] = System.Web.HttpContext.Current.Session["UrlAnterior"] as String;
+                var urlAnterior = System.Web.HttpContext.Current.Session["UrlAnterior"] as String;
                 if (usuario != null)
                 {
-                    //Verifica si el viewdata no es nulo
-                    if (ViewData["UrlAnterior"] != null) {
+                    var action = "Inicio";
+                    var controller = "Administracion";
 
-                        UsuarioServicio.AgregarUsuarioASesion(usuario.NombreUsuario);
-                        Session["Usuario"] = usuario.NombreUsuario;
-                        //return RedirectToAction("Proximamente", "Home");
-                        return View(ViewData["UrlAnterior"]);
-                    }
                     UsuarioServicio.AgregarUsuarioASesion(usuario.NombreUsuario);
                     Session["Usuario"] = usuario.NombreUsuario;
-                    return RedirectToAction("Inicio", "Administracion");
+
+                    //Verifica si el viewdata no es nulo
+                    if (urlAnterior != null)
+                    {
+                        var urlArray = urlAnterior.ToString().Trim('/').Split('/');
+                        if (urlArray.Count() == 2)
+                        {
+                            controller = urlArray[0].ToString();
+                            action = urlArray[1].ToString();
+                        }
+                    }
+                    return RedirectToAction(action, controller);
                 }
                 else
                 {

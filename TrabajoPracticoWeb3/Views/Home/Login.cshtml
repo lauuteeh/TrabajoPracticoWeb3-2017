@@ -34,7 +34,7 @@
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(x => x.Password, new { @class = "sr-only" })
-                                @Html.TextBoxFor(x => x.Password, new { @class = "form-password form-control", placeholder = "Contraseña..." })
+                                @Html.PasswordFor(x => x.Password, new { @class = "form-password form-control", placeholder = "Contraseña..." })
                                 @Html.ValidationMessageFor(x => x.Password)
                             </div>
                             <button type="submit" class="btn">Ingrese!</button>
