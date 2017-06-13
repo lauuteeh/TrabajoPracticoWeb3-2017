@@ -221,11 +221,10 @@ namespace TrabajoPracticoWeb3.Controllers
         public ActionResult EditarSede(Sedes sede)
         {
             myContext ctx = new myContext();
-            var precio = Decimal.Parse(Request.Form["PrecioGeneral"]);
+            //var precio = Decimal.Parse(Request.Form["PrecioGeneral"]);
             Sedes sedeOrig = (from se in ctx.Sedes where se.IdSede == sede.IdSede select se).First();
-
             sedeOrig.Nombre = sede.Nombre;
-            sedeOrig.PrecioGeneral = precio;
+            //sedeOrig.PrecioGeneral = Decimal.Parse(Request.Form["PrecioGeneral"]);
             sedeOrig.Direccion = sede.Direccion;
             ctx.SaveChanges();
             var a = (ctx.Sedes).ToList();
