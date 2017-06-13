@@ -323,6 +323,24 @@ namespace TrabajoPracticoWeb3.Controllers
             return View();
         }
 
+        public ActionResult EliminarCartelera()
+        {
+            myContext ctx = new myContext();
+            var idCart = Int32.Parse(Request.QueryString["id"]);
+            Carteleras cart = (from pe in ctx.Carteleras where pe.IdCartelera == idCart select pe).First();
+            ctx.Carteleras.Remove(cart);
+            ctx.SaveChanges();
+            var a = (ctx.Carteleras).ToList();//Cargo el modelo para Peliculas
+            var b = (ctx.Sedes).ToList();
+            var c = (ctx.Peliculas).ToList();
+            var d = (ctx.Versiones).ToList();
+
+            ViewBag.Sedes = b;
+            ViewBag.Peli = c;
+            ViewBag.Version = d;
+            return View("Carteleras", a);
+        }
+
         public ActionResult Reportes()
         {
             return View();
