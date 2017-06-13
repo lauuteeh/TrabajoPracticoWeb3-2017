@@ -21,10 +21,16 @@ namespace TrabajoPracticoWeb3.Controllers
             {
                 base.OnActionExecuting(filterContext);
 
+                //obtiene la url anterior
+                var url = filterContext.HttpContext.Request.RawUrl;
+
                 if (!UsuarioServicio.ExisteUsuarioEnSesion())
                 {
+                    //ingresa la url en una variable de sesion
+                    System.Web.HttpContext.Current.Session["UrlAnterior"] = url;
                     filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                     {
+                        url,
                         controller = "Home",
                         action = "Login"
                     }));
