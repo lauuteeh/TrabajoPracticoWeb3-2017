@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -188,6 +189,7 @@ namespace TrabajoPracticoWeb3.Controllers
         {
             return View();
         }
+
         //Acción que persiste los datos en la bdd
         [HttpPost]
         public ActionResult AltaSede(Sedes sede)
@@ -210,8 +212,7 @@ namespace TrabajoPracticoWeb3.Controllers
             if (ModelState.IsValid)
             {
                 var id = Int32.Parse(Request.QueryString["id"]);
-                var a = (from se in ctx.Sedes where se.IdSede == id select se).ToList();
-
+                var a = (from se in ctx.Sedes where se.IdSede == id select se).FirstOrDefault();
                 return View(a);
             }
             return View();
@@ -221,14 +222,20 @@ namespace TrabajoPracticoWeb3.Controllers
         public ActionResult EditarSede(Sedes sede)
         {
             myContext ctx = new myContext();
-            //var precio = Decimal.Parse(Request.Form["PrecioGeneral"]);
-            Sedes sedeOrig = (from se in ctx.Sedes where se.IdSede == sede.IdSede select se).First();
-            sedeOrig.Nombre = sede.Nombre;
-            //sedeOrig.PrecioGeneral = Decimal.Parse(Request.Form["PrecioGeneral"]);
-            sedeOrig.Direccion = sede.Direccion;
-            ctx.SaveChanges();
-            var a = (ctx.Sedes).ToList();
-            return View("Sedes", a);
+            if (ModelState.IsValid)
+            {
+                Sedes sedeOrig = (from se in ctx.Sedes where se.IdSede == sede.IdSede select se).FirstOrDefault();
+                sedeOrig.Nombre = sede.Nombre;
+                sedeOrig.Direccion = sede.Direccion;
+                sedeOrig.PrecioGeneral = sede.PrecioGeneral;    
+                ctx.SaveChanges();
+
+                var a = (ctx.Sedes).ToList();
+                return View("Sedes", a);
+            }
+            return View();
+
+
         }
         /*Lase sedes no deben eliminarse
         public ActionResult EliminarSede()

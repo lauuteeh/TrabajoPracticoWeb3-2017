@@ -1,58 +1,33 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "editarSede";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    @model IEnumerable<TrabajoPracticoWeb3.App_Data.Sedes>
+    @model TrabajoPracticoWeb3.App_Data.Sedes
 }
 
-<h2>editarSede</h2>
-
-<h2>AltaSede</h2>
-
-
+<h2>Editar Sede</h2>
 @using (Html.BeginForm("EditarSede", "Administracion", FormMethod.Post))
 {
-    foreach (var sede in Model)
-    {
-        @Html.HiddenFor(x => sede.IdSede, new { Value= @sede.IdSede })
+    @Html.HiddenFor(model => model.IdSede)
     <div class="form-group">
-        @Html.LabelFor(x => sede.Nombre)
-        @Html.TextBoxFor(x => sede.Nombre, new { @class = "form-control", Value = @sede.Nombre })
+        @Html.LabelFor(model => model.Nombre)
+        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+        <span class="text-danger">
+            @Html.ValidationMessageFor(model => model.Nombre)
+        </span>
     </div>
     <div class="form-group">
-        @Html.LabelFor(x => sede.Direccion)
-        @Html.TextBoxFor(x => sede.Direccion, new { @class = "form-control", Value = @sede.Direccion })
+        @Html.LabelFor(model => model.Direccion)
+        @Html.TextBoxFor(model => model.Direccion, new { @class = "form-control" })
+        <span class="text-danger">
+            @Html.ValidationMessageFor(model => model.Direccion)
+        </span>
     </div>
     <div class="form-group">
-        <label for="PrecioGeneral">Precio General:</label>
-        <input type="text" class="form-control" value="@sede.PrecioGeneral" id="PrecioGeneral" name="PrecioGeneral">
-
+        @Html.LabelFor(model => model.PrecioGeneral)
+        @Html.TextBoxFor(model => model.PrecioGeneral, new { @class = "form-control" })
+        <span class="text-danger">
+            @Html.ValidationMessageFor(model => model.PrecioGeneral)
+        </span>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-    }
+    <button type="submit" class="btn btn-default">Enviar</button>
 }
-
-<!--foreach (var sede in Model)
-{
-<form action="EditarSede" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-         <input type="hidden" class="form-control" value="sede.IdSede" id="id" name="id">
-    </div>
-    <div class="form-group">
-        <label for="Nombre">Nombre:</label>
-        <input type="text" class="form-control" value="sede.Nombre" id="Nombre" name="Nombre">
-    </div>
-    <div class="form-group">
-        <label for="Descripcion">Dirección:</label>
-        <input type="text" class="form-control" value="sede.Direccion"id="Direccion" name="Direccion">
-    </div>
-
-    <div class="form-group">
-        <label for="Duracion">Precio General:</label>
-        <input type="text" class="form-control" value="sede.PrecioGeneral" id="PrecioGeneral" name="PrecioGeneral">
-    </div>
-
-
-    <button type="submit" class="btn btn-default">Submit</button>
-</form>
-}-->
