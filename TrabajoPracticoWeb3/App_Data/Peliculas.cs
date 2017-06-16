@@ -33,7 +33,7 @@ namespace TrabajoPracticoWeb3.App_Data
         public int IdCalificacion { get; set; }
         [Required(ErrorMessage = "¡Por favor, Seleccionar un genero!")]
         public int IdGenero { get; set; }
-        [Required(ErrorMessage = "¡Por favor, ingresar la duración!")]
+        [Required(ErrorMessage = "¡Por favor, ingresar la duración!")]        
         public int Duracion { get; set; }
         public System.DateTime FechaCarga { get; set; }
     

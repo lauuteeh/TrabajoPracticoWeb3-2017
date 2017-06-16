@@ -227,7 +227,7 @@ namespace TrabajoPracticoWeb3.Controllers
                 Sedes sedeOrig = (from se in ctx.Sedes where se.IdSede == sede.IdSede select se).FirstOrDefault();
                 sedeOrig.Nombre = sede.Nombre;
                 sedeOrig.Direccion = sede.Direccion;
-                sedeOrig.PrecioGeneral = sede.PrecioGeneral;    
+                sedeOrig.PrecioGeneral = sede.PrecioGeneral;
                 ctx.SaveChanges();
 
                 var a = (ctx.Sedes).ToList();

@@ -15,12 +15,12 @@
         <input type="hidden" value="@peli.IdPelicula" name="id"/>
         <div class="form-group">
             @Html.LabelFor(x => peli.Nombre)
-            @Html.TextBoxFor(x => peli.Nombre, new { @class = "form-control", Value = @peli.Nombre })
+            @Html.TextBoxFor(x => peli.Nombre, new { @class = "form-control", Value = @peli.Nombre, @maxlength = "50" })
 
         </div>
         <div class="form-group">
             @Html.LabelFor(x => peli.Descripcion)
-            @Html.TextBoxFor(x => peli.Descripcion, new { @class = "form-control", Value = @peli.Descripcion })
+            @Html.TextAreaFor(x => peli.Descripcion, new { @class = "form-control", Value = @peli.Descripcion, @maxlength = "750" })
         </div>
         <div class="form-group">
             <label for="sel1">Generos:</label>
@@ -58,7 +58,7 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(x => peli.Duracion)
-            @Html.TextBoxFor(x => peli.Duracion, new { @class = "form-control", Value = @peli.Duracion })
+            @Html.TextBoxFor(x => peli.Duracion, new { @class = "form-control", Value = @peli.Duracion, @maxlength = "4" })
 
         </div>
         <div class="form-group">
