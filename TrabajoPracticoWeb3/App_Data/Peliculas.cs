@@ -21,7 +21,7 @@ namespace TrabajoPracticoWeb3.App_Data
             this.Carteleras = new HashSet<Carteleras>();
             this.Reservas = new HashSet<Reservas>();
         }
-    
+
         public int IdPelicula { get; set; }
         [Required(ErrorMessage = "¡Se requiere un nombre de pelicula!")]
         public string Nombre { get; set; }
@@ -33,10 +33,10 @@ namespace TrabajoPracticoWeb3.App_Data
         public int IdCalificacion { get; set; }
         [Required(ErrorMessage = "¡Por favor, Seleccionar un genero!")]
         public int IdGenero { get; set; }
-        [Required(ErrorMessage = "¡Por favor, ingresar la duración!")]        
+        [Required(ErrorMessage = "¡Por favor, ingresar la duración!")]
         public int Duracion { get; set; }
         public System.DateTime FechaCarga { get; set; }
-    
+
         public virtual Calificaciones Calificaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carteleras> Carteleras { get; set; }

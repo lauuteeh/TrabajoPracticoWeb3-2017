@@ -82,11 +82,12 @@ namespace TrabajoPracticoWeb3.Controllers
         }
         //Accion que persiste los datos en la bdd
         [HttpPost]
-        public ActionResult AltaPelicula(Peliculas pelicula, HttpPostedFileBase file)
+        public ActionResult AltaPelicula(Peliculas pelicula, HttpPostedFileBase Imagen)
         {
             myContext ctx = new myContext();//Instancio el contexto
             if (ModelState.IsValid)
             {
+                var file = Imagen;
                 pelicula.FechaCarga = DateTime.Now;
                 ctx.Peliculas.Add(pelicula);//Agrego la pelicula traida por post
 
@@ -122,48 +123,63 @@ namespace TrabajoPracticoWeb3.Controllers
         {
             myContext ctx = new myContext();
             var idPeli = Int32.Parse(Request.QueryString["id"]);
-            var a = (from peli in ctx.Peliculas where peli.IdPelicula == idPeli select peli).ToList();
-            var b = (ctx.Generos).ToList();
-            ViewBag.Generos = b;
-            var c = (ctx.Calificaciones).ToList();
-            ViewBag.Calificaciones = c;
+            var a = (from peli in ctx.Peliculas where peli.IdPelicula == idPeli select peli).FirstOrDefault();
+
+            ViewBag.Generos = AdministracionServicio.GetGeneros();
+            ViewBag.Calificaciones = AdministracionServicio.GetCalificaciones();
             return View(a);
         }
         //Persiste los cambios en bdd
         [HttpPost]
-        public ActionResult editarPelicula(Peliculas peli, HttpPostedFileBase file)
+        public ActionResult editarPelicula(Peliculas peli, HttpPostedFileBase Imagen)
         {
             myContext ctx = new myContext();//Instancio el contexto
-
-            var id = Int32.Parse(Request.Form["id"]);
-            Peliculas peli2 = (from pel in ctx.Peliculas where pel.IdPelicula == id select pel).First();
-
-            if (file != null && file.ContentLength > 0) // Agregar IMAGEN
-                try
-                {
-                    string path = Path.Combine(Server.MapPath("~/Images"),
-                                               Path.GetFileName(file.FileName));
-                    file.SaveAs(path);
-                    peli.Imagen = Path.GetFileName(file.FileName);
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
-                }
-
-            else
+            if (ModelState.IsValid)
             {
-                peli.Imagen = Request.Form["Imagen"];
+                var file = Imagen;
+                var id = Int32.Parse(Request.Form["idPelicula"]);
+                Peliculas peli2 = (from pel in ctx.Peliculas where pel.IdPelicula == id select pel).FirstOrDefault();
+
+                if (file != null && file.ContentLength > 0) // Agregar IMAGEN
+                    try
+                    {
+                        string path = Path.Combine(Server.MapPath("~/Images"),
+                                                   Path.GetFileName(file.FileName));
+                        file.SaveAs(path);
+                        peli.Imagen = Path.GetFileName(file.FileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                    }
+
+                else
+                {
+                    if (peli2.Imagen != Request.Form["Imagen"] && Request.Form["Imagen"] != "" && Request.Form["Imagen"] != null)
+                    {
+                        //string path = Path.Combine(Server.MapPath("~/Images"),
+                        //          Path.GetFileName(Request.Form["Imagen"]));
+                        //file.SaveAs(path);
+                        //peli.Imagen = Path.GetFileName(Request.Form["Imagen"]);
+                        peli2.Imagen = Request.Form["Imagen"];
+
+                    }
+                }
+                peli2.Nombre = peli.Nombre;
+                peli2.Descripcion = peli.Descripcion;
+                peli2.Duracion = peli.Duracion;
+                peli2.FechaCarga = DateTime.Now;
+                peli2.IdGenero = peli.IdGenero;
+                peli2.IdCalificacion = peli.IdCalificacion;
+                ctx.SaveChanges();//persisto los datos en la bdd
+                var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
+                return View("Peliculas", a);
             }
-            peli2.Nombre = peli.Nombre;
-            peli2.Descripcion = peli.Descripcion;
-            peli2.Duracion = peli.Duracion;
-            peli2.FechaCarga = DateTime.Now;
-            peli2.IdGenero = Int32.Parse(Request.Form["Generos"]);
-            peli2.IdCalificacion = Int32.Parse(Request.Form["Calificaciones"]);
-            ctx.SaveChanges();//persisto los datos en la bdd
-            var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
-            return View("Peliculas", a);
+
+            ViewBag.Generos = AdministracionServicio.GetGeneros();
+            ViewBag.Calificaciones = AdministracionServicio.GetCalificaciones();
+
+            return View(peli);
         }
 
         /* Las peliculas no deben eliminarse
