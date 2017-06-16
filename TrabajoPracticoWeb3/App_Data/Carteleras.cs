@@ -12,6 +12,7 @@ namespace TrabajoPracticoWeb3.App_Data
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using TrabajoPracticoWeb3.Models;
 
     public partial class Carteleras
     {
@@ -22,6 +23,7 @@ namespace TrabajoPracticoWeb3.App_Data
         [Required(ErrorMessage = "Se requiere Hora inicio")]
         public int HoraInicio { get; set; }
         [Required(ErrorMessage = "Se requiere Fecha inicio")]
+      //  [SedeClaseFecha("NumeroSala", "FechaInicio", "IdPelicula")]
         public System.DateTime FechaInicio { get; set; }
         [Required(ErrorMessage = "Se requiere Fecha fin")]
         public System.DateTime FechaFin { get; set; }
