@@ -23,7 +23,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.IdGenero)
-        @Html.DropDownListFor(x => x.IdGenero, new SelectList(ViewBag.Generos,"IdGenero","Nombre"))
+        @Html.DropDownListFor(x => x.IdGenero, new SelectList(ViewBag.Generos, "IdGenero", "Nombre"), new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.IdGenero)
     </div>
     <div class="form-group">
@@ -34,7 +34,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.IdCalificacion)
-        @Html.DropDownListFor(x => x.IdCalificacion, new SelectList(ViewBag.Calificaciones, "IdCalificacion", "Nombre"))
+        @Html.DropDownListFor(x => x.IdCalificacion, new SelectList(ViewBag.Calificaciones, "IdCalificacion", "Nombre"), new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.IdCalificacion)
     </div>
     <div class="form-group">
@@ -46,4 +46,3 @@
 
     <button type="submit" class="btn btn-default">Enviar</button>
 }
-  
