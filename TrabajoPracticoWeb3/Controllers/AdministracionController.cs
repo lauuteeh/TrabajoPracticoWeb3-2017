@@ -131,12 +131,12 @@ namespace TrabajoPracticoWeb3.Controllers
         }
         //Persiste los cambios en bdd
         [HttpPost]
-        public ActionResult editarPelicula(Peliculas peli, HttpPostedFileBase Imagen)
+        public ActionResult editarPelicula(Peliculas peli, HttpPostedFileBase image)
         {
             myContext ctx = new myContext();//Instancio el contexto
             if (ModelState.IsValid)
             {
-                var file = Imagen;
+                var file = image;
                 var id = Int32.Parse(Request.Form["idPelicula"]);
                 Peliculas peli2 = (from pel in ctx.Peliculas where pel.IdPelicula == id select pel).FirstOrDefault();
 
@@ -146,7 +146,7 @@ namespace TrabajoPracticoWeb3.Controllers
                         string path = Path.Combine(Server.MapPath("~/Images"),
                                                    Path.GetFileName(file.FileName));
                         file.SaveAs(path);
-                        peli.Imagen = Path.GetFileName(file.FileName);
+                        peli2.Imagen = Path.GetFileName(file.FileName);
                     }
                     catch (Exception ex)
                     {

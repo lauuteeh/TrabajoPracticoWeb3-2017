@@ -8,7 +8,7 @@
 
 <h2>Editar Pelicula</h2>
 
-@using (Html.BeginForm("editarPelicula", "Administracion", FormMethod.Post))
+@using (Html.BeginForm("editarPelicula", "Administracion", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(model => model.IdPelicula)
 
@@ -29,7 +29,7 @@
     </div>
     <div class="form-group">
         <label for="exampleInputFile">Inserte una imagen</label>
-        <input type="file" id="exampleInputFile" name="file">
+        <input type="file" id="exampleInputFile" name="image">
         <p class="help-block">@Model.Imagen</p>
         <input type="hidden" value="@Model.Imagen" />
 
