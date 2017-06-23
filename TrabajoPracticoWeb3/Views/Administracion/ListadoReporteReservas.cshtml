@@ -1,0 +1,33 @@
+﻿
+@{
+        ViewBag.Title = "ListadoReporteReservas";
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+        @model IEnumerable<TrabajoPracticoWeb3.App_Data.sp_reservar_Result>
+    }
+<h2>ListadoReporteReservas</h2>
+
+<table class="table">
+        <thead>
+            <tr>
+                <th>sedeNombre</th>
+                <th>versionNombre</th>
+                <th>peliculaNombre</th>
+                <th>PrecioGeneral</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @*@foreach (var reserva in Model)
+            {
+                <tr>
+
+                    <td>@reserva.NombreSede</td>
+                    <td>@reserva.VersionPelicula</td>
+                    <td>@reserva.NombrePelicula</td>
+                    <td>@reserva.PrecioGeneral</td>
+
+                </tr>
+            }*@
+
+        </tbody>
+    </table>
