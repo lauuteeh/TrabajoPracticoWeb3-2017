@@ -17,7 +17,7 @@ namespace TrabajoPracticoWeb3.Controllers
             fin = DateTime.Now;
             myContext ctx = new myContext();
 
-            var listSP = ctx.sp()
+            var listSP = ctx.sp();
             var listReservas = (from r in ctx.Reservas
                                 join s in ctx.Sedes on
                                 r.IdSede equals s.IdSede
