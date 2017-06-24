@@ -34,10 +34,10 @@ namespace TrabajoPracticoWeb3.App_Data
         public bool Miercoles { get; set; }
         public bool Jueves { get; set; }
         public bool Viernes { get; set; }
-        public bool Sabado { get; set; }
+        public bool Sabado { get; set; }      
         public bool Domingo { get; set; }
         public System.DateTime FechaCarga { get; set; }
-    
+
         public virtual Peliculas Peliculas { get; set; }
         public virtual Sedes Sedes { get; set; }
         public virtual Versiones Versiones { get; set; }

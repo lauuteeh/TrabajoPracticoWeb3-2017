@@ -57,6 +57,11 @@ namespace TrabajoPracticoWeb3.Controllers
             }
         }
 
+        public AdministracionController()
+        {
+            //crear aca el contexto
+        }
+
         // GET: Administracion
         public ActionResult Inicio()
         {
@@ -300,17 +305,9 @@ namespace TrabajoPracticoWeb3.Controllers
             myContext ctx = new myContext();
             if (ModelState.IsValid)
             {
-
-                /* cartelera.IdSede = Int32.Parse(Request.Form["Sedes"]);
-                 cartelera.IdVersion = Int32.Parse(Request.Form["Versiones"]);
-                 var asd = Convert.ToDateTime(Request.Form["HoraInicio"]);
-                 var asd2 = (asd.Hour).ToString();
-                 var asd3 = (asd.Minute).ToString();
-                 cartelera.HoraInicio = Int32.Parse(asd2 + asd3);*/
+                ViewBag.Mensaje = "";
                 cartelera.FechaCarga = DateTime.Now;
-
                 var dias = Request.Form["chk_group[]"];
-
                 foreach (var dia in dias)
                 {
                     if (dia == '1') { cartelera.Lunes = true; }
@@ -320,20 +317,31 @@ namespace TrabajoPracticoWeb3.Controllers
                     if (dia == '5') { cartelera.Viernes = true; }
                     if (dia == '6') { cartelera.Sabado = true; }
                     if (dia == '7') { cartelera.Domingo = true; }
-
                 }
 
-                ctx.Carteleras.Add(cartelera);
-                ctx.SaveChanges();
-                //Preparo lo necesario para devolver la vista Carteleras
                 var sede = (ctx.Sedes).ToList();
                 var peli = (ctx.Peliculas).ToList();
                 var version = (ctx.Versiones).ToList();
                 ViewBag.Sedes = sede;
                 ViewBag.Peli = peli;
                 ViewBag.Version = version;
-                var a = (ctx.Carteleras).ToList();
-                return View("Carteleras", a);
+
+                if (AdministracionServicio.ValidaCartelera(cartelera))
+                {
+                    ctx.Carteleras.Add(cartelera);
+                    ctx.SaveChanges();
+                    //Preparo lo necesario para devolver la vista Carteleras
+
+                    var a = (ctx.Carteleras).ToList();
+                    return View("Carteleras", a);
+                }
+                else
+                {
+                    ViewBag.Mensaje = "ATENCIÓN !!! La cartelera ingresada no se encuentra disponible en las fechas: " + cartelera.FechaInicio + " - " + cartelera.FechaFin;
+                    return View();
+                }
+
+
             }
             var b = (ctx.Sedes).ToList();
             var c = (ctx.Peliculas).ToList();

@@ -38,5 +38,68 @@ namespace TrabajoPracticoWeb3.Models
                                });
             return new SelectList(calificaciones, "Value", "Text"); ;
         }
+
+        public static bool ValidaCartelera(Carteleras cartelera)
+        {
+            ctx = new myContext();
+
+            //Carteleras que se encuentran en el rango ingresado por la nueva cartelera
+            var cartelerasPorFechas = ctx.Carteleras.Where(x => (x.FechaInicio >= cartelera.FechaInicio && x.FechaInicio <= cartelera.FechaFin) ||
+                     (x.FechaFin >= cartelera.FechaInicio && x.FechaFin <= cartelera.FechaFin) ||
+                     (x.FechaInicio <= cartelera.FechaInicio && x.FechaFin >= cartelera.FechaFin)
+                     );
+            if (cartelerasPorFechas.Count() == 0)
+                return true;
+
+            //Comprobamos sedes en cartelera
+            var sedes = cartelerasPorFechas.Where(x => x.IdSede == cartelera.IdSede);
+            if (sedes.Count() == 0)
+                return true;
+
+            //Comprobamos sedes y sala en cartelera
+            var sedesSala = sedes.Where(x => x.NumeroSala == cartelera.NumeroSala);
+            if (sedesSala.Count() == 0)
+                return true;
+
+            //Comprobacion Dias
+            var countDias = 0;
+            if (cartelera.Lunes)
+            {
+                var lunes = sedesSala.Where(x => x.Lunes == cartelera.Lunes);
+                countDias += lunes.Count();
+            }
+            if (cartelera.Martes)
+            {
+                var martes = sedesSala.Where(x => x.Martes == cartelera.Martes);
+                countDias += martes.Count();
+            }
+            if (cartelera.Miercoles)
+            {
+                var miercoles = sedesSala.Where(x => x.Miercoles == cartelera.Miercoles);
+                countDias += miercoles.Count();
+            }
+            if (cartelera.Jueves)
+            {
+                var jueves = sedesSala.Where(x => x.Jueves == cartelera.Jueves);
+                countDias += jueves.Count();
+            }
+            if (cartelera.Viernes)
+            {
+                var viernes = sedesSala.Where(x => x.Viernes == cartelera.Viernes);
+                countDias += viernes.Count();
+            }
+            if (cartelera.Sabado)
+            {
+                var sabado = sedesSala.Where(x => x.Sabado == cartelera.Sabado);
+                countDias += sabado.Count();
+            }
+            if (cartelera.Domingo)
+            {
+                var domingo = sedesSala.Where(x => x.Domingo == cartelera.Domingo);
+                countDias += domingo.Count();
+            }
+              
+            return countDias == 0;
+        }
     }
 }
