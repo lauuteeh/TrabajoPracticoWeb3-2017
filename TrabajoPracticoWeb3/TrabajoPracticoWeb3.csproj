@@ -272,6 +272,7 @@
     <Content Include="Views\Administracion\editarPelicula.cshtml" />
     <Content Include="Views\Administracion\editarSede.cshtml" />
     <Content Include="Views\Administracion\ListadoReporteReservas.cshtml" />
+    <Content Include="Views\Administracion\EditarCartelera.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
