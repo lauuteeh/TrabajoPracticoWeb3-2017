@@ -7,14 +7,28 @@
 @model IEnumerable<TrabajoPracticoWeb3.App_Data.Reservas>
 <h2>ListaReportes</h2>
 
+<table class="table">
+    
+    <thead>
+        <tr>
+            <th>Sede</th>
+            <th>Version</th>
+            <th>Nombre Pelicula</th>
+            <th>Precio</th>
+            
+        </tr>
+    </thead>
+    
+    <tbody>
+        @foreach (var reserva in Model)
+        {
+         <tr>
+            <td>@reserva.Sedes.Nombre</td>
+            <td>@reserva.Versiones.Nombre</td>
+            <td>@reserva.Peliculas.Nombre</td>
+            <td>@reserva.CantidadEntradas * @reserva.Sedes.PrecioGeneral</td>
+        </tr>
+        }
 
-
-@foreach (var reserva in Model)
-{
-
-    <p>@reserva.Sedes.Nombre</p>
-    <p>@reserva.Versiones.Nombre</p>
-    <p>@reserva.Peliculas.Nombre</p>
-    <p>@reserva.CantidadEntradas * @reserva.Sedes.PrecioGeneral</p>
-
-}
+    </tbody>
+</table>
