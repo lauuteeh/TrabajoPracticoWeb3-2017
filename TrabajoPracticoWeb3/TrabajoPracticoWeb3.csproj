@@ -216,6 +216,7 @@
     </Compile>
     <Compile Include="Models\AdministracionServicio.cs" />
     <Compile Include="Models\HomeServicios.cs" />
+    <Compile Include="Models\Reporte.cs" />
     <Compile Include="Models\ValidaRangoFechaInicioFin.cs" />
     <Compile Include="Models\MinimoUnCampoRequerido.cs" />
     <Compile Include="Models\PeliculaServicio.cs" />
