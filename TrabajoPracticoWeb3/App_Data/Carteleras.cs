@@ -11,6 +11,7 @@ namespace TrabajoPracticoWeb3.App_Data
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using TrabajoPracticoWeb3.Models;
 
@@ -18,17 +19,24 @@ namespace TrabajoPracticoWeb3.App_Data
     {
 
         public int IdCartelera { get; set; }
+        [DisplayName("Sede")]
         public int IdSede { get; set; }
+        [DisplayName("Película")]
         public int IdPelicula { get; set; }
+        [DisplayName("Hora Inicio")]
         [Required(ErrorMessage = "Se requiere Hora inicio")]
         public int HoraInicio { get; set; }
+        [DisplayName("Fecha Inicio")]
         [Required(ErrorMessage = "Se requiere Fecha inicio")]
         public System.DateTime FechaInicio { get; set; }
+        [DisplayName("Fecha Fin")]
         [Required(ErrorMessage = "Se requiere Fecha fin")]
         [ValidaRangoFechaInicioFin("FechaInicio", "FechaFin")]
         public System.DateTime FechaFin { get; set; }
+        [DisplayName("Número de Sala")]
         [Required(ErrorMessage = "Se requiere una sala")]
         public int NumeroSala { get; set; }
+        [DisplayName("Versión")]
         public int IdVersion { get; set; }
 
         [MinimoUnCampoRequerido(new string[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" })]

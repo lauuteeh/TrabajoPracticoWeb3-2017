@@ -1,16 +1,17 @@
 ﻿
 @{
-    ViewBag.Title = "AltaCartelera";
+    ViewBag.Title = "EditarCartelera";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     @model TrabajoPracticoWeb3.App_Data.Carteleras
 }
 
-<h2>Alta Cartelera</h2>
+<h2>Editar Cartelera</h2>
 <h3 class="label label-danger">@ViewBag.Mensaje</h3>
 
-@using (Html.BeginForm("AltaCartelera", "Administracion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("EditarCartelera", "Administracion", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <br />
+    @Html.HiddenFor(x => x.IdCartelera)
     <div class="form-group">
         @Html.LabelFor(x => x.IdSede)
         @Html.DropDownListFor(x => x.IdSede, new SelectList(ViewBag.Sedes, "IdSede", "Nombre"), new { @class = "form-control" })
@@ -28,7 +29,7 @@
     </div>
     <div class="form-group">
         <label for="Descripcion">Días:</label>
-        <br /> 
+        <br />
         @Html.LabelFor(x => x.Lunes)
         @Html.CheckBoxFor(x => x.Lunes)
         @Html.LabelFor(x => x.Martes)
@@ -49,12 +50,12 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.FechaInicio)
-        @Html.TextBoxFor(x => x.FechaInicio, new { @class = "form-control", type = "date" })
+        @Html.TextBoxFor(x => x.FechaInicio, new { @class = "form-control", @maxlength = "10" })
         <span class="text-danger">@Html.ValidationMessageFor(x => x.FechaInicio)</span>
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.FechaFin)
-        @Html.TextBoxFor(x => x.FechaFin, new { @class = "form-control", type = "date" })
+        @Html.TextBoxFor(x => x.FechaFin, new { @class = "form-control", @maxlength = "10" })
         <span class="text-danger"> @Html.ValidationMessageFor(x => x.FechaFin)</span>
     </div>
     <div class="form-group">

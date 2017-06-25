@@ -15,6 +15,7 @@ namespace TrabajoPracticoWeb3.Controllers
     [Autenticado]
     public class AdministracionController : Controller
     {
+
         // Si no estamos logeado, regresamos al login
         public class AutenticadoAttribute : ActionFilterAttribute
         {
@@ -187,17 +188,6 @@ namespace TrabajoPracticoWeb3.Controllers
             return View(peli);
         }
 
-        /* Las peliculas no deben eliminarse
-        public ActionResult eliminarPelicula()
-        {
-            myContext ctx = new myContext();
-            var idPeli = Int32.Parse(Request.QueryString["id"]);
-            Peliculas peli = (from pe in ctx.Peliculas where pe.IdPelicula == idPeli select pe).First();
-            ctx.Peliculas.Remove(peli);
-            ctx.SaveChanges();
-            var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
-            return View("Peliculas",a);
-        }*/
         //Listado de Sedes
         public ActionResult Sedes()
         {
@@ -258,18 +248,6 @@ namespace TrabajoPracticoWeb3.Controllers
 
 
         }
-        /*Lase sedes no deben eliminarse
-        public ActionResult EliminarSede()
-        {
-            myContext ctx = new myContext();
-            var id = Int32.Parse(Request.QueryString["id"]);
-            Sedes sede = (from se in ctx.Sedes where se.IdSede == id select se).First();
-            ctx.Sedes.Remove(sede);
-            ctx.SaveChanges();
-            var a = (ctx.Sedes).ToList();//Cargo el modelo para Peliculas
-            
-            return View("Sedes", a);
-        }*/
 
         public ActionResult Carteleras()
         {
@@ -352,6 +330,70 @@ namespace TrabajoPracticoWeb3.Controllers
             ViewBag.Version = d;
             return View();
         }
+
+        public ActionResult EditarCartelera()
+        {
+            myContext ctx = new myContext();
+            var idCart = Int32.Parse(Request.QueryString["id"]);
+            Carteleras cart = (from pe in ctx.Carteleras where pe.IdCartelera == idCart select pe).FirstOrDefault();
+
+            var b = (ctx.Sedes).ToList();
+            var c = (ctx.Peliculas).ToList();
+            var d = (ctx.Versiones).ToList();
+
+            ViewBag.Sedes = b;
+            ViewBag.Peli = c;
+            ViewBag.Version = d;
+
+            return View(cart);
+        }
+
+        [HttpPost]
+        public ActionResult EditarCartelera(Carteleras cartelera)
+        {
+            myContext ctx = new myContext();
+
+            var b = (ctx.Sedes).ToList();
+            var c = (ctx.Peliculas).ToList();
+            var d = (ctx.Versiones).ToList();
+
+            ViewBag.Sedes = b;
+            ViewBag.Peli = c;
+            ViewBag.Version = d;
+
+            if (ModelState.IsValid)
+            {
+                if (AdministracionServicio.ValidaCartelera(cartelera))
+                {
+                    Carteleras carteleraOrig = (from se in ctx.Carteleras where se.IdCartelera == cartelera.IdCartelera select se).FirstOrDefault();
+                    carteleraOrig.IdSede = cartelera.IdSede;
+                    carteleraOrig.IdPelicula = cartelera.IdPelicula;
+                    carteleraOrig.HoraInicio = cartelera.HoraInicio;
+                    carteleraOrig.Lunes = cartelera.Lunes;
+                    carteleraOrig.Martes = cartelera.Martes;
+                    carteleraOrig.Miercoles = cartelera.Miercoles;
+                    carteleraOrig.Jueves = cartelera.Jueves;
+                    carteleraOrig.Viernes = cartelera.Viernes;
+                    carteleraOrig.Sabado = cartelera.Sabado;
+                    carteleraOrig.Domingo = cartelera.Domingo;
+                    carteleraOrig.FechaInicio = cartelera.FechaInicio.Date;
+                    carteleraOrig.FechaFin = cartelera.FechaFin.Date;
+                    carteleraOrig.FechaCarga = DateTime.Now.Date;
+                    carteleraOrig.NumeroSala = cartelera.NumeroSala;
+                    carteleraOrig.IdVersion = cartelera.IdVersion;
+
+                    ctx.SaveChanges();
+                    var a = (ctx.Carteleras).ToList();
+                    return View("Carteleras", a);
+                }
+                else
+                    ViewBag.Mensaje = "ATENCIÓN !!! La cartelera ingresada no se encuentra disponible en las fechas: " + cartelera.FechaInicio.ToShortDateString() + " - " + cartelera.FechaFin.ToShortDateString();
+            }
+            return View();
+
+
+        }
+
 
         public ActionResult EliminarCartelera()
         {

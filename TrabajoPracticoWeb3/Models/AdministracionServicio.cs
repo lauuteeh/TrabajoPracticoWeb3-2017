@@ -44,12 +44,13 @@ namespace TrabajoPracticoWeb3.Models
             ctx = new myContext();
 
             //Carteleras que se encuentran en el rango ingresado por la nueva cartelera
-            var cartelerasPorFechas = ctx.Carteleras.Where(x => (x.FechaInicio >= cartelera.FechaInicio && x.FechaInicio <= cartelera.FechaFin) ||
+            var cartelerasPorFechas = ctx.Carteleras.Where(x => ((x.FechaInicio >= cartelera.FechaInicio && x.FechaInicio <= cartelera.FechaFin) ||
                      (x.FechaFin >= cartelera.FechaInicio && x.FechaFin <= cartelera.FechaFin) ||
-                     (x.FechaInicio <= cartelera.FechaInicio && x.FechaFin >= cartelera.FechaFin)
+                     (x.FechaInicio <= cartelera.FechaInicio && x.FechaFin >= cartelera.FechaFin)) &&
+                     x.IdCartelera != cartelera.IdCartelera
                      );
             if (cartelerasPorFechas.Count() == 0)
-                return true;
+                return true;          
 
             //Comprobamos sedes en cartelera
             var sedes = cartelerasPorFechas.Where(x => x.IdSede == cartelera.IdSede);
@@ -98,7 +99,7 @@ namespace TrabajoPracticoWeb3.Models
                 var domingo = sedesSala.Where(x => x.Domingo == cartelera.Domingo);
                 countDias += domingo.Count();
             }
-              
+
             return countDias == 0;
         }
     }
