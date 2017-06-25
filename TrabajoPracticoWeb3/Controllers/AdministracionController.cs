@@ -415,12 +415,31 @@ namespace TrabajoPracticoWeb3.Controllers
 
         public ActionResult Reportes()
         {
+            myContext ctx = new myContext();
+
+            IEnumerable<SelectListItem> ReportesItems = ctx.Peliculas.AsEnumerable().Select(c => new SelectListItem()
+            {
+                Text = c.Nombre,
+                Value = c.IdPelicula.ToString(),
+                Selected = true,
+            });
+
+            SelectList Peliculas = new SelectList(ReportesItems, "Value", "Text");
+            ViewData["Pelicula"] = Peliculas;
             return View();
         }
 
-        public ActionResult ListaReportes()
+        public ActionResult ListaReportes(Reporte reporte)
         {
-            return View();
+            myContext ctx = new myContext();
+
+            int IdPelicula;
+
+            Int32.TryParse(Request["Pelicula"], out IdPelicula);
+
+            var a = ctx.Reservas.Where(x => x.IdPelicula == IdPelicula && x.FechaCarga >= reporte.FechaInicio && x.FechaCarga <= reporte.FechaInicio);
+
+            return View(a);
         }
 
         public ActionResult Logout()

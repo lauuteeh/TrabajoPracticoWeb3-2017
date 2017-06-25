@@ -3,54 +3,29 @@
 @{
     ViewBag.Title = "Reportes";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    @model TrabajoPracticoWeb3.App_Data.Reservas
+    @model TrabajoPracticoWeb3.Models.Reporte
 }
 
-@*@{
-        ViewBag.Title = "Peliculas";
-        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-        @model IEnumerable<TrabajoPracticoWeb3.App_Data.sp_reservar_Result>
-    }*@
+
 <h2>Reportes</h2>
 
-@using (Html.BeginForm("ReporteReservas", "ReporteReservas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("ListaReportes", "Administracion", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="form-group">
-        @Html.LabelFor(x => x.FechaHoraInicio)
-        @Html.TextBoxFor(x => x.FechaHoraInicio, new { @class = "form-control", @maxlength = "50" })
-        @Html.ValidationMessageFor(x => x.FechaHoraInicio)
+        @Html.LabelFor(x => x.FechaInicio)
+        @Html.TextBoxFor(x => x.FechaInicio, new { @class = "form-control", @maxlength = "50"})
+        @*@Html.ValidationMessageFor(x => x.FechaHoraInicio)*@
     </div>
     <div class="form-group">
-        @Html.LabelFor(x => x.FechaHoraInicio)
-        @Html.TextBoxFor(x => x.FechaHoraInicio, new { @class = "form-control", @maxlength = "50" })
-        @Html.ValidationMessageFor(x => x.FechaHoraInicio)
+        @Html.LabelFor(x => x.FechaFin)
+        @Html.TextBoxFor(x => x.FechaFin, new { @class = "form-control", @maxlength = "50" })
+        @*@Html.ValidationMessageFor(x => x.FechaHoraInicio)*@
     </div>
 
-    @*<table class="table">
-            <thead>
-                <tr>
-                    <th>sedeNombre</th>
-                    <th>versionNombre</th>
-                    <th>peliculaNombre</th>
-                    <th>PrecioGeneral</th>
+    @Html.Label("Pelicula", new { @class = "margin-dp" })
+    @Html.DropDownList("Pelicula", ViewData["Pelicula"] as List<SelectListItem>, "Por Favor, seleccione una Pelicula", new { @class = "margin-dp form-control" })
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var reserva in Model)
-                {
-                    <tr>
+    <button type="submit" class="margin-dp btn btn-success">Continuar</button>
 
-                        <td>@reserva.NombreSede</td>
-                        <td>@reserva.VersionPelicula</td>
-                        <td>@reserva.NombrePelicula</td>
-                        <td>@reserva.PrecioGeneral</td>
 
-                    </tr>
-                }
-
-            </tbody>
-        </table>*@
-    <button onclick="window.location.href='ListadoReporteReservas?inicio=@peli.IdPelicula'" class="btn btn-success">Ver</button>
-   
 }

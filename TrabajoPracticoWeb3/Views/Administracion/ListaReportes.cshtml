@@ -1,7 +1,20 @@
 ﻿
 @{
     ViewBag.Title = "ListaReportes";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+@model IEnumerable<TrabajoPracticoWeb3.App_Data.Reservas>
 <h2>ListaReportes</h2>
 
+
+
+@foreach (var reserva in Model)
+{
+
+    <p>@reserva.Sedes.Nombre</p>
+    <p>@reserva.Versiones.Nombre</p>
+    <p>@reserva.Peliculas.Nombre</p>
+    <p>@reserva.CantidadEntradas * @reserva.Sedes.PrecioGeneral</p>
+
+}
