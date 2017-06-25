@@ -134,5 +134,72 @@ namespace TrabajoPracticoWeb3.Models
 
 
         }
+
+        public static SelectList MostrarHorarioCascada(string IdPelicula, string IdVersion, string IdSede) {
+
+
+            myContext ctx = new myContext();
+
+
+            int idPeliculaConvertido, idSedeConvertido, idVersionConvertido;
+
+            Int32.TryParse(IdPelicula, out idPeliculaConvertido);
+            Int32.TryParse(IdSede, out idSedeConvertido);
+            Int32.TryParse(IdVersion, out idVersionConvertido);
+
+            var Cartelera = ctx.Carteleras.Where(x => x.IdPelicula == idPeliculaConvertido && x.IdSede == idSedeConvertido && x.IdVersion == idVersionConvertido).First();
+
+            List<SelectListItem> HorarioItems = new List<SelectListItem>();
+
+            string HoraInicio = Cartelera.HoraInicio.ToString();
+            int sitioDeCorte = 2;
+            string parte1 = HoraInicio.Substring(0, sitioDeCorte);
+            string parte2 = HoraInicio.Substring(sitioDeCorte);
+
+            int HoraInicioParte1, HoraInicioParte2;
+
+            Int32.TryParse(parte1, out HoraInicioParte1);
+            Int32.TryParse(parte2, out HoraInicioParte2);
+
+            TimeSpan Base = TimeSpan.FromHours(0);
+            TimeSpan BaseComparar = TimeSpan.FromHours(0);
+
+            TimeSpan HoraInicioResult1 = TimeSpan.FromHours(HoraInicioParte1);
+            TimeSpan HoraInicioResult2 = TimeSpan.FromMinutes(HoraInicioParte2);
+            TimeSpan HoraInicioCartelera = TimeSpan.FromHours(0);
+            HoraInicioCartelera = HoraInicioResult1 + HoraInicioResult2;
+
+            TimeSpan DuracionPelicula = TimeSpan.FromMinutes(Cartelera.Peliculas.Duracion);
+
+            TimeSpan Intervalo = TimeSpan.FromMinutes(30);
+
+            for (int i = 1; i < 8; i++)
+            {
+
+
+                if (Base == BaseComparar)
+                {
+                    Base = HoraInicioCartelera;
+                }
+                else
+                {
+                    Base = Base + DuracionPelicula;
+
+                }
+
+
+                string BaseString = Base.ToString("hh':'mm");
+                HorarioItems.Add(new SelectListItem { Text = BaseString, Value = i.ToString() });
+
+                Base = Base + Intervalo;
+
+            }
+
+            SelectList Horarios = new SelectList(HorarioItems, "Value", "Text");
+
+            return Horarios;
+
+        }
+
     }
 }
