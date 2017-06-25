@@ -337,7 +337,7 @@ namespace TrabajoPracticoWeb3.Controllers
                 }
                 else
                 {
-                    ViewBag.Mensaje = "ATENCIÓN !!! La cartelera ingresada no se encuentra disponible en las fechas: " + cartelera.FechaInicio + " - " + cartelera.FechaFin;
+                    ViewBag.Mensaje = "ATENCIÓN !!! La cartelera ingresada no se encuentra disponible en las fechas: " + cartelera.FechaInicio.ToShortDateString() + " - " + cartelera.FechaFin.ToShortDateString();
                     return View();
                 }
 
