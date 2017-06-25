@@ -39,30 +39,11 @@ namespace TrabajoPracticoWeb3.Controllers
             return Json(Dia);
         }
 
-        public JsonResult GetHorario(string id)
+        public JsonResult GetHorario(string idDia, string idSede, string idVersion, string idPelicula)
         {
-            List<SelectListItem> City = new List<SelectListItem>();
-            switch (id)
-            {
-                case "1":
-                    City.Add(new SelectListItem { Text = "Select", Value = "0" });
-                    City.Add(new SelectListItem { Text = "10:00am", Value = "1" });
-                    break;
-                case "2":
-                    City.Add(new SelectListItem { Text = "Select", Value = "0" });
-                    City.Add(new SelectListItem { Text = "12:00am", Value = "2" });
-                    break;
-                case "3":
-                    City.Add(new SelectListItem { Text = "Select", Value = "0" });
-                    City.Add(new SelectListItem { Text = "14:00am", Value = "3" });
-                    break;
-                case "4":
-                    City.Add(new SelectListItem { Text = "Select", Value = "0" });
-                    City.Add(new SelectListItem { Text = "16:00am", Value = "4" });
-                    break;
-            }
+            SelectList Horarios = PeliculaServicio.MostrarHorarioCascada(idPelicula, idVersion, idSede);
 
-            return Json(new SelectList(City, "Value", "Text"));
+            return Json(Horarios);
         }
 
 

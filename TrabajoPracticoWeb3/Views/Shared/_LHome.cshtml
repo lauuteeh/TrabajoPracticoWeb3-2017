@@ -172,7 +172,7 @@
                     type: 'POST',
                     url: '@Url.Action("GetHorario")',
                     dataType: 'json',
-                    data: { id: $("#Dia").val() },
+                    data: { idDia: $("#Dia").val(), idSede: $("#Sede").val(), idVersion: $("#Version").val(), idPelicula: $("#Pelicula").val()  },
                     success: function (citys) {
                         // states contains the JSON formatted list
                         // of states passed from the controller
