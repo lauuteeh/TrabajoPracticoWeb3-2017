@@ -23,7 +23,9 @@
     <div class="col-md-4">
 
         @using (Html.BeginForm())
-            {
+        {
+            @Html.Hidden("Pelicula", pelicula.IdPelicula)
+
             @Html.Label("Version", new { @class = "margin-dp" })
             @Html.DropDownList("Version", ViewData["version"] as List<SelectListItem>, "Por Favor, seleccione una Version", new { @class = "margin-dp form-control" })
 

@@ -75,22 +75,31 @@
 </html>
 
 
-  <!-- Script Para Select en cascada en reserva pelicula -->
+ <!-- Script Para Select en cascada en reserva pelicula -->
 <script type="text/javascript">
 
     $(document).ready(function () {
         //Dropdownlist Selectedchange event
         $("#Version").change(function () {
             $("#Sede").empty();
+            $("#Sede").append('<option value="'
+                + 0 + '">'
+                + "Por favor,seleccione una sede" + '</option>');
             $("#Dia").empty();
+            $("#Dia").append('<option value="'
+                + 0 + '">'
+                + "Por favor,seleccione un Dia" + '</option>');
             $("#Horario").empty();
+            $("#Horario").append('<option value="'
+                + 0 + '">'
+                + "Por favor,seleccione un Horario" + '</option>');
             $.ajax({
                 type: 'POST',
-                url: '@Url.Action("GetStates")', // we are calling json method
+                url: '@Url.Action("GetSede")', // we are calling json method
 
                 dataType: 'json',
 
-                data: { id: $("#Version").val() },
+                data: { idVersion: $("#Version").val(), idPelicula: $("#Pelicula").val() },
                // here we are get value of selected country and passing same value as inputto json method GetStates.
 
 
@@ -120,12 +129,18 @@
             //Dropdownlist Selectedchange event
             $("#Sede").change(function () {
                 $("#Dia").empty();
+                $("#Dia").append('<option value="'
+                    + 0 + '">'
+                    + "Por favor,seleccione un Dia" + '</option>');
                 $("#Horario").empty();
+                $("#Horario").append('<option value="'
+                    + 0 + '">'
+                    + "Por favor,seleccione un Horario" + '</option>');
                 $.ajax({
                     type: 'POST',
-                    url: '@Url.Action("GetCity")',
+                    url: '@Url.Action("GetDia")',
                     dataType: 'json',
-                    data: { id: $("#Sede").val() },
+                    data: { idSede: $("#Sede").val(), idVersion: $("#Version").val(), idPelicula: $("#Pelicula").val()},
                     success: function (citys) {
                         // states contains the JSON formatted list
                         // of states passed from the controller
@@ -150,6 +165,9 @@
             //Dropdownlist Selectedchange event
             $("#Dia").change(function () {
                 $("#Horario").empty();
+                $("#Horario").append('<option value="'
+                    + 0 + '">'
+                    + "Por favor,seleccione un Horario" + '</option>');
                 $.ajax({
                     type: 'POST',
                     url: '@Url.Action("GetHorario")',
