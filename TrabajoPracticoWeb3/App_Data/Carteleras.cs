@@ -25,19 +25,22 @@ namespace TrabajoPracticoWeb3.App_Data
         [Required(ErrorMessage = "Se requiere Fecha inicio")]
         public System.DateTime FechaInicio { get; set; }
         [Required(ErrorMessage = "Se requiere Fecha fin")]
+        [ValidaRangoFechaInicioFin("FechaInicio", "FechaFin")]
         public System.DateTime FechaFin { get; set; }
         [Required(ErrorMessage = "Se requiere una sala")]
         public int NumeroSala { get; set; }
         public int IdVersion { get; set; }
+
+        [MinimoUnCampoRequerido(new string[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" })]
         public bool Lunes { get; set; }
         public bool Martes { get; set; }
         public bool Miercoles { get; set; }
         public bool Jueves { get; set; }
         public bool Viernes { get; set; }
-        public bool Sabado { get; set; }      
+        public bool Sabado { get; set; }
         public bool Domingo { get; set; }
-        public System.DateTime FechaCarga { get; set; }
 
+        public System.DateTime FechaCarga { get; set; }
         public virtual Peliculas Peliculas { get; set; }
         public virtual Sedes Sedes { get; set; }
         public virtual Versiones Versiones { get; set; }
