@@ -135,7 +135,8 @@ namespace TrabajoPracticoWeb3.Models
 
         }
 
-        public static SelectList MostrarHorarioCascada(string IdPelicula, string IdVersion, string IdSede) {
+        public static SelectList MostrarHorarioCascada(string IdPelicula, string IdVersion, string IdSede)
+        {
 
 
             myContext ctx = new myContext();
@@ -200,6 +201,15 @@ namespace TrabajoPracticoWeb3.Models
             return Horarios;
 
         }
+
+        public static dynamic TraeTiposDeDocumentos()
+        {
+            myContext ctx = new myContext();
+            var tiposDoc = ctx.TiposDocumentos;
+
+            return tiposDoc;
+        }
+
 
     }
 }

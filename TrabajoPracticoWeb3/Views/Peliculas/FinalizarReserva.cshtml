@@ -5,96 +5,133 @@
 
     var a = ViewBag.Dia;
 }
+@model  TrabajoPracticoWeb3.Models.CarteleraReserva
 
-@model  TrabajoPracticoWeb3.App_Data.Carteleras
-
-<h2>FinalizarReserva</h2>
+<h2>Finalizar Reserva</h2>
 
 @*@ViewBag.Horario
-@ViewBag.Dia
+    @ViewBag.Dia
 
-@Model.Peliculas.Nombre
-@Model.Peliculas.Descripcion
-@Model.Peliculas.Generos.Nombre
-@Model.Peliculas.Calificaciones.Nombre
-@Model.Sedes.PrecioGeneral*@
-
-
+    @Model.Peliculas.Nombre
+    @Model.Peliculas.Descripcion
+    @Model.Peliculas.Generos.Nombre
+    @Model.Peliculas.Calificaciones.Nombre
+    @Model.Sedes.PrecioGeneral*@
 
 @using (Html.BeginForm("ConfirmarReserva", "Peliculas", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.Hidden("IdPelicula", Model.IdPelicula)
+    @Html.Hidden("IdVersion", Model.IdVersion)
+    @Html.Hidden("IdSede", Model.IdSede)
 
-    <div class="form-group">
-        @Html.Label("Pelicula")
-        @Html.Hidden("IdPelicula",Model.IdPelicula)
-        <input type="text" name="Pelicula" value="@Model.Peliculas.Nombre" class="form-control" readonly="readonly" />
+    @Html.Hidden("Horario", Model.Horario)
 
+    <div class="movie">
+        <h2 class="page-heading">@Model.Peliculas.Nombre</h2>
+
+        <div class="movie__info">
+            <div class="col-sm-4 col-md-4 movie-mobile">
+                <div class="movie__images">
+                    <img class="img-responsive" src='@Url.Action("GetImage", "Home", new { image =  @ViewBag.ImagenPelicula.ToString() } )'>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <p class="movie__time">@Model.Peliculas.Duracion Min</p>
+                <p class="movie__option"><strong>Descripcion: </strong>@Model.Peliculas.Descripcion</p>
+                <p class="movie__option"><strong>Sede: </strong>@Model.Sedes.Nombre</p>
+                <p class="movie__option"><strong>Version: </strong>@Model.Versiones.Nombre</p>
+                <p class="movie__option"><strong>Dia: </strong>@ViewBag.Dia</p>
+                <p class="movie__option"><strong>Horario: </strong>@Model.Horario</p>
+                <p class="movie__option"><strong>Sala: </strong>@Model.NumeroSala</p>
+                <p class="movie__option"><strong>Genero: </strong>@Model.Peliculas.Generos.Nombre</p>
+                <p class="movie__option"><strong>Clasificacion: </strong>@Model.Peliculas.Calificaciones.Nombre</p>
+                <p class="movie__option"><strong>Precio: </strong>@Model.Sedes.PrecioGeneral</p>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Email)
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @maxlength = "40" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.Email)</span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.IdTipoDocumento)
+                    @Html.DropDownListFor(x => x.IdTipoDocumento, new SelectList(ViewBag.TiposDocumentos, "IdTipoDocumento", "Descripcion"), new { @class = "form-control" })
+                    <span class="text-danger"> @Html.ValidationMessageFor(x => x.IdTipoDocumento)</span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.NumeroDocumento)
+                    @Html.TextBoxFor(x => x.NumeroDocumento, new { @class = "form-control", @maxlength = "8" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.NumeroDocumento)</span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.CantidadEntradas)
+                    @Html.TextBoxFor(x => x.CantidadEntradas, new { @class = "form-control", @maxlength = "4" })
+                    <span class="text-danger">@Html.ValidationMessageFor(x => x.CantidadEntradas)</span>
+                </div>
+                <button type="submit" class="btn btn-success">Confirmar Reserva</button>
+            </div>
+        </div>
     </div>
 
-    <div class="form-group">
-        @Html.Label("Version")
-        @Html.Hidden("IdVersion", Model.IdVersion)
-        <input type="text" name="Version" value="@Model.Versiones.Nombre" class="form-control" readonly="readonly" />
 
-    </div>
 
-    <div class="form-group">
-        @Html.Label("Sede")
-        @Html.Hidden("IdSede", Model.IdSede)
-        <input type="text" name="Sede" value="@Model.Sedes.Nombre" class="form-control" readonly="readonly" />
 
-    </div>
+    @*<div class="form-group">
+            @Html.Label("Pelicula")
+            @Html.Hidden("IdPelicula", Model.IdPelicula)
+            <input type="text" name="Pelicula" value="@Model.Peliculas.Nombre" class="form-control" readonly="readonly" />
 
-    <div class="form-group">
-        @Html.Label("Dia")
-        <input type="text" name="Dia" value="@ViewBag.Dia" class="form-control" readonly="readonly" />
+        </div>
 
-    </div>
+        <div class="form-group">
+            @Html.Label("Version")
+            @Html.Hidden("IdVersion", Model.IdVersion)
+            <input type="text" name="Version" value="@Model.Versiones.Nombre" class="form-control" readonly="readonly" />
 
-    <div class="form-group">
-        @Html.Label("Horario")
-        <input type="text" name="Horario" value="@ViewBag.Horario" class="form-control" readonly="readonly" />
-    </div>
+        </div>
 
-    <div class="form-group">
-        @Html.Label("Descripcion")
-        <input type="text" name="Descripcion" value="@Model.Peliculas.Descripcion" class="form-control" readonly="readonly" />
-    </div>
+        <div class="form-group">
+            @Html.Label("Sede")
+            @Html.Hidden("IdSede", Model.IdSede)
+            <input type="text" name="Sede" value="@Model.Sedes.Nombre" class="form-control" readonly="readonly" />
 
-    <div class="form-group">
-        @Html.Label("Genero")
-        <input type="text" name="Genero" value="@Model.Peliculas.Generos.Nombre" class="form-control" readonly="readonly" />
-    </div>
+        </div>
 
-    <div class="form-group">
-        @Html.Label("Clasificacion")
-        <input type="text" name="Clasificacion" value="@Model.Peliculas.Calificaciones.Nombre" class="form-control" readonly="readonly" />
-    </div>
+        <div class="form-group">
+            @Html.Label("Dia")
+            <input type="text" name="Dia" value="@ViewBag.Dia" class="form-control" readonly="readonly" />
 
-    <div class="form-group">
-        @Html.Label("Precio")
-        <input type="text" name="Precio" value="@Model.Sedes.PrecioGeneral" class="form-control" readonly="readonly" />
-    </div>
+        </div>
 
-    <div class="form-group">
-        @Html.Label("Email")
-        <input type="text" name="Email" class="form-control"  />
-    </div>
+        <div class="form-group">
+            @Html.Label("Horario")
+            <input type="text" name="Horario" value="@ViewBag.Horario" class="form-control" readonly="readonly" />
+        </div>
 
-    <div class="form-group">
-        @Html.Label("Tipo De Documento")
-        <input type="text" name="TipoDocumento" class="form-control" />
-    </div>
+        <div class="form-group">
+            @Html.Label("Descripcion")
+            <input type="text" name="Descripcion" value="@Model.Peliculas.Descripcion" class="form-control" readonly="readonly" />
+        </div>
 
-    <div class="form-group">
-        @Html.Label("Numero De Documento")
-        <input type="text" name="NumeroDocumento" class="form-control" />
-    </div>
+        <div class="form-group">
+            @Html.Label("Genero")
+            <input type="text" name="Genero" value="@Model.Peliculas.Generos.Nombre" class="form-control" readonly="readonly" />
+        </div>
 
-    <div class="form-group">
-        @Html.Label("Cantidad De Entradas")
-        <input type="text" name="CantidadEntradas" class="form-control" />
-    </div>
+        <div class="form-group">
+            @Html.Label("Clasificacion")
+            <input type="text" name="Clasificacion" value="@Model.Peliculas.Calificaciones.Nombre" class="form-control" readonly="readonly" />
+        </div>
 
-    <button type="submit" class="btn btn-default">Enviar</button>
+        <div class="form-group">
+            @Html.Label("Precio")
+            <input type="text" name="Precio" value="@Model.Sedes.PrecioGeneral" class="form-control" readonly="readonly" />
+        </div>*@
+
+
+
+
 }

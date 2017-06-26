@@ -218,6 +218,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AdministracionServicio.cs" />
+    <Compile Include="Models\CarteleraReserva.cs" />
     <Compile Include="Models\HomeServicios.cs" />
     <Compile Include="Models\Reporte.cs" />
     <Compile Include="Models\Validadores\ValidaHoraInicio.cs" />
