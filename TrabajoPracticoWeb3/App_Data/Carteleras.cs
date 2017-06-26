@@ -29,6 +29,7 @@ namespace TrabajoPracticoWeb3.App_Data
         [DisplayName("Hora Inicio")]
         [Required(ErrorMessage = "Se requiere Hora inicio")]
         [RegularExpression(@"^[0-9]{4,4}$", ErrorMessage = "Hora de inicio debe ser numérico y contener 4 caracteres")]
+        [ValidaHoraInicio("HoraInicio")]
         public int HoraInicio { get; set; }
 
         [DisplayName("Fecha Inicio")]

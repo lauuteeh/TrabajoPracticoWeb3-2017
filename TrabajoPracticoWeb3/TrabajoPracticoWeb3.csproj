@@ -219,6 +219,7 @@
     <Compile Include="Models\AdministracionServicio.cs" />
     <Compile Include="Models\HomeServicios.cs" />
     <Compile Include="Models\Reporte.cs" />
+    <Compile Include="Models\Validadores\ValidaHoraInicio.cs" />
     <Compile Include="Models\Validadores\ValidaRangoFechaInicioFin.cs" />
     <Compile Include="Models\Validadores\MinimoUnCampoRequerido.cs" />
     <Compile Include="Models\PeliculaServicio.cs" />
