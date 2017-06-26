@@ -68,7 +68,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(x => x.CantidadEntradas)
-                    @Html.TextBoxFor(x => x.CantidadEntradas, new { @class = "form-control", @maxlength = "4" })
+                    @Html.TextBoxFor(x => x.CantidadEntradas, new { @class = "form-control", @maxlength = "4", Value = "" })
                     <span class="text-danger">@Html.ValidationMessageFor(x => x.CantidadEntradas)</span>
                 </div>
                 <button type="submit" class="btn btn-success">Confirmar Reserva</button>

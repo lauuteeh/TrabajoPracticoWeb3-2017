@@ -38,7 +38,7 @@ namespace TrabajoPracticoWeb3.Models
         public string NumeroDocumento { get; set; }
 
         [DisplayName("Cantidad de Entradas")]
-        [RegularExpression(@"^[0-9]{1,4}$", ErrorMessage = "Hora de inicio debe ser numérico y contener 4 caracteres")]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Cantidad debe ser mayor que 0")]
         [Required(ErrorMessage = "Se requiere cantidad de entradas")]
         public int CantidadEntradas { get; set; }   
                       
