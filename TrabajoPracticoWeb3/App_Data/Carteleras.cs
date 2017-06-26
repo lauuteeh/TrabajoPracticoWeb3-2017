@@ -21,9 +21,11 @@ namespace TrabajoPracticoWeb3.App_Data
         public int IdCartelera { get; set; }
 
         [DisplayName("Sede")]
+        [Required(ErrorMessage = "Se requiere una sede")]
         public int IdSede { get; set; }
-
+        
         [DisplayName("Película")]
+        [Required(ErrorMessage = "Se requiere una película")]
         public int IdPelicula { get; set; }
 
         [DisplayName("Hora Inicio")]

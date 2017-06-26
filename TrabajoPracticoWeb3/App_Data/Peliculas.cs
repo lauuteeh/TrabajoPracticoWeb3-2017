@@ -11,6 +11,7 @@ namespace TrabajoPracticoWeb3.App_Data
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class Peliculas
@@ -29,12 +30,15 @@ namespace TrabajoPracticoWeb3.App_Data
         public string Descripcion { get; set; }
 
         public string Imagen { get; set; }
+        [DisplayName("Calificación")]
         [Required(ErrorMessage = "¡Por favor, Seleccionar una calificacion!")]
         public int IdCalificacion { get; set; }
+        [DisplayName("Genero")]
         [Required(ErrorMessage = "¡Por favor, Seleccionar un genero!")]
         public int IdGenero { get; set; }
         [Required(ErrorMessage = "¡Por favor, ingresar la duración!")]
         [Range(1, 90, ErrorMessage = "El rango de duración es de 1 a 90 minutos")]
+        [DisplayName("Duración")]
         public int Duracion { get; set; }
         public System.DateTime FechaCarga { get; set; }
 

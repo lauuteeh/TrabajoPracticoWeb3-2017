@@ -104,6 +104,9 @@ namespace TrabajoPracticoWeb3.Controllers
                                                    Path.GetFileName(file.FileName));
                         file.SaveAs(path);
                         pelicula.Imagen = Path.GetFileName(file.FileName);
+                        ctx.SaveChanges();//persisto los datos en la bdd
+                        var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
+                        return View("Peliculas", a);
                     }
                     catch (Exception ex)
                     {
@@ -113,10 +116,6 @@ namespace TrabajoPracticoWeb3.Controllers
                 {
                     ViewBag.Message = "No especificó una imagen";
                 }
-
-                ctx.SaveChanges();//persisto los datos en la bdd
-                var a = (ctx.Peliculas).ToList();//Cargo el modelo para Peliculas
-                return View("Peliculas", a);
             }
             var e = (ctx.Generos).ToList();
             ViewBag.Generos = e;
@@ -303,6 +302,17 @@ namespace TrabajoPracticoWeb3.Controllers
                 ViewBag.Sedes = sede;
                 ViewBag.Peli = peli;
                 ViewBag.Version = version;
+                                
+                if (cartelera.IdSede == 0)
+                {
+                    ViewBag.Mensaje = "Debe ingresar una sede";
+                    return View();
+                }
+                if (cartelera.IdPelicula == 0)
+                {
+                    ViewBag.Mensaje = "Debe ingresar una película";
+                    return View();
+                }
 
                 if (AdministracionServicio.ValidaCartelera(cartelera))
                 {

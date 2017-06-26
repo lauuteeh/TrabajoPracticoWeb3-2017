@@ -50,7 +50,7 @@ namespace TrabajoPracticoWeb3.Models
                      x.IdCartelera != cartelera.IdCartelera
                      );
             if (cartelerasPorFechas.Count() == 0)
-                return true;          
+                return true;
 
             //Comprobamos sedes en cartelera
             var sedes = cartelerasPorFechas.Where(x => x.IdSede == cartelera.IdSede);

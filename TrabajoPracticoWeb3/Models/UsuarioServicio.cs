@@ -28,26 +28,13 @@ namespace TrabajoPracticoWeb3.Models
             FormsAuthentication.SignOut();
         }
 
-        public static int ObtenerUsuario()
-        {
-            int user_id = 0;
-            if (HttpContext.Current.User != null && HttpContext.Current.User.Identity is FormsIdentity)
-            {
-                FormsAuthenticationTicket ticket = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket;
-                if (ticket != null)
-                {
-                    user_id = Convert.ToInt32(ticket.UserData);
-                }
-            }
-            return user_id;
-        }
         public static void AgregarUsuarioASesion(string id)
         {
             bool persist = true;
             var cookie = FormsAuthentication.GetAuthCookie("usuario", persist);
 
             cookie.Name = FormsAuthentication.FormsCookieName;
-            cookie.Expires = DateTime.Now.AddMonths(3);
+            cookie.Expires = DateTime.Now.AddMonths(3); //Expira en 3 meses
 
             var ticket = FormsAuthentication.Decrypt(cookie.Value);
             var newTicket = new FormsAuthenticationTicket(ticket.Version, ticket.Name, ticket.IssueDate, ticket.Expiration, ticket.IsPersistent, id);

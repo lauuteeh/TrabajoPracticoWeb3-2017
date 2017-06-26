@@ -11,6 +11,7 @@ namespace TrabajoPracticoWeb3.App_Data
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class Sedes
@@ -28,8 +29,10 @@ namespace TrabajoPracticoWeb3.App_Data
         public string Nombre { get; set; }
         [StringLength(40, MinimumLength = 2, ErrorMessage = "El minimo es 2 caracteres")]
         [Required(ErrorMessage = "¡Se necesita una dirección!")]
+        [DisplayName("Dirección")]
         public string Direccion { get; set; }
         [Required(ErrorMessage = "¡Se necesita un precio general!")]
+        [DisplayName("Precio General")]
         public decimal PrecioGeneral { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
