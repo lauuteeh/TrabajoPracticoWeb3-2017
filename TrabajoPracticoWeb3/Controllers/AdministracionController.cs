@@ -422,8 +422,9 @@ namespace TrabajoPracticoWeb3.Controllers
             if (ModelState.IsValid)
             {
                 int IdPelicula;
+                
                 Int32.TryParse(Request["Pelicula"], out IdPelicula);
-                var a = ctx.Reservas.Where(x => x.IdPelicula == IdPelicula && x.FechaCarga >= reporte.FechaInicio && x.FechaCarga <= reporte.FechaInicio);
+                var a = ctx.Reservas.Where(x => x.IdPelicula == IdPelicula && x.FechaCarga >= reporte.FechaInicio && x.FechaCarga <= reporte.FechaFin);
 
                 return View(a);
             }
