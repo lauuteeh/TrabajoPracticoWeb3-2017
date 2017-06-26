@@ -23,12 +23,13 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.HoraInicio)
-        @Html.TextBoxFor(x => x.HoraInicio, new { @class = "form-control", @maxlength = "6" })
+        <span class="label label-info">@Html.Label("Formato hora: 1600 (Representa 16:00hs)")</span>
+        @Html.TextBoxFor(x => x.HoraInicio, new { @class = "form-control", @maxlength = "4" })
         <span class="text-danger">@Html.ValidationMessageFor(x => x.HoraInicio)</span>
     </div>
     <div class="form-group">
         <label for="Descripcion">Días:</label>
-        <br /> 
+        <br />
         @Html.LabelFor(x => x.Lunes)
         @Html.CheckBoxFor(x => x.Lunes)
         @Html.LabelFor(x => x.Martes)
@@ -49,17 +50,17 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.FechaInicio)
-        @Html.TextBoxFor(x => x.FechaInicio, new { @class = "form-control", type = "date" })
+        @Html.TextBoxFor(x => x.FechaInicio, new { @class = "form-control", @maxlength = "10" })
         <span class="text-danger">@Html.ValidationMessageFor(x => x.FechaInicio)</span>
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.FechaFin)
-        @Html.TextBoxFor(x => x.FechaFin, new { @class = "form-control", type = "date" })
+        @Html.TextBoxFor(x => x.FechaFin, new { @class = "form-control", @maxlength = "10" })
         <span class="text-danger"> @Html.ValidationMessageFor(x => x.FechaFin)</span>
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.NumeroSala)
-        @Html.TextBoxFor(x => x.NumeroSala, new { type = "number", @class = "form-control" })
+        @Html.TextBoxFor(x => x.NumeroSala, new { @class = "form-control", @maxlength = "4" })
         <span class="text-danger">@Html.ValidationMessageFor(x => x.NumeroSala)</span>
     </div>
     <div class="form-group">

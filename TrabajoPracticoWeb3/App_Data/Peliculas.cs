@@ -34,6 +34,7 @@ namespace TrabajoPracticoWeb3.App_Data
         [Required(ErrorMessage = "¡Por favor, Seleccionar un genero!")]
         public int IdGenero { get; set; }
         [Required(ErrorMessage = "¡Por favor, ingresar la duración!")]
+        [Range(1, 90, ErrorMessage = "El rango de duración es de 1 a 90 minutos")]
         public int Duracion { get; set; }
         public System.DateTime FechaCarga { get; set; }
 
