@@ -302,7 +302,7 @@ namespace TrabajoPracticoWeb3.Controllers
                 ViewBag.Sedes = sede;
                 ViewBag.Peli = peli;
                 ViewBag.Version = version;
-                                
+
                 if (cartelera.IdSede == 0)
                 {
                     ViewBag.Mensaje = "Debe ingresar una sede";
@@ -445,17 +445,23 @@ namespace TrabajoPracticoWeb3.Controllers
         {
             myContext ctx = new myContext();
             if (ModelState.IsValid)
-
-            { 
-                 int IdPelicula;
-                 Int32.TryParse(Request["Pelicula"], out IdPelicula);
-                 var a = ctx.Reservas.Where(x => x.IdPelicula == IdPelicula && x.FechaCarga >= reporte.FechaInicio && x.FechaCarga <= reporte.FechaInicio);
+            {
+                int IdPelicula;
+                Int32.TryParse(Request["Pelicula"], out IdPelicula);
+                var a = ctx.Reservas.Where(x => x.IdPelicula == IdPelicula && x.FechaCarga >= reporte.FechaInicio && x.FechaCarga <= reporte.FechaInicio);
 
                 return View(a);
-
             }
+            IEnumerable<SelectListItem> ReportesItems = ctx.Peliculas.AsEnumerable().Select(c => new SelectListItem()
+            {
+                Text = c.Nombre,
+                Value = c.IdPelicula.ToString(),
+                Selected = true,
+            });
 
-            return View();
+            SelectList Peliculas = new SelectList(ReportesItems, "Value", "Text");
+            ViewData["Pelicula"] = Peliculas;
+            return View("Reportes");
         }
 
 
@@ -463,7 +469,7 @@ namespace TrabajoPracticoWeb3.Controllers
         //public ActionResult GenerarReporteReservas(DateTime desde, DateTime hasta)
         //{
         //    myContext ctx = new myContext();
-          
+
         //        var listReservas = (from r in ctx.Reservas
         //                            join s in ctx.Sedes on
         //                            r.IdSede equals s.IdSede
@@ -477,7 +483,7 @@ namespace TrabajoPracticoWeb3.Controllers
         //                      ).ToList();
 
         //        return View(listReservas);
-            
+
 
 
         //}
