@@ -429,42 +429,48 @@ namespace TrabajoPracticoWeb3.Controllers
             return View();
         }
 
+
+        [HttpPost]
         public ActionResult ListaReportes(Reporte reporte)
         {
             myContext ctx = new myContext();
+            if (ModelState.IsValid)
 
-            int IdPelicula;
+            { 
+                 int IdPelicula;
+                 Int32.TryParse(Request["Pelicula"], out IdPelicula);
+                 var a = ctx.Reservas.Where(x => x.IdPelicula == IdPelicula && x.FechaCarga >= reporte.FechaInicio && x.FechaCarga <= reporte.FechaInicio);
 
-            Int32.TryParse(Request["Pelicula"], out IdPelicula);
+                return View(a);
 
-            var a = ctx.Reservas.Where(x => x.IdPelicula == IdPelicula && x.FechaCarga >= reporte.FechaInicio && x.FechaCarga <= reporte.FechaInicio);
+            }
 
-            return View(a);
+            return View();
         }
 
 
-        
-        public ActionResult GenerarReporteReservas(DateTime desde, DateTime hasta)
-        {
-            myContext ctx = new myContext();
+
+        //public ActionResult GenerarReporteReservas(DateTime desde, DateTime hasta)
+        //{
+        //    myContext ctx = new myContext();
+          
+        //        var listReservas = (from r in ctx.Reservas
+        //                            join s in ctx.Sedes on
+        //                            r.IdSede equals s.IdSede
+        //                            join v in ctx.Versiones on
+        //                            r.IdVersion equals v.IdVersion
+        //                            join p in ctx.Peliculas on
+        //                            r.IdPelicula equals p.IdPelicula
+        //                            where r.FechaHoraInicio > desde && r.FechaHoraInicio < hasta
+
+        //                            select new { sedeNombre = s.Nombre, versionNombre = v.Nombre, peliculaNombre = p.Nombre, s.PrecioGeneral }
+        //                      ).ToList();
+
+        //        return View(listReservas);
             
-            
-                                var listReservas = (from r in ctx.Reservas
-                                                    join s in ctx.Sedes on
-                                                    r.IdSede equals s.IdSede
-                                                    join v in ctx.Versiones on
-                                                    r.IdVersion equals v.IdVersion
-                                                    join p in ctx.Peliculas on
-                                                    r.IdPelicula equals p.IdPelicula
-                                                    where r.FechaHoraInicio > desde && r.FechaHoraInicio < hasta
-
-                                select new { sedeNombre = s.Nombre, versionNombre = v.Nombre, peliculaNombre = p.Nombre, s.PrecioGeneral }
-                              ).ToList();
-
-            return View (listReservas);
 
 
-        }
+        //}
 
         public ActionResult Logout()
         {
