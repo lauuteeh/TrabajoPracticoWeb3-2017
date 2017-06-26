@@ -24,6 +24,8 @@ namespace TrabajoPracticoWeb3.Models
         public System.DateTime FechaHoraInicio { get; set; }
 
         [Required(ErrorMessage = "Se requiere Email")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
 
         [DisplayName("Tipo de Documento")]
