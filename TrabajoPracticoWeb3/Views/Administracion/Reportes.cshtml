@@ -13,13 +13,13 @@
 {
     <div class="form-group">
         @Html.LabelFor(x => x.FechaInicio)
-        @Html.TextBoxFor(x => x.FechaInicio, new { @class = "form-control", type = "date"/*@maxlength = "50"*/})
-        @Html.ValidationMessageFor(x => x.FechaInicio)
+        @Html.TextBoxFor(x => x.FechaInicio, new { @class = "form-control", maxlength = "10"})
+        <span class="text-danger">@Html.ValidationMessageFor(x => x.FechaInicio)</span>
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.FechaFin)
-        @Html.TextBoxFor(x => x.FechaFin, new { @class = "form-control", type = "date" /*@maxlength = "50"*/ })
-        @Html.ValidationMessageFor(x => x.FechaFin)
+        @Html.TextBoxFor(x => x.FechaFin, new { @class = "form-control", maxlength = "10" })
+        <span class="text-danger"> @Html.ValidationMessageFor(x => x.FechaFin)</span>
     </div>
 
     @Html.Label("Pelicula", new { @class = "margin-dp" })

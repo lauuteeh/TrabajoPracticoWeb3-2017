@@ -11,10 +11,20 @@ namespace TrabajoPracticoWeb3.Models
     public class Reporte
     {
 
-        
-        [Required(ErrorMessage = "Se requiere Fecha")]
+
+        [DisplayName("Fecha Inicio")]
+        [Required(ErrorMessage = "Se requiere Fecha inicio")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime FechaInicio { get; set; }
-        [Required(ErrorMessage = "Se requiere Fecha")]
+
+
+
+        [DisplayName("Fecha Fin")]
+        [Required(ErrorMessage = "Se requiere Fecha fin")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [ValidaRangoFechaInicioFin("FechaInicio", "FechaFin")]
         public DateTime FechaFin { get; set; }
 
     }
