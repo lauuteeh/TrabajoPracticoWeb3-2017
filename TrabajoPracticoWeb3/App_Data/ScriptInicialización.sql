@@ -15,4 +15,7 @@ Insert into Usuarios(NombreUsuario,Password) values ('admin','123');
 
 Insert into TiposDocumentos(Descripcion) values ('DNI');
 
+Insert into Versiones(Nombre) values ('ESP');
+Insert into Versiones(Nombre) values ('SUB');
+
 
