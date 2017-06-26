@@ -23,7 +23,7 @@
     </div>
 
     @Html.Label("Pelicula", new { @class = "margin-dp" })
-    @Html.DropDownList("Pelicula", ViewData["Pelicula"] as List<SelectListItem>, "Por Favor, seleccione una Pelicula", new { @class = "margin-dp form-control" })
+    @Html.DropDownList("Pelicula", ViewData["Pelicula"] as List<SelectListItem>, new {  @class = "margin-dp form-control" })
 
     <button type="submit" class="margin-dp btn btn-success">Continuar</button>
 

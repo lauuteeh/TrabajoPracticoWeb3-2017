@@ -39,6 +39,20 @@ namespace TrabajoPracticoWeb3.Models
             return new SelectList(calificaciones, "Value", "Text"); ;
         }
 
+        public static SelectList GetMovies()
+        {
+            ctx = new myContext();
+            var c = (ctx.Peliculas).ToList();
+            var peliculas = c.Select(x => new SelectListItem
+                                {
+                                    Text = x.Nombre,
+                                    Value = x.IdPelicula.ToString(),
+                                    Selected = true,
+                                });
+            
+            return new SelectList(peliculas, "Value", "Text"); ;
+        }
+
         public static bool ValidaCartelera(Carteleras cartelera)
         {
             ctx = new myContext();

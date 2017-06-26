@@ -28,10 +28,15 @@ namespace TrabajoPracticoWeb3.Models
             var fieldValueFechaInicio = propertyFechaInicio.GetValue(validationContext.ObjectInstance, null);
             var fieldValueFechaFin = propertyFechaFin.GetValue(validationContext.ObjectInstance, null);
 
-            if ((DateTime)fieldValueFechaInicio <= (DateTime)fieldValueFechaFin)
-                return null;
-            else
+            if ((DateTime)fieldValueFechaInicio <= (DateTime)fieldValueFechaFin) { 
+                if (((DateTime)fieldValueFechaFin - (DateTime)fieldValueFechaInicio).TotalDays <= 30)
+                    return null;
+                else
+                    return new ValidationResult("El rango de fechas no debe ser mayor a 30 dias");
+            }
+            else { 
                 return new ValidationResult("Fecha Inicio debe ser menor o igual a fecha fin");
+            }
         }
 
     }
