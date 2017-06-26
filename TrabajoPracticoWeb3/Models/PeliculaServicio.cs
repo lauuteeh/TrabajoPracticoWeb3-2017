@@ -82,49 +82,49 @@ namespace TrabajoPracticoWeb3.Models
             var query = ctx.Carteleras.Where(x => x.IdPelicula == IdPeliculaConvertido && x.IdVersion == IdVersionConvertido && x.IdSede == IdSedeConvertido && x.Lunes == true && x.FechaFin >= todaysDate && x.FechaInicio < todaysDate).Select(x => x.IdCartelera).ToList();
             if (query.Count() > 0)
             {
-                DiasItems.Add(new SelectListItem { Text = "Lunes", Value = "1" });
+                DiasItems.Add(new SelectListItem { Text = "Lunes", Value = "Lunes" });
 
             }
 
             var query2 = ctx.Carteleras.Where(x => x.IdPelicula == IdPeliculaConvertido && x.IdVersion == IdVersionConvertido && x.IdSede == IdSedeConvertido && x.Martes == true && x.FechaFin >= todaysDate && x.FechaInicio < todaysDate).Select(x => x.IdCartelera).ToList();
             if (query2.Count() > 0)
             {
-                DiasItems.Add(new SelectListItem { Text = "Martes", Value = "2" });
+                DiasItems.Add(new SelectListItem { Text = "Martes", Value = "Martes" });
 
             }
 
             var query3 = ctx.Carteleras.Where(x => x.IdPelicula == IdPeliculaConvertido && x.IdVersion == IdVersionConvertido && x.IdSede == IdSedeConvertido && x.Miercoles == true && x.FechaFin >= todaysDate && x.FechaInicio < todaysDate).Select(x => x.IdCartelera).ToList();
             if (query3.Count() > 0)
             {
-                DiasItems.Add(new SelectListItem { Text = "Miercoles", Value = "3" });
+                DiasItems.Add(new SelectListItem { Text = "Miercoles", Value = "Miercoles" });
 
             }
 
             var query4 = ctx.Carteleras.Where(x => x.IdPelicula == IdPeliculaConvertido && x.IdVersion == IdVersionConvertido && x.IdSede == IdSedeConvertido && x.Jueves == true && x.FechaFin >= todaysDate && x.FechaInicio < todaysDate).Select(x => x.IdCartelera).ToList();
             if (query4.Count() > 0)
             {
-                DiasItems.Add(new SelectListItem { Text = "Jueves", Value = "4" });
+                DiasItems.Add(new SelectListItem { Text = "Jueves", Value = "Jueves" });
 
             }
 
             var query5 = ctx.Carteleras.Where(x => x.IdPelicula == IdPeliculaConvertido && x.IdVersion == IdVersionConvertido && x.IdSede == IdSedeConvertido && x.Viernes == true && x.FechaFin >= todaysDate && x.FechaInicio < todaysDate).Select(x => x.IdCartelera).ToList();
             if (query5.Count() > 0)
             {
-                DiasItems.Add(new SelectListItem { Text = "Viernes", Value = "5" });
+                DiasItems.Add(new SelectListItem { Text = "Viernes", Value = "Viernes" });
 
             }
 
             var query6 = ctx.Carteleras.Where(x => x.IdPelicula == IdPeliculaConvertido && x.IdVersion == IdVersionConvertido && x.IdSede == IdSedeConvertido && x.Sabado == true && x.FechaFin >= todaysDate && x.FechaInicio < todaysDate).Select(x => x.IdCartelera).ToList();
             if (query6.Count() > 0)
             {
-                DiasItems.Add(new SelectListItem { Text = "Sabado", Value = "6" });
+                DiasItems.Add(new SelectListItem { Text = "Sabado", Value = "Sabado" });
 
             }
 
             var query7 = ctx.Carteleras.Where(x => x.IdPelicula == IdPeliculaConvertido && x.IdVersion == IdVersionConvertido && x.IdSede == IdSedeConvertido && x.Domingo == true && x.FechaFin >= todaysDate && x.FechaInicio < todaysDate).Select(x => x.IdCartelera).ToList();
             if (query7.Count() > 0)
             {
-                DiasItems.Add(new SelectListItem { Text = "Domingo", Value = "7" });
+                DiasItems.Add(new SelectListItem { Text = "Domingo", Value = "Domingo" });
 
             }
 
@@ -189,7 +189,7 @@ namespace TrabajoPracticoWeb3.Models
 
 
                 string BaseString = Base.ToString("hh':'mm");
-                HorarioItems.Add(new SelectListItem { Text = BaseString, Value = i.ToString() });
+                HorarioItems.Add(new SelectListItem { Text = BaseString, Value = BaseString });
 
                 Base = Base + Intervalo;
 
