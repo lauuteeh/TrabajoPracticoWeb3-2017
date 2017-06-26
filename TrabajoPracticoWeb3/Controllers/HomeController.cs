@@ -35,12 +35,7 @@ namespace TrabajoPracticoWeb3.Controllers
         {
             var a = HomeServicios.CarteleraProximamente();
             return View(a);
-        }
-
-        public ActionResult Ubicacion()
-        {
-            return View();
-        }
+        }      
 
         public ActionResult Login()
         {

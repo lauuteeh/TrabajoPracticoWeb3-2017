@@ -15,7 +15,6 @@ namespace TrabajoPracticoWeb3.Controllers
     [Autenticado]
     public class AdministracionController : Controller
     {
-
         // Si no estamos logeado, regresamos al login
         public class AutenticadoAttribute : ActionFilterAttribute
         {
@@ -39,7 +38,6 @@ namespace TrabajoPracticoWeb3.Controllers
                 }
             }
         }
-
         // Si estamos logeado ya no podemos acceder a la página de Login
         public class NoLoginAttribute : ActionFilterAttribute
         {
@@ -56,11 +54,6 @@ namespace TrabajoPracticoWeb3.Controllers
                     }));
                 }
             }
-        }
-
-        public AdministracionController()
-        {
-            //crear aca el contexto
         }
 
         // GET: Administracion
@@ -162,12 +155,7 @@ namespace TrabajoPracticoWeb3.Controllers
                 {
                     if (peli2.Imagen != Request.Form["Imagen"] && Request.Form["Imagen"] != "" && Request.Form["Imagen"] != null)
                     {
-                        //string path = Path.Combine(Server.MapPath("~/Images"),
-                        //          Path.GetFileName(Request.Form["Imagen"]));
-                        //file.SaveAs(path);
-                        //peli.Imagen = Path.GetFileName(Request.Form["Imagen"]);
                         peli2.Imagen = Request.Form["Imagen"];
-
                     }
                 }
                 peli2.Nombre = peli.Nombre;
@@ -284,18 +272,6 @@ namespace TrabajoPracticoWeb3.Controllers
             {
                 ViewBag.Mensaje = "";
                 cartelera.FechaCarga = DateTime.Now;
-                //var dias = Request.Form["chk_group[]"];
-                //foreach (var dia in dias)
-                //{
-                //    if (dia == '1') { cartelera.Lunes = true; }
-                //    if (dia == '2') { cartelera.Martes = true; }
-                //    if (dia == '3') { cartelera.Miercoles = true; }
-                //    if (dia == '4') { cartelera.Jueves = true; }
-                //    if (dia == '5') { cartelera.Viernes = true; }
-                //    if (dia == '6') { cartelera.Sabado = true; }
-                //    if (dia == '7') { cartelera.Domingo = true; }
-                //}
-
                 var sede = (ctx.Sedes).ToList();
                 var peli = (ctx.Peliculas).ToList();
                 var version = (ctx.Versiones).ToList();
@@ -318,7 +294,6 @@ namespace TrabajoPracticoWeb3.Controllers
                 {
                     ctx.Carteleras.Add(cartelera);
                     ctx.SaveChanges();
-                    //Preparo lo necesario para devolver la vista Carteleras
 
                     var a = (ctx.Carteleras).ToList();
                     return View("Carteleras", a);

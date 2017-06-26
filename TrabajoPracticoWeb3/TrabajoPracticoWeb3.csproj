@@ -97,6 +97,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ScriptInicialización.sql" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\HomeCss.css" />
@@ -248,7 +249,6 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -266,16 +266,13 @@
     <Content Include="Views\Administracion\ListaReportes.cshtml" />
     <Content Include="Views\Peliculas\Reserva.cshtml" />
     <Content Include="Views\Peliculas\FinalizarReserva.cshtml" />
-    <Content Include="Views\Peliculas\ConfirmarReserva.cshtml" />
     <Content Include="Views\Shared\_LHome.cshtml" />
     <Content Include="Views\Home\Cartelera.cshtml" />
     <Content Include="Views\Home\Proximamente.cshtml" />
-    <Content Include="Views\Home\Ubicacion.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Administracion\editarPelicula.cshtml" />
     <Content Include="Views\Administracion\editarSede.cshtml" />
-    <Content Include="Views\Administracion\ListadoReporteReservas.cshtml" />
     <Content Include="Views\Administracion\EditarCartelera.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
