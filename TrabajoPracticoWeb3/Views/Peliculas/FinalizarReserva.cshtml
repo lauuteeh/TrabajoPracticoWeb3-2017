@@ -7,15 +7,6 @@
 
 <h2>Finalizar Reserva</h2>
 
-@*@ViewBag.Horario
-    @ViewBag.Dia
-
-    @Model.Peliculas.Nombre
-    @Model.Peliculas.Descripcion
-    @Model.Peliculas.Generos.Nombre
-    @Model.Peliculas.Calificaciones.Nombre
-    @Model.Sedes.PrecioGeneral*@
-
 @using (Html.BeginForm("ConfirmarReserva", "Peliculas", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.Hidden("IdPelicula", Model.IdPelicula)
@@ -26,7 +17,6 @@
 
     <div class="movie">
         <h2 class="page-heading">@Model.Peliculas.Nombre</h2>
-
         <div class="movie__info">
             <div class="col-sm-4 col-md-4 movie-mobile">
                 <div class="movie__images">
@@ -74,62 +64,8 @@
         </div>
     </div>
 
-
-
-
-    @*<div class="form-group">
-            @Html.Label("Pelicula")
-            @Html.Hidden("IdPelicula", Model.IdPelicula)
-            <input type="text" name="Pelicula" value="@Model.Peliculas.Nombre" class="form-control" readonly="readonly" />
-
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Version")
-            @Html.Hidden("IdVersion", Model.IdVersion)
-            <input type="text" name="Version" value="@Model.Versiones.Nombre" class="form-control" readonly="readonly" />
-
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Sede")
-            @Html.Hidden("IdSede", Model.IdSede)
-            <input type="text" name="Sede" value="@Model.Sedes.Nombre" class="form-control" readonly="readonly" />
-
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Dia")
-            <input type="text" name="Dia" value="@ViewBag.Dia" class="form-control" readonly="readonly" />
-
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Horario")
-            <input type="text" name="Horario" value="@ViewBag.Horario" class="form-control" readonly="readonly" />
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Descripcion")
-            <input type="text" name="Descripcion" value="@Model.Peliculas.Descripcion" class="form-control" readonly="readonly" />
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Genero")
-            <input type="text" name="Genero" value="@Model.Peliculas.Generos.Nombre" class="form-control" readonly="readonly" />
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Clasificacion")
-            <input type="text" name="Clasificacion" value="@Model.Peliculas.Calificaciones.Nombre" class="form-control" readonly="readonly" />
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Precio")
-            <input type="text" name="Precio" value="@Model.Sedes.PrecioGeneral" class="form-control" readonly="readonly" />
-        </div>*@
-
-
-
-
+    <br />
+    <div>
+        <span class="text-center label label-info">La reserva estará vigente hasta 1hr antes de la función elegida y deberá ser confirmada en el cine seleccionado.</span>
+    </div>
 }

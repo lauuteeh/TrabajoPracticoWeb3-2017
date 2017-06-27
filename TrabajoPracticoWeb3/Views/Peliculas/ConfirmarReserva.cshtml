@@ -3,6 +3,16 @@
     ViewBag.Title = "ConfirmarReserva";
     Layout = "~/Views/Shared/_LHome.cshtml";
 }
+@model  TrabajoPracticoWeb3.Models.CarteleraReserva
 
-<h2>Su reserva se ha realizado con éxito!!! Muchas gracias!</h2>
+<ul>
+    <li><h3>Código de reserva: @Model.IdReserva</h3></li>
+    <li><h3>Cantidad de entradas:@Model.CantidadEntradas</h3></li>
+    <li><h3>Precio Total: @ViewBag.PrecioTotal</h3></li>
+</ul>
+
+
+
+
+<h4 class="label label-success">Su reserva se ha realizado con éxito!!! Muchas gracias!</h4>
 
