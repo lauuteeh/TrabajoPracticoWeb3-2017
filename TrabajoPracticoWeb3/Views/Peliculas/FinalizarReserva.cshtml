@@ -1,9 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "FinalizarReserva";
-    Layout = "~/Views/Shared/_LHome.cshtml";
-
-    var a = ViewBag.Dia;
+    Layout = "~/Views/Shared/_LHome.cshtml";   
 }
 @model  TrabajoPracticoWeb3.Models.CarteleraReserva
 
@@ -23,7 +21,7 @@
     @Html.Hidden("IdPelicula", Model.IdPelicula)
     @Html.Hidden("IdVersion", Model.IdVersion)
     @Html.Hidden("IdSede", Model.IdSede)
-
+    @Html.Hidden("Dia", Model.Dia)
     @Html.Hidden("Horario", Model.Horario)
 
     <div class="movie">
@@ -40,7 +38,7 @@
                 <p class="movie__option"><strong>Descripcion: </strong>@Model.Peliculas.Descripcion</p>
                 <p class="movie__option"><strong>Sede: </strong>@Model.Sedes.Nombre</p>
                 <p class="movie__option"><strong>Version: </strong>@Model.Versiones.Nombre</p>
-                <p class="movie__option"><strong>Dia: </strong>@ViewBag.Dia</p>
+                <p class="movie__option"><strong>Dia: </strong>@Model.Dia</p>
                 <p class="movie__option"><strong>Horario: </strong>@Model.Horario</p>
                 <p class="movie__option"><strong>Sala: </strong>@Model.NumeroSala</p>
                 <p class="movie__option"><strong>Genero: </strong>@Model.Peliculas.Generos.Nombre</p>

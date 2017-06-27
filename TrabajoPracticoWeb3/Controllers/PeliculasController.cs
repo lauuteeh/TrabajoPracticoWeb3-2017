@@ -55,8 +55,7 @@ namespace TrabajoPracticoWeb3.Controllers
             Int32.TryParse(Request["Version"], out IdVersion);
 
             var a = ctx.Carteleras.Where(x => x.IdPelicula == IdPelicula && x.IdSede == IdSede && x.IdVersion == IdVersion).First();
-            ViewBag.ImagenPelicula = ctx.Peliculas.Where(x => x.IdPelicula == IdPelicula).FirstOrDefault().Imagen;
-            ViewBag.Dia = Request["Dia"];
+            ViewBag.ImagenPelicula = ctx.Peliculas.Where(x => x.IdPelicula == IdPelicula).FirstOrDefault().Imagen;         
             ViewBag.TiposDocumentos = PeliculaServicio.TraeTiposDeDocumentos();
 
             CarteleraReserva cr = new CarteleraReserva();
@@ -68,6 +67,7 @@ namespace TrabajoPracticoWeb3.Controllers
             cr.Sedes = a.Sedes;
             cr.Versiones = a.Versiones;
             cr.Horario = Request["Horario"];
+            cr.Dia = Request["Dia"];
 
             return View(cr);
         }
@@ -107,8 +107,22 @@ namespace TrabajoPracticoWeb3.Controllers
                 ctx.Reservas.Add(reserva);
                 ctx.SaveChanges();
                 return View();
-            }
-            return View("FinalizarReserva");
+            }          
+            
+            var a = ctx.Carteleras.Where(x => x.IdPelicula == cr.IdPelicula && x.IdSede == cr.IdSede && x.IdVersion == cr.IdVersion).First();
+            ViewBag.ImagenPelicula = ctx.Peliculas.Where(x => x.IdPelicula == cr.IdPelicula).FirstOrDefault().Imagen;           
+            ViewBag.TiposDocumentos = PeliculaServicio.TraeTiposDeDocumentos();
+           
+            cr.IdPelicula = a.IdPelicula;
+            cr.IdSede = a.IdSede;
+            cr.NumeroSala = a.NumeroSala;
+            cr.IdVersion = a.IdVersion;
+            cr.Peliculas = a.Peliculas;
+            cr.Sedes = a.Sedes;
+            cr.Versiones = a.Versiones;
+            cr.Horario = cr.Horario;
+            cr.Dia = cr.Dia;
+            return View("FinalizarReserva",cr);
 
         }
 

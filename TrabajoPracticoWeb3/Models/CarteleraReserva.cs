@@ -43,6 +43,7 @@ namespace TrabajoPracticoWeb3.Models
         public int CantidadEntradas { get; set; }   
                       
         public virtual TiposDocumentos TiposDocumentos { get; set; }
+        public string Dia { get; set; }
         public string Horario { get; set; }
 
     }
