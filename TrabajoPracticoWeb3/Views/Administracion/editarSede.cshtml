@@ -24,7 +24,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.PrecioGeneral)
-        @Html.TextBoxFor(model => model.PrecioGeneral, new { @class = "form-control", @maxlength = "18" })
+        @Html.TextBoxFor(model => model.PrecioGeneral, new { @class = "form-control", @maxlength = "16" })
         <span class="text-danger">
             @Html.ValidationMessageFor(model => model.PrecioGeneral)
         </span>

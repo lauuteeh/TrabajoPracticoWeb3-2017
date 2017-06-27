@@ -21,7 +21,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.PrecioGeneral)
-        @Html.TextBoxFor(x => x.PrecioGeneral, new { @class = "form-control" , @maxlength = "18" })
+        @Html.TextBoxFor(x => x.PrecioGeneral, new { @class = "form-control" , @maxlength = "16" })
         <span class="text-danger">@Html.ValidationMessageFor(x => x.PrecioGeneral)</span>
     </div>
     <button type="submit" class="btn btn-default">Enviar</button>
