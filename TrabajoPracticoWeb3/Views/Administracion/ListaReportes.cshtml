@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "ListaReportes";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
 }
 
 @model IEnumerable<TrabajoPracticoWeb3.App_Data.Reservas>
@@ -13,18 +14,24 @@
             <th>Sede</th>
             <th>Versión</th>
             <th>Nombre Película</th>
+            <th>Detalle</th>
             <th>Precio</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var reserva in Model)
         {
+            var totalReserva = reserva.CantidadEntradas * reserva.Sedes.PrecioGeneral;
+            
+
             <tr>
                 <td>@reserva.Sedes.Nombre</td>
                 <td>@reserva.Versiones.Nombre</td>
                 <td>@reserva.Peliculas.Nombre</td>
                 <td>@reserva.CantidadEntradas * @reserva.Sedes.PrecioGeneral</td>
+                <td>$@totalReserva</td>
             </tr>
         }
     </tbody>
 </table>
+<h3>@ViewBag.PrecioTotal</h3>

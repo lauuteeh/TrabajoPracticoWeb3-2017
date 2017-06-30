@@ -380,10 +380,10 @@ namespace TrabajoPracticoWeb3.Controllers
         }
 
 
-        public ActionResult EliminarCartelera()
+        public ActionResult EliminarCartelera(int id)
         {
             myContext ctx = new myContext();
-            var idCart = Int32.Parse(Request.QueryString["id"]);
+            var idCart = id; // Int32.Parse(Request.QueryString["id"]);
             Carteleras cart = (from pe in ctx.Carteleras where pe.IdCartelera == idCart select pe).First();
             ctx.Carteleras.Remove(cart);
             ctx.SaveChanges();
@@ -428,6 +428,7 @@ namespace TrabajoPracticoWeb3.Controllers
 
                 return View(a);
             }
+            
             IEnumerable<SelectListItem> ReportesItems = ctx.Peliculas.AsEnumerable().Select(c => new SelectListItem()
             {
                 Text = c.Nombre,
@@ -437,6 +438,7 @@ namespace TrabajoPracticoWeb3.Controllers
 
             SelectList Peliculas = new SelectList(ReportesItems, "Value", "Text");
             ViewData["Pelicula"] = Peliculas;
+            
             return View("Reportes");
         }
 
