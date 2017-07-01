@@ -11,8 +11,19 @@ namespace TrabajoPracticoWeb3.Controllers
     public class PeliculasController : Controller
     {
         // GET: Peliculas
-        public ActionResult Reserva(int idPelicula)
+        public ActionResult Reserva(int idPelicula = -1)
         {
+            
+            if (TempData["IdPelicula"] != null) { 
+
+                string temp = (string)TempData["IdPelicula"];
+
+                int IdPelicula2;
+
+                Int32.TryParse(temp, out IdPelicula2);
+
+                idPelicula = IdPelicula2;
+            }
             myContext ctx = new myContext();
 
             var Pelicula = PeliculaServicio.TraerPelicula(idPelicula);
@@ -46,6 +57,13 @@ namespace TrabajoPracticoWeb3.Controllers
 
         public ActionResult FinalizarReserva()
         {
+            if (Request["Sede"] == "0" || Request["Version"] == "0" || Request["Horario"] == "0" || Request["Dia"] == "0" || Request["Sede"] == "" || Request["Version"] == "" || Request["Horario"] == "" || Request["Dia"] == "")
+            {
+
+                TempData["IdPelicula"] = Request["Pelicula"];
+                return RedirectToAction("Reserva");
+            }
+            else { 
             myContext ctx = new myContext();
 
             int IdPelicula, IdSede, IdVersion;
@@ -70,6 +88,8 @@ namespace TrabajoPracticoWeb3.Controllers
             cr.Dia = Request["Dia"];
 
             return View(cr);
+
+            }
         }
         [HttpPost]
         public ActionResult ConfirmarReserva(CarteleraReserva cr)

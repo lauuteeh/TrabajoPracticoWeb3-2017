@@ -27,7 +27,7 @@
             @Html.Hidden("Pelicula", pelicula.IdPelicula)
 
             @Html.Label("Version", new { @class = "margin-dp" })
-            @Html.DropDownList("Version", ViewData["version"] as List<SelectListItem>, "Por Favor, seleccione una Version", new { @class = "margin-dp form-control" })
+            @Html.DropDownList("Version", ViewData["version"] as List<SelectListItem>, "Por Favor, seleccione una Version", new { @class = "margin-dp form-control"  })
 
             @Html.Label("Sede", new { @class = "margin-dp" })
             @Html.DropDownList("Sede", new SelectList(string.Empty, "Value", "Text"), "Por Favor, seleccione una sede", new { @class = "margin-dp form-control" })
