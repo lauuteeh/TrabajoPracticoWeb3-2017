@@ -22,7 +22,7 @@
     </div>
     <div class="col-md-4">
 
-        @using (Html.BeginForm("FinalizarReserva", "Peliculas", FormMethod.Get))
+        @using (Html.BeginForm("FinalizarReserva", "Peliculas", FormMethod.Post))
         {
             @Html.Hidden("Pelicula", pelicula.IdPelicula)
 
