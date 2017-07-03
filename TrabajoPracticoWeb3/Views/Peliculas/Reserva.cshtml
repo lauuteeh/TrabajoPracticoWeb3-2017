@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Reserva";
     Layout = "~/Views/Shared/_LHome.cshtml";
+
+
 }
 
 @model IEnumerable<TrabajoPracticoWeb3.App_Data.Peliculas>
@@ -39,6 +41,13 @@
             @Html.DropDownList("Horario", new SelectList(string.Empty, "Value", "Text"), "Por favor, Seleccione un horario", new { @class = "margin-dp form-control" })
 
             <button type="submit" class="margin-dp btn btn-success">Continuar</button>
+
+            if (ViewData["error"] != null)
+            {
+
+                <p class="alert-danger margin-dp error">@Html.Display("error", ViewData["error"])</p>
+                
+            }
 
         }
 

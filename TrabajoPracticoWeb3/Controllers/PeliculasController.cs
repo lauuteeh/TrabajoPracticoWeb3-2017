@@ -13,8 +13,11 @@ namespace TrabajoPracticoWeb3.Controllers
         // GET: Peliculas
         public ActionResult Reserva(int idPelicula = -1)
         {
-            
-            if (TempData["IdPelicula"] != null) { 
+            ViewData["error"] = null;
+
+            if (TempData["IdPelicula"] != null) {
+
+                ViewData["error"] = "Por favor, no deje ningun campo vacio";
 
                 string temp = (string)TempData["IdPelicula"];
 
@@ -24,6 +27,8 @@ namespace TrabajoPracticoWeb3.Controllers
 
                 idPelicula = IdPelicula2;
             }
+
+            
             myContext ctx = new myContext();
 
             var Pelicula = PeliculaServicio.TraerPelicula(idPelicula);

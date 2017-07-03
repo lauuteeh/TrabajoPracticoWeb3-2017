@@ -108,6 +108,10 @@ footer {
     margin-top: 5px;
 }
 
+.error {
+    width : 70%;
+}
+
 .row-con-margin {
     margin-right: -15px;
     margin-left: -15px;
