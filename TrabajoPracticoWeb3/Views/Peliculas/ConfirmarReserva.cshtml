@@ -6,36 +6,15 @@
 @model  TrabajoPracticoWeb3.Models.CarteleraReserva
 
 
-<h2>Detalle de reserva realizada</h2>
+<h2 class="">Detalle de reserva realizada</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Codigo Reserva</th>
-            <th>Cantidad de entradas</th>
-            <th>Precio total</th>
-        </tr>
-    </thead>
-
-
-    <tbody>
-        
-
-
-            <tr>
-                <td>@Model.IdReserva</td>
-                <td>@Model.CantidadEntradas</td>
-                <td>$@ViewBag.PrecioTotal</td>
-               
-            </tr>
-        
-    </tbody>
-
-   
-
-</table>
-
-
-
-    <h4 class="label label-success">Su reserva se ha realizado con éxito!!! Muchas gracias!</h4>
+ <div class="col-md-6 col-md-offset-3 table-bordered">
+    <h3 class="text-center">Código de reserva: @Model.IdReserva</h3>
+    <h3 class="text-center">Cantidad de entradas: @Model.CantidadEntradas</h3>
+    <h3 class="text-center">Precio total: @ViewBag.PrecioTotal</h3>
+    <h3 class="label label-success text-center">Su reserva se ha realizado con éxito!!! Muchas gracias!</h3>
+</div>
+<div class="col-md-12 col-md-1">
+    <button class="btn btn-info btn-lg">Volver a Cartelera</button>
+</div>
 
